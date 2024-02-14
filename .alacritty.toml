@@ -1,0 +1,27 @@
+# themes from https://github.com/alacritty/alacritty-theme
+
+import = [
+    "~/.config/alacritty/themes/themes/druvbox_dark.toml"
+]
+
+[font]
+size = 12
+
+[font.normal]
+family = "ComicCodeLigatures Nerd Font"
+
+[window]
+opacity=0.8
+decorations = "none"
+
+[window.padding]
+x = 7
+y = 0
+
+[shell]
+program = "/opt/homebrew/bin/tmux"
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "F11"
+mods = "None"
