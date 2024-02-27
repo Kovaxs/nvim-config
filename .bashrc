@@ -15,10 +15,12 @@ alias ssha='eval $(ssh-agent) && ssh-add'
 
 alias l="ls -lh"
 alias wl="watch -n 1 ls -lh"
-
+alias vim="nvim"
+# ----------------------
 export PATH=/opt/homebrew/bin:$PATH
 export PATH=$PATH:~/bin
 # ----------------------
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/Users/oleksandrkovalyk/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -96,3 +98,4 @@ __ps1() {
 }
 
 PROMPT_COMMAND="__ps1"
+. "$HOME/.cargo/env"
