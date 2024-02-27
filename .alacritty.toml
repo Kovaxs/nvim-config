@@ -11,7 +11,7 @@ size = 12
 family = "ComicCodeLigatures Nerd Font"
 
 [window]
-opacity=0.8
+opacity=0.99
 decorations = "none"
 
 [window.padding]
