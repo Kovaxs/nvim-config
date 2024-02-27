@@ -19,7 +19,8 @@ return {
       'python',
       'latex',
       'markdown',
-      'dockerfile'
+      'dockerfile',
+      'bibtex'
     },
   },
   config = function (_, opts)

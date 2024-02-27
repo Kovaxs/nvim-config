@@ -44,5 +44,6 @@
   "vim-fugitive": { "branch": "master", "commit": "2e88f14a585c014691904ba8fe39e6ea851c9422" },
   "vim-isort": { "branch": "master", "commit": "757c2c830ba0365167460c26f304f3472dfa2ce2" },
   "vim-maximizer": { "branch": "master", "commit": "2e54952fe91e140a2e69f35f22131219fcd9c5f1" },
-  "vim-rest-console": { "branch": "master", "commit": "7b407f47185468d1b57a8bd71cdd66c9a99359b2" }
+  "vim-rest-console": { "branch": "master", "commit": "7b407f47185468d1b57a8bd71cdd66c9a99359b2" },
+  "vimtex": { "branch": "master", "commit": "afac40289eed684ab1301390dcd246b1609f8119" }
 }
