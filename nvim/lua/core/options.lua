@@ -7,6 +7,20 @@ opt.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,term
 opt.spelllang = 'en_us'
 opt.spell = true
 
+-- Identation
+vim.api.nvim_set_keymap('v', '<', '<gv', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('v', '>', '>gv', {noremap = true, silent = true})
+
+-- Yanking highlight
+vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+    group = "YankHighlight",
+    pattern = "*",
+    callback = function()
+        vim.highlight.on_yank({higroup="IncSearch", timeout=150})
+    end,
+})
+
 -- Line Number
 opt.relativenumber = true
 opt.number = true
