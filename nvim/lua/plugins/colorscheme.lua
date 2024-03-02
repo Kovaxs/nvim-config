@@ -11,7 +11,7 @@ return {
     -- transparent = true,
     background = {
       -- light = "lotus",
-      dark = "wave", -- "wave, dragon"
+      dark = "dragon", -- "wave, dragon"
     },
     colors = {
       palette = {
@@ -135,7 +135,7 @@ return {
 --   opts = {
 --   --   -- Replace this with your scheme-specific settings or remove to use the defaults
 --     -- transparent = true,
---     flavour = "mocha", -- "latte, frappe, macchiato, mocha"
+--     flavour = "macchiato", -- "latte, frappe, macchiato, mocha"
 --   },
 --   config = function(_, opts)
 --     require('catppuccin').setup(opts) -- Replace this with your favorite colorscheme

@@ -65,10 +65,18 @@ keymap.set("n", "<leader>sl", "<C-w>>5")    -- make split windows width bigger
 keymap.set("n", "<leader>sh", "<C-w><5")    -- make split windows width smaller
 
 -- Tab management
-keymap.set("n", "<leader>to", ":tabnew<CR>")   -- open a new tab
-keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close a tab
-keymap.set("n", "<leader>tn", ":tabn<CR>")     -- next tab
-keymap.set("n", "<leader>tp", ":tabp<CR>")     -- previous tab
+-- keymap.set("n", "<leader>to", ":tabnew<CR>")   -- open a new tab
+-- keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close a tab
+-- keymap.set("n", "<leader>tn", ":tabn<CR>")     -- next tab
+-- keymap.set("n", "<leader>tp", ":tabp<CR>")     -- previous tab
+
+-- Trouble
+vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
+vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
+vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
+vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
+vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
+vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
 
 -- Diff keymaps
 keymap.set("n", "<leader>cc", ":diffput<CR>")   -- put diff from current to other during diff
