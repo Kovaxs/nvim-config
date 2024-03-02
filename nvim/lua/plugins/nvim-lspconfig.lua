@@ -28,7 +28,7 @@ return {
     require('mason-lspconfig').setup({
       -- Install these LSPs automatically
       ensure_installed = {
-        -- 'bashls', -- requires npm to be installed
+        'bashls', -- requires npm to be installed
         -- 'cssls', -- requires npm to be installed
         -- 'html', -- requires npm to be installed
         -- 'gradle_ls',
@@ -36,13 +36,12 @@ return {
         'lua_ls',
         'pyright',
         'jsonls',
-        'yamlls',
-        -- 'intelephense', -- requires npm to be installed
-        -- 'lemminx',
-        -- 'marksman',
-        -- 'quick_lint_js',
-        -- 'tsserver', -- requires npm to be installed
-        -- 'yamlls', -- requires npm to be installed
+        'intelephense', -- requires npm to be installed
+        'lemminx',
+        'marksman',
+        'quick_lint_js',
+        'tsserver', -- requires npm to be installed
+        'yamlls', -- requires npm to be installed
       }
     })
     require('mason-tool-installer').setup({
@@ -50,20 +49,30 @@ return {
       ensure_installed = {
         'black',
         'debugpy',
-        'flake8',
+        -- 'flake8',
         'isort',
         'mypy',
-        'pylint',
+        -- 'pylint',
+        'ruff',
+        -- 'pyright',
       },
     })
 
     -- There is an issue with mason-tools-installer running with VeryLazy, since it triggers on VimEnter which has already occurred prior to this plugin loading so we need to call install explicitly
     -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim/issues/39
     vim.api.nvim_command('MasonToolsInstall')
+
     local lspconfig = require('lspconfig')
     local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
     local lsp_attach = function(client, bufnr)
-      -- Create your keybindings here...
+    -- Create your keybindings here...
+    end
+
+    local on_attach = function(client, bufnr)
+      if client.name == 'ruff_lsp' then
+        -- Disable hover in favor of Pyright
+        client.server_capabilities.hoverProvider = false
+      end
     end
 
     -- Call setup on each LSP server
@@ -93,5 +102,25 @@ return {
       },
     }
 
+    -- Python setting
+    lspconfig.ruff_lsp.setup {
+      on_attach = on_attach,
+    }
+
+    lspconfig.pyright.setup {
+      on_attach = on_attach,
+      settings = {
+        pyright = {
+          -- Using Ruff's import organizer
+          disableOrganizeImports = true,
+        },
+        python = {
+          analysis = {
+            -- Ignore all files for analysis to exclusively use Ruff for linting
+            ignore = { '*' },
+          },
+        },
+      },
+    }
   end
 }
