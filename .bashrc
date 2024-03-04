@@ -34,6 +34,7 @@ if [[ $(uname) == "Darwin" ]]; then
     alias cdr="cd /Users/oleksandrkovalyk/Library/CloudStorage/"
     # Aliases for project loading
     alias cda="cd /Users/oleksandrkovalyk/Library/CloudStorage/OneDrive-UniversidadPolitécnicadeCartagena/Escritorio/PAPILA_articles/RIF_clinical_paper/Elsevier_git/"
+    alias cdo="cd /Users/oleksandrkovalyk/OutsideBrain/"
 
     # Bash completion
     [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
