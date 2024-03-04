@@ -21,9 +21,9 @@ PROMPT_MAX=95
 PROMPT_AT=@
 
 # Aliases
-alias l="ls -lh"
+alias l="ls -lha"
 alias wl="watch -n 1 ls -lh"
-alias vim="nvim"
+alias v="nvim"
 
 if [[ $(uname) == "Darwin" ]]; then
     alias sshtu='ssh tdam-3090-tunel'
