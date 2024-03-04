@@ -40,6 +40,10 @@ if [[ $(uname) == "Darwin" ]]; then
     [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
     # pomo complete
     complete -C pomo pomo
+
+# Ubuntu aliases
+elif [[ $(grep -E "^(ID|NAME)=" /etc/os-release | grep -q "ubuntu")$? == 0 ]]; then
+    alias k9s="/snap/k9s/current/bin/k9s"
 fi
 
 if [[ $(uname) == "Darwin" ]]; then
@@ -56,6 +60,7 @@ if [[ $(uname) == "Darwin" ]]; then
     fi
     unset __conda_setup
 fi
+
 # Prompt function
 __ps1() {
     local P='$' dir="${PWD##*/}" B countme short long double conda_env \
