@@ -11,6 +11,7 @@ if [[ $(uname) == "Darwin" ]]; then
     export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET" 
     export PATH=/opt/homebrew/bin:$PATH
     export PATH=$PATH:~/bin
+    export PATH=$PATH:/Users/oleksandrkovalyk/go/bin/
 fi
 
 # Misc
@@ -31,10 +32,14 @@ if [[ $(uname) == "Darwin" ]]; then
     alias cdupct="cd /Users/oleksandrkovalyk/Library/CloudStorage/OneDrive-UniversidadPolitécnicadeCartagena"
     alias cdic="cd /Users/oleksandrkovalyk/Library/Mobile\ Documents/com~apple~CloudDocs"
     alias cdr="cd /Users/oleksandrkovalyk/Library/CloudStorage/"
-fi
+    # Aliases for project loading
+    alias cda="cd /Users/oleksandrkovalyk/Library/CloudStorage/OneDrive-UniversidadPolitécnicadeCartagena/Escritorio/PAPILA_articles/RIF_clinical_paper/Elsevier_git/"
 
-# Aliases for project loading
-alias cda="cd /Users/oleksandrkovalyk/Library/CloudStorage/OneDrive-UniversidadPolitécnicadeCartagena/Escritorio/PAPILA_articles/RIF_clinical_paper/Elsevier_git/"
+    # Bash completion
+    [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+    # pomo complete
+    complete -C pomo pomo
+fi
 
 if [[ $(uname) == "Darwin" ]]; then
     # Conda

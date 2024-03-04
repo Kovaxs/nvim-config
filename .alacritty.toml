@@ -5,21 +5,21 @@ import = [
 ]
 
 [font]
-size = 12
+size = 15
 
 [font.normal]
 family = "ComicCodeLigatures Nerd Font"
 
 [window]
-opacity=0.99
+opacity=0.95
 decorations = "none"
 
 [window.padding]
 x = 7
 y = 0
 
-[shell]
-program = "/opt/homebrew/bin/tmux"
-
 [env]
-term = "tmux-265color"
+term = "tmux-256color"
+
+# [shell]
+# program = "/opt/homebrew/bin/tmux"
