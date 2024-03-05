@@ -41,9 +41,12 @@ if [[ $(uname) == "Darwin" ]]; then
     # pomo complete
     complete -C pomo pomo
 
-# Ubuntu aliases
+# Ubuntu stuff
 elif [[ $(grep -E "^(ID|NAME)=" /etc/os-release | grep -q "ubuntu")$? == 0 ]]; then
+
     alias k9s="/snap/k9s/current/bin/k9s"
+    # kubectl autocompletion
+    source <(kubectl completion bash)
 fi
 
 if [[ $(uname) == "Darwin" ]]; then
