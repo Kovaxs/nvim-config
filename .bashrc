@@ -11,8 +11,24 @@ if [[ $(uname) == "Darwin" ]]; then
     export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET" 
     export PATH=/opt/homebrew/bin:$PATH
     export PATH=$PATH:~/bin
-    export PATH=$PATH:/Users/oleksandrkovalyk/go/bin/
+    export PATH=$PATH:$HOME/go/bin/
 fi
+
+# fzf
+export FD_OPTIONS="--follow --exclude .git --exclude node_modules"
+export FZF_DEFAULT_OPTS="--no-mouse --height 50% --reverse --border --multi --inline-info --preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -300' --preview-window='right:hidden:wrap' --bind='f3:execute(bat --style=numbers {} || less -f {}),f2:toggle-preview,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy)'"
+export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard | fd --type f --type l $FD_OPTIONS"
+export FZF_CTRL_T_COMMAND="fd $FD_OPTIONS"
+export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
+
+# bat
+export BAT_PAGER="less -R"
+
+# Eval
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
+tree=$(tree -tf --noreport -I '*~' --charset ascii $1 |
+       sed -e 's/| \+/  /g' -e 's/[|`]-\+/ */g' -e 's:\(* \)\(\(.*/\)\([^/]\+\)\):\1[\4](\2):g')
 
 # Misc
 HISTTIMEFORMAT="%F %T "
@@ -21,20 +37,19 @@ PROMPT_MAX=95
 PROMPT_AT=@
 
 # Aliases
-alias l="ls -lha"
-alias wl="watch -n 1 ls -lh"
-alias v="nvim"
+alias l='ls -lha'
+alias wl='watch -n 1 ls -lh'
+alias v='nvim'
+alias vf='nvim $(fzf)'
 
 if [[ $(uname) == "Darwin" ]]; then
-    alias sshtu='ssh tdam-3090-tunel'
     alias ssha='eval $(ssh-agent) && ssh-add'
-
-    alias cdupct="cd /Users/oleksandrkovalyk/Library/CloudStorage/OneDrive-UniversidadPolitécnicadeCartagena"
-    alias cdic="cd /Users/oleksandrkovalyk/Library/Mobile\ Documents/com~apple~CloudDocs"
-    alias cdr="cd /Users/oleksandrkovalyk/Library/CloudStorage/"
+    alias cdupct="cd $HOME/Library/CloudStorage/OneDrive-UniversidadPolitécnicadeCartagena"
+    alias cdic="cd $HOME/Library/Mobile\ Documents/com~apple~CloudDocs"
+    alias cdr="cd $HOME/Library/CloudStorage/"
     # Aliases for project loading
-    alias cda="cd /Users/oleksandrkovalyk/Library/CloudStorage/OneDrive-UniversidadPolitécnicadeCartagena/Escritorio/PAPILA_articles/RIF_clinical_paper/Elsevier_git/"
-    alias cdo="cd /Users/oleksandrkovalyk/OutsideBrain/"
+    alias cda="cd $HOME/Library/CloudStorage/OneDrive-UniversidadPolitécnicadeCartagena/Escritorio/PAPILA_articles/RIF_clinical_paper/Elsevier_git/"
+    alias cdo="cd $HOME/OutsideBrain/"
 
     # Bash completion
     [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
@@ -51,17 +66,35 @@ fi
 
 if [[ $(uname) == "Darwin" ]]; then
     # Conda
-    __conda_setup="$('/Users/oleksandrkovalyk/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    __conda_setup="$('$HOME/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
     if [ $? -eq 0 ]; then
         eval "$__conda_setup"
     else
-        if [ -f "/Users/oleksandrkovalyk/miniconda3/etc/profile.d/conda.sh" ]; then
-            . "/Users/oleksandrkovalyk/miniconda3/etc/profile.d/conda.sh"
+        if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+            . "$HOME/miniconda3/etc/profile.d/conda.sh"
         else
-            export PATH="/Users/oleksandrkovalyk/miniconda3/bin:$PATH"
+            export PATH="$HOME/miniconda3/bin:$PATH"
         fi
     fi
     unset __conda_setup
+
+    # Mamba 
+    __conda_setup="$('$HOME/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+            . "$HOME/miniconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="$HOME/miniconda3/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+
+    if [ -f "$HOME/miniconda3/etc/profile.d/mamba.sh" ]; then
+        . "$HOME/miniconda3/etc/profile.d/mamba.sh"
+    fi
+
 fi
 
 # Prompt function
@@ -111,3 +144,4 @@ PROMPT_COMMAND="__ps1"
 if [[ $(uname) == "Darwin" ]]; then
     . "$HOME/.cargo/env"
 fi
+# eval "$(register-python-argcomplete conda)"

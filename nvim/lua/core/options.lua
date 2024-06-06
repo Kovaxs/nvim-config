@@ -6,6 +6,7 @@ opt.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,term
 -- Spell check
 opt.spelllang = 'en_us'
 opt.spell = true
+vim.g.spellfile_URL = "https://ftp.nluug.nl/vim/runtime/spell/"
 
 -- Identation
 vim.api.nvim_set_keymap('v', '<', '<gv', {noremap = true, silent = true})
@@ -30,7 +31,7 @@ opt.tabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
 opt.autoindent = true
-vim.bo.softtabstop = 4
+opt.softtabstop = 4
 
 -- Line Wrapping
 opt.wrap = false
