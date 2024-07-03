@@ -7,12 +7,19 @@ export HISTSIZE=25000
 export SAVEHIST=25000
 export HISTCONTROL=ignorespace
 export BASH_SILENCE_DEPRECATION_WARNING=1
+# export BASH_COMPLETION_DEBUG=true
 if [[ $(uname) == "Darwin" ]]; then
     export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET" 
     export PATH=/opt/homebrew/bin:$PATH
     export PATH=$PATH:~/bin
     export PATH=$PATH:$HOME/go/bin/
 fi
+
+# Aliases
+alias l='ls -lhaFS'
+alias wl='watch -n 1 ls -lh'
+alias v='nvim'
+alias vf='nvim $(fzf)'
 
 # fzf
 export FD_OPTIONS="--follow --exclude .git --exclude node_modules"
@@ -27,8 +34,6 @@ export BAT_PAGER="less -R"
 # Eval
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
-tree=$(tree -tf --noreport -I '*~' --charset ascii $1 |
-       sed -e 's/| \+/  /g' -e 's/[|`]-\+/ */g' -e 's:\(* \)\(\(.*/\)\([^/]\+\)\):\1[\4](\2):g')
 
 # Misc
 HISTTIMEFORMAT="%F %T "
@@ -36,11 +41,6 @@ PROMPT_LONG=20
 PROMPT_MAX=95
 PROMPT_AT=@
 
-# Aliases
-alias l='ls -lha'
-alias wl='watch -n 1 ls -lh'
-alias v='nvim'
-alias vf='nvim $(fzf)'
 
 if [[ $(uname) == "Darwin" ]]; then
     alias ssha='eval $(ssh-agent) && ssh-add'
@@ -50,6 +50,7 @@ if [[ $(uname) == "Darwin" ]]; then
     # Aliases for project loading
     alias cda="cd $HOME/Library/CloudStorage/OneDrive-UniversidadPolitécnicadeCartagena/Escritorio/PAPILA_articles/RIF_clinical_paper/Elsevier_git/"
     alias cdo="cd $HOME/OutsideBrain/"
+    alias cw="cd $HOME/workspace/"
 
     # Bash completion
     [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
@@ -66,7 +67,7 @@ fi
 
 if [[ $(uname) == "Darwin" ]]; then
     # Conda
-    __conda_setup="$('$HOME/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    __conda_setup="$("$HOME/miniconda3/bin/conda" 'shell.bash' 'hook' 2> /dev/null)"
     if [ $? -eq 0 ]; then
         eval "$__conda_setup"
     else
@@ -77,23 +78,6 @@ if [[ $(uname) == "Darwin" ]]; then
         fi
     fi
     unset __conda_setup
-
-    # Mamba 
-    __conda_setup="$('$HOME/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
-    else
-        if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-            . "$HOME/miniconda3/etc/profile.d/conda.sh"
-        else
-            export PATH="$HOME/miniconda3/bin:$PATH"
-        fi
-    fi
-    unset __conda_setup
-
-    if [ -f "$HOME/miniconda3/etc/profile.d/mamba.sh" ]; then
-        . "$HOME/miniconda3/etc/profile.d/mamba.sh"
-    fi
 
 fi
 

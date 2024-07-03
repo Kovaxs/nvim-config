@@ -70,7 +70,9 @@ opt.splitright = true
 opt.splitbelow = true
 
 -- Consider - as part of keyword
-opt.iskeyword:append("-")
+-- opt.iskeyword:append("-")
+-- opt.iskeyword:append("_")
+
 
 -- Disable the mouse while in nvim
 opt.mouse = ""

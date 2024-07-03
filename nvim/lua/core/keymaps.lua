@@ -3,6 +3,9 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap
 
+-- spell checker change language
+keymap.set("n", "<leader>cl", ":setlocal spell spelllang=es_es<CR>")
+
 -- General keymaps
 keymap.set("i", "kj", "<ESC>")
 

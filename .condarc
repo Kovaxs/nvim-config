@@ -1,2 +1,3 @@
 solver: classic
 changeps1: true
+auto_activate_base: true
