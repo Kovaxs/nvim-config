@@ -73,6 +73,8 @@ opt.splitbelow = true
 -- opt.iskeyword:append("-")
 -- opt.iskeyword:append("_")
 
+-- Remove underscore from `iskeyword` for all file types
+vim.opt.iskeyword:remove("_")
 
 -- Disable the mouse while in nvim
 opt.mouse = ""

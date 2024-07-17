@@ -18,7 +18,6 @@ return {
     sync_install = false,
     ensure_installed = {
       'lua',
-      'help',
       'python',
       'latex',
       'markdown',
