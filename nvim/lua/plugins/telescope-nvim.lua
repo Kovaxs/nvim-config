@@ -3,7 +3,9 @@ return {
   -- https://github.com/nvim-telescope/telescope.nvim
   'nvim-telescope/telescope.nvim',
   lazy = true,
-  branch = '0.1.x',
+  tag = '0.1.8',
+  -- branch = '0.1.x',
+
   dependencies = {
     -- https://github.com/nvim-lua/plenary.nvim
     { 'nvim-lua/plenary.nvim' },

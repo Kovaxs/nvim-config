@@ -11,11 +11,14 @@ return {
   opts = {
     highlight = {
       enable = true,
+      additional_vim_regex_highlighting = false,
     },
     indent = { enable = true },
     auto_install = true, -- automatically install syntax support when entering new file type buffer
+    sync_install = false,
     ensure_installed = {
       'lua',
+      'help',
       'python',
       'latex',
       'markdown',
