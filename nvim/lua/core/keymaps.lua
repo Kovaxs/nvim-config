@@ -138,16 +138,16 @@ keymap.set("n", "<leader>xr", ":call VrcQuery()<CR>") -- Run REST query
 -- LSP
 -- Normal mode, starting with <leader>l
 keymap.set('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', {desc = "LSP: Code Action"})
-keymap.set('n', '<leader>lrn', '<cmd>lua vim.lsp.buf.rename()<CR>', {desc = "LSP: Rename Symbol"})
 keymap.set('n', '<leader>ld', '<cmd>lua vim.lsp.buf.definition()<CR>', {desc = "LSP: Go to Definition"})
 keymap.set('n', '<leader>lD', '<cmd>lua vim.lsp.buf.declaration()<CR>', {desc = "LSP: Go to Declaration"})
 keymap.set('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', {desc = "LSP: Format Code"})
-keymap.set('n', '<leader>lg', '<cmd>lua vim.lsp.buf.hover()<CR>', {desc = "LSP: Hover Documentation"})
+keymap.set('n', '<leader>lh', '<cmd>lua vim.lsp.buf.hover()<CR>', {desc = "LSP: Hover Documentation"})
 keymap.set('n', '<leader>li', '<cmd>lua vim.lsp.buf.implementation()<CR>', {desc = "LSP: Go to Implementation"})
 keymap.set('n', '<leader>ll', '<cmd>lua vim.diagnostic.open_float()<CR>', {desc = "LSP: Show Line Diagnostics"})
 keymap.set('n', '<leader>ln', '<cmd>lua vim.diagnostic.goto_next()<CR>', {desc = "LSP: Go to Next Diagnostic"})
 keymap.set('n', '<leader>lp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', {desc = "LSP: Go to Previous Diagnostic"})
 keymap.set('n', '<leader>lr', '<cmd>lua vim.lsp.buf.references()<CR>', {desc = "LSP: Show References"})
+keymap.set('n', '<leader>lrn', '<cmd>lua vim.lsp.buf.rename()<CR>', {desc = "LSP: Rename Symbol"})
 keymap.set('n', '<leader>ls', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', {desc = "LSP: Document Symbols"})
 keymap.set('n', '<leader>lt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', {desc = "LSP: Type Definition"})
 keymap.set('n', '<leader>lws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', {desc = "LSP: Workspace Symbol"})
