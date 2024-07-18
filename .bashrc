@@ -8,10 +8,11 @@ export SAVEHIST=25000
 export HISTCONTROL=ignorespace
 export BASH_SILENCE_DEPRECATION_WARNING=1
 # export BASH_COMPLETION_DEBUG=true
+# Export PATHs
+export PATH=$PATH:~/bin
 if [[ $(uname) == "Darwin" ]]; then
     export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET" 
     export PATH=/opt/homebrew/bin:$PATH
-    export PATH=$PATH:~/bin
     export PATH=$PATH:$HOME/go/bin/
 fi
 
@@ -58,11 +59,11 @@ if [[ $(uname) == "Darwin" ]]; then
     complete -C pomo pomo
 
 # Ubuntu stuff
-elif [[ $(grep -E "^(ID|NAME)=" /etc/os-release | grep -q "ubuntu")$? == 0 ]]; then
+# elif [[ $(grep -E "^(ID|NAME)=" /etc/os-release | grep -q "ubuntu")$? == 0 ]]; then
 
-    alias k9s="/snap/k9s/current/bin/k9s"
-    # kubectl autocompletion
-    source <(kubectl completion bash)
+#     alias k9s="/snap/k9s/current/bin/k9s"
+#     # kubectl autocompletion
+#     source <(kubectl completion bash)
 fi
 
 if [[ $(uname) == "Darwin" ]]; then
