@@ -8,6 +8,6 @@ return {
   },
   config = function ()
     -- Update the path passed to setup to point to your system or virtual env python binary
-    require('dap-python').setup('/Users/oleksandrkovalyk/miniconda3/bin/python')
+    require('dap-python').setup('$HOME/miniconda3/bin/python')
   end
 }
