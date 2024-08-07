@@ -128,6 +128,7 @@ keymap.set("n", "<leader>h6", function() require("harpoon.ui").nav_file(6) end, 
 keymap.set("n", "<leader>h7", function() require("harpoon.ui").nav_file(7) end, {desc = "Navigate to 7"})
 keymap.set("n", "<leader>h8", function() require("harpoon.ui").nav_file(8) end, {desc = "Navigate to 8"})
 keymap.set("n", "<leader>h9", function() require("harpoon.ui").nav_file(9) end, {desc = "Navigate to 9"})
+keymap.set("n", "<leader>hg1", function() require("harpoon.tmux").sendCommand("2", 1); require("harpoon.tmux").gotoTerminal("2") end, {desc = "Run the first command on Tmux pane 2"})
 
 -- Undo Tree
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, {desc = "Toggle undo tree"})
@@ -194,3 +195,33 @@ keymap.set("n", '<leader>d?',
     function()
         local widgets = require "dap.ui.widgets"; widgets.centered_float(widgets.scopes)
     end, {desc = "Displays variable scopes in a centered floating window"})
+
+-- ChatGPT
+-- keymap.set({"n", "v"}, "<leader>ac", "<cmd>ChatGPT<CR>", {desc = "ChatGPT"})
+
+keymap.set({"n", "v"}, "<leader>ac", "<cmd>ChatGPT<CR>", { desc = "ChatGPT", noremap = true, silent = true })
+keymap.set({"n", "v"}, "<leader>ae", "<cmd>ChatGPTEditWithInstruction<CR>", { desc = "Edit with instruction", noremap = true, silent = true })
+keymap.set({"n", "v"}, "<leader>ag", "<cmd>ChatGPTRun grammar_correction<CR>", { desc = "Grammar Correction", noremap = true, silent = true })
+keymap.set({"n", "v"}, "<leader>at", "<cmd>ChatGPTRun translate<CR>", { desc = "Translate", noremap = true, silent = true })
+keymap.set({"n", "v"}, "<leader>ak", "<cmd>ChatGPTRun keywords<CR>", { desc = "Keywords", noremap = true, silent = true })
+keymap.set({"n", "v"}, "<leader>ad", "<cmd>ChatGPTRun docstring<CR>", { desc = "Docstring", noremap = true, silent = true })
+keymap.set({"n", "v"}, "<leader>aa", "<cmd>ChatGPTRun add_tests<CR>", { desc = "Add Tests", noremap = true, silent = true })
+keymap.set({"n", "v"}, "<leader>ao", "<cmd>ChatGPTRun optimize_code<CR>", { desc = "Optimize Code", noremap = true, silent = true })
+keymap.set({"n", "v"}, "<leader>as", "<cmd>ChatGPTRun summarize<CR>", { desc = "Summarize", noremap = true, silent = true })
+keymap.set({"n", "v"}, "<leader>af", "<cmd>ChatGPTRun fix_bugs<CR>", { desc = "Fix Bugs", noremap = true, silent = true })
+keymap.set({"n", "v"}, "<leader>ax", "<cmd>ChatGPTRun explain_code<CR>", { desc = "Explain Code", noremap = true, silent = true })
+keymap.set({"n", "v"}, "<leader>ar", "<cmd>ChatGPTRun roxygen_edit<CR>", { desc = "Roxygen Edit", noremap = true, silent = true })
+keymap.set({"n", "v"}, "<leader>al", "<cmd>ChatGPTRun code_readability_analysis<CR>", { desc = "Code Readability Analysis", noremap = true, silent = true })
+
+-- e = { "<cmd>ChatGPTEditWithInstruction<CR>", "Edit with instruction", mode = { "n", "v" } },
+-- g = { "<cmd>ChatGPTRun grammar_correction<CR>", "Grammar Correction", mode = { "n", "v" } },
+-- t = { "<cmd>ChatGPTRun translate<CR>", "Translate", mode = { "n", "v" } },
+-- k = { "<cmd>ChatGPTRun keywords<CR>", "Keywords", mode = { "n", "v" } },
+-- d = { "<cmd>ChatGPTRun docstring<CR>", "Docstring", mode = { "n", "v" } },
+-- a = { "<cmd>ChatGPTRun add_tests<CR>", "Add Tests", mode = { "n", "v" } },
+-- o = { "<cmd>ChatGPTRun optimize_code<CR>", "Optimize Code", mode = { "n", "v" } },
+-- s = { "<cmd>ChatGPTRun summarize<CR>", "Summarize", mode = { "n", "v" } },
+-- f = { "<cmd>ChatGPTRun fix_bugs<CR>", "Fix Bugs", mode = { "n", "v" } },
+-- x = { "<cmd>ChatGPTRun explain_code<CR>", "Explain Code", mode = { "n", "v" } },
+-- r = { "<cmd>ChatGPTRun roxygen_edit<CR>", "Roxygen Edit", mode = { "n", "v" } },
+-- l = { "<cmd>ChatGPTRun code_readability_analysis<CR>", "Code Readability Analysis", mode = { "n", "v" } },
