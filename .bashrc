@@ -126,7 +126,7 @@ __ps1() {
 
 PROMPT_COMMAND="__ps1"
 
-if [[ $(uname) == "Darwin" ]]; then
-    . "$HOME/.cargo/env"
-fi
+# if [[ $(uname) == "Darwin" ]]; then
+#     . "$HOME/.cargo/env"
+# fi
 # eval "$(register-python-argcomplete conda)"
