@@ -108,7 +108,19 @@ __ps1() {
     fi
 
     if [[ $(uname) == "Darwin" ]]; then
-        PS1="${conda_env} $u\u$g$PROMPT_AT$h\h$g:$w$dir$B$p$P$x "
+        # PS1="${conda_env} $u\u$g$PROMPT_AT$h\h$g:$w$dir$B$p$P$x "
+
+        short="${conda_env} $u\u$g$PROMPT_AT$h\h$g:$w$dir$B$p$P$x "
+        long="$g╔${conda_env} $u\u$g$PROMPT_AT$h\h$g:$w$dir$B\n$g╚$p$P$x "
+        double="$g╔${conda_env} $u\u$g$PROMPT_AT$h\h$g:$w$dir\n$g║$B\n$g╚$p$P$x "
+
+        if ((${#countme} + ${#conda_env} > PROMPT_MAX)); then
+            PS1="$double"
+        elif ((${#countme} + ${#conda_env} > PROMPT_LONG)); then
+            PS1="$long"
+        else
+            PS1="$short"
+        fi
     else
         short="${conda_env} $u\u$g$PROMPT_AT$h\h$g:$w$dir$B$p$P$x "
         long="$g╔${conda_env} $u\u$g$PROMPT_AT$h\h$g:$w$dir$B\n$g╚$p$P$x "
