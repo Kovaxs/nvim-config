@@ -46,7 +46,8 @@ opt.incsearch = true
 
 -- Cursor Line
 opt.cursorline = true
-opt.guicursor = ""
+-- opt.guicursor = ""
+opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 
 -- Appearance
 opt.termguicolors = true

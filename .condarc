@@ -1,3 +1,7 @@
 solver: classic
 changeps1: true
 auto_activate_base: true
+channel_priority: strict
+channels:
+  - conda-forge
+  - defaults

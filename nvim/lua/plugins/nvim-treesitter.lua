@@ -1,32 +1,58 @@
 -- Code Tree Support / Syntax Highlighting
 return {
-  -- https://github.com/nvim-treesitter/nvim-treesitter
-  'nvim-treesitter/nvim-treesitter',
-  event = 'VeryLazy',
-  dependencies = {
-    -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-    'nvim-treesitter/nvim-treesitter-textobjects',
-  },
-  build = ':TSUpdate',
-  opts = {
-    highlight = {
-      enable = true,
-      additional_vim_regex_highlighting = false,
+    "nvim-treesitter/nvim-treesitter",
+    event = { "BufReadPre", "BufNewFile" },
+    build = ":TSUpdate",
+    dependencies = {
+        "windwp/nvim-ts-autotag",
     },
-    indent = { enable = true },
-    auto_install = true, -- automatically install syntax support when entering new file type buffer
-    sync_install = false,
-    ensure_installed = {
-      'lua',
-      'python',
-      'latex',
-      'markdown',
-      'dockerfile',
-      'bibtex'
-    },
-  },
-  config = function (_, opts)
-    local configs = require("nvim-treesitter.configs")
-    configs.setup(opts)
-  end
+    config = function()
+        -- import nvim-treesitter plugin
+        local treesitter = require("nvim-treesitter.configs")
+
+        -- configure treesitter
+        treesitter.setup({ -- enable syntax highlighting
+            highlight = {
+                enable = true,
+            },
+            -- enable indentation
+            indent = { enable = true },
+            -- enable autotagging (w/ nvim-ts-autotag plugin)
+            autotag = {
+                enable = true,
+            },
+            -- ensure these language parsers are installed
+            ensure_installed = {
+                "lua",
+                "python",
+                "latex",
+                "markdown",
+                "markdown_inline",
+                "dockerfile",
+                "bibtex",
+                "json",
+                "yaml",
+                "html",
+                "css",
+                "markdown",
+                "markdown_inline",
+                "bash",
+                "lua",
+                "vim",
+                "dockerfile",
+                "gitignore",
+                "vimdoc",
+                "c",
+            },
+            incremental_selection = {
+                enable = true,
+                keymaps = {
+                    init_selection = "<leader>n",
+                    node_incremental = "<leader>n",
+                    scope_incremental = false,
+                    node_decremental = "<bs>",
+                },
+            },
+        })
+    end,
 }

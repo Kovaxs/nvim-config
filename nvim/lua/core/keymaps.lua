@@ -69,10 +69,10 @@ keymap.set("n", "<leader>sh", "<C-w><5", {desc = "make split windows width small
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", {desc = "toggle maximize tab"}) -- toggle maximize tab
 
 -- Tab management
--- keymap.set("n", "<leader>to", ":tabnew<CR>")   -- open a new tab
--- keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close a tab
--- keymap.set("n", "<leader>tn", ":tabn<CR>")     -- next tab
--- keymap.set("n", "<leader>tp", ":tabp<CR>")     -- previous tab
+keymap.set("n", "<leader>to", ":tabnew<CR>")   -- open a new tab
+keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close a tab
+keymap.set("n", "<leader>tn", ":tabn<CR>")     -- next tab
+keymap.set("n", "<leader>tp", ":tabp<CR>")     -- previous tab
 
 -- Trouble
 -- vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
@@ -213,15 +213,3 @@ keymap.set({"n", "v"}, "<leader>ax", "<cmd>ChatGPTRun explain_code<CR>", { desc 
 keymap.set({"n", "v"}, "<leader>ar", "<cmd>ChatGPTRun roxygen_edit<CR>", { desc = "Roxygen Edit", noremap = true, silent = true })
 keymap.set({"n", "v"}, "<leader>al", "<cmd>ChatGPTRun code_readability_analysis<CR>", { desc = "Code Readability Analysis", noremap = true, silent = true })
 
--- e = { "<cmd>ChatGPTEditWithInstruction<CR>", "Edit with instruction", mode = { "n", "v" } },
--- g = { "<cmd>ChatGPTRun grammar_correction<CR>", "Grammar Correction", mode = { "n", "v" } },
--- t = { "<cmd>ChatGPTRun translate<CR>", "Translate", mode = { "n", "v" } },
--- k = { "<cmd>ChatGPTRun keywords<CR>", "Keywords", mode = { "n", "v" } },
--- d = { "<cmd>ChatGPTRun docstring<CR>", "Docstring", mode = { "n", "v" } },
--- a = { "<cmd>ChatGPTRun add_tests<CR>", "Add Tests", mode = { "n", "v" } },
--- o = { "<cmd>ChatGPTRun optimize_code<CR>", "Optimize Code", mode = { "n", "v" } },
--- s = { "<cmd>ChatGPTRun summarize<CR>", "Summarize", mode = { "n", "v" } },
--- f = { "<cmd>ChatGPTRun fix_bugs<CR>", "Fix Bugs", mode = { "n", "v" } },
--- x = { "<cmd>ChatGPTRun explain_code<CR>", "Explain Code", mode = { "n", "v" } },
--- r = { "<cmd>ChatGPTRun roxygen_edit<CR>", "Roxygen Edit", mode = { "n", "v" } },
--- l = { "<cmd>ChatGPTRun code_readability_analysis<CR>", "Code Readability Analysis", mode = { "n", "v" } },
