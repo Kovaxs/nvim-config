@@ -13,6 +13,8 @@ else
     echo "Dotfiles directory already exists. Skipping cloning."
 fi
 
+curl -o ~/dotfiles/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+
 # Creating symbolic links
 ln -sf "$DOTFILES_DIR/.alacritty.toml" "$HOME/.alacritty.toml"
 ln -sf "$DOTFILES_DIR/.bash_profile" "$HOME/.bash_profile"
@@ -21,5 +23,6 @@ ln -sf "$DOTFILES_DIR/.condarc" "$HOME/.condarc"
 ln -sf "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
 ln -sf "$DOTFILES_DIR/.tmux.conf" "$HOME/.tmux.conf"
 ln -sf "$DOTFILES_DIR/.vimrc" "$HOME/.vimrc"
+ln -s /Users/kovaxs/dotfiles/nix ~/nix
 
 echo "All dotfiles have been linked."

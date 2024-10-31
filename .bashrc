@@ -1,6 +1,6 @@
 # Settings
 set -o vi
-
+export EDITOR=nvim
 # Exporting
 export HISTFILE=~/.histfile
 export HISTSIZE=25000
@@ -14,6 +14,7 @@ if [[ $(uname) == "Darwin" ]]; then
     export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET" 
     export PATH=/opt/homebrew/bin:$PATH
     export PATH=$PATH:$HOME/go/bin/
+    # export PATH="/usr/local/bin:$PATH"
 fi
 
 # Aliases
@@ -21,6 +22,7 @@ alias l='ls -lhaFS'
 alias wl='watch -n 1 ls -lh'
 alias v='nvim'
 alias vf='nvim $(fzf)'
+alias ctop='TERM="${TERM/#tmux/screen}" ctop'
 
 # fzf
 export FD_OPTIONS="--follow --exclude .git --exclude node_modules"
@@ -35,6 +37,9 @@ export BAT_PAGER="less -R"
 # Eval
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
+
+# git 
+source ~/dotfiles/.git-prompt.sh
 
 # Misc
 HISTTIMEFORMAT="%F %T "
@@ -82,64 +87,34 @@ if [[ $(uname) == "Darwin" ]]; then
 
 fi
 
+####################################################################################################
 # Prompt function
-__ps1() {
-    local P='$' dir="${PWD##*/}" B countme short long double conda_env \
-        r='\[\e[31m\]' g='\[\e[32m\]' h='\[\e[34m\]' \
-        u='\[\e[33m\]' p='\[\e[34m\]' w='\[\e[35m\]' \
-        b='\[\e[36m\]' x='\[\e[0m\]' 
+#      ✓ ✗
+####################################################################################################
 
-    [[ $EUID == 0 ]] && P='#' && u=$r && p=$u  # If user is root, use # and change colors
-    [[ $PWD = / ]] && dir=/
-    [[ $PWD = "$HOME" ]] && dir='~'
-
-    B=$(git branch --show-current 2>/dev/null)
-    [[ $dir = "$B" ]] && B=.
-    countme="$USER$PROMPT_AT$(hostname):$dir($B)\$ "
-    bc="$b"
-    [[ $B == master || $B == main ]] && b="$r"
-    [[ -n "$B" ]] && B="$g($b$B$g)"
-    
-    # Add Conda Environment to the Prompt
-    if [[ -n "$CONDA_DEFAULT_ENV" ]]; then
-        conda_env="$g[$bc$CONDA_DEFAULT_ENV$g]"  # Conda environment at the beginning in green
+function __failed_cmd {
+    if [[ $? -eq 0 ]]; then
+        printf "\033[32m✓"
     else
-        conda_env=""
-    fi
-
-    if [[ $(uname) == "Darwin" ]]; then
-        PS1="${conda_env} $u\u$g$PROMPT_AT$h\h$g:$w$dir$B$p$P$x "
-
-        # short="${conda_env} $u\u$g$PROMPT_AT$h\h$g:$w$dir$B$p$P$x "
-        # long="$g╔${conda_env} $u\u$g$PROMPT_AT$h\h$g:$w$dir$B\n$g╚$p$P$x "
-        # double="$g╔${conda_env} $u\u$g$PROMPT_AT$h\h$g:$w$dir\n$g║$B\n$g╚$p$P$x "
-        # PS1="$short"
-
-        # if ((${#countme} + ${#conda_env} > PROMPT_MAX)); then
-        #     PS1="$double"
-        # elif ((${#countme} + ${#conda_env} > PROMPT_LONG)); then
-        #     PS1="$long"
-        # else
-        #     PS1="$short"
-        # fi
-    else
-        short="${conda_env} $u\u$g$PROMPT_AT$h\h$g:$w$dir$B$p$P$x "
-        long="$g╔${conda_env} $u\u$g$PROMPT_AT$h\h$g:$w$dir$B\n$g╚$p$P$x "
-        double="$g╔${conda_env} $u\u$g$PROMPT_AT$h\h$g:$w$dir\n$g║$B\n$g╚$p$P$x "
-
-        if ((${#countme} + ${#conda_env} > PROMPT_MAX)); then
-            PS1="$double"
-        elif ((${#countme} + ${#conda_env} > PROMPT_LONG)); then
-            PS1="$long"
-        else
-            PS1="$short"
-        fi
+        printf "\033[31m✗"
     fi
 }
 
-PROMPT_COMMAND="__ps1"
+GREEN="\[\033[32m\]"
+BLUE="\[\033[34m\]"
+MAGENTA="\[\033[35m\] "
+RESET="\[\033[0m\]"
+RED="\[\033[31m\]"
 
-# if [[ $(uname) == "Darwin" ]]; then
-#     . "$HOME/.cargo/env"
-# fi
-# eval "$(register-python-argcomplete conda)"
+
+if [[ $(uname) == "Darwin" ]]; then
+    PS1=" "
+else
+    PS1=" "
+fi
+# PS1=" "
+PS1+="${GREEN}\u[\h]"
+PS1+="${BLUE}  \w"
+PS1+="${MAGENTA}\$(__git_ps1 '(%s )')\n"
+PS1+='$(__failed_cmd) '
+PS1+="${RESET}"

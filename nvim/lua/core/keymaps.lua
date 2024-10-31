@@ -64,8 +64,8 @@ keymap.set("n", "<leader>se", "<C-w>=", {desc = "make split windows equal width"
 keymap.set("n", "<leader>sx", ":close<CR>", {desc = "close split window"}) -- close split window
 keymap.set("n", "<leader>sj", "<C-w>-", {desc = "make split window height shorter"})     -- make split window height shorter
 keymap.set("n", "<leader>sk", "<C-w>+", {desc = "make split windows height taller"})     -- make split windows height taller
-keymap.set("n", "<leader>sl", "<C-w>>5", {desc = "make split windows width bigger"})    -- make split windows width bigger
-keymap.set("n", "<leader>sh", "<C-w><5", {desc = "make split windows width smaller"})    -- make split windows width smaller
+keymap.set("n", "<leader>sl", "<C-w>5>", {desc = "make split windows width bigger"})    -- make split windows width bigger
+keymap.set("n", "<leader>sh", "<C-w>5<", {desc = "make split windows width smaller"})    -- make split windows width smaller
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", {desc = "toggle maximize tab"}) -- toggle maximize tab
 
 -- Tab management
