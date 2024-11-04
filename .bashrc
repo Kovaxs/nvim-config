@@ -1,5 +1,6 @@
 # Settings
 set -o vi
+
 export EDITOR=nvim
 # Exporting
 export HISTFILE=~/.histfile
@@ -21,8 +22,15 @@ fi
 alias l='ls -lhaFS'
 alias wl='watch -n 1 ls -lh'
 alias v='nvim'
+alias vim='nvim'
 alias vf='nvim $(fzf)'
 alias ctop='TERM="${TERM/#tmux/screen}" ctop'
+alias git='/run/current-system/sw/bin/git'
+# alias nixu='nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/nix#kovaxs'
+alias nixu='darwin-rebuild switch --flake ~/nix#kovaxs'
+alias genv='printenv | grep -i'
+
+
 
 # fzf
 export FD_OPTIONS="--follow --exclude .git --exclude node_modules"
@@ -71,6 +79,11 @@ if [[ $(uname) == "Darwin" ]]; then
 #     source <(kubectl completion bash)
 fi
 
+
+####################################################################################################
+# Prompt function
+#      ✓ ✗
+####################################################################################################
 if [[ $(uname) == "Darwin" ]]; then
     # Conda
     __conda_setup="$("$HOME/miniconda3/bin/conda" 'shell.bash' 'hook' 2> /dev/null)"
@@ -87,11 +100,6 @@ if [[ $(uname) == "Darwin" ]]; then
 
 fi
 
-####################################################################################################
-# Prompt function
-#      ✓ ✗
-####################################################################################################
-
 function __failed_cmd {
     if [[ $? -eq 0 ]]; then
         printf "\033[32m✓"
@@ -100,21 +108,36 @@ function __failed_cmd {
     fi
 }
 
-GREEN="\[\033[32m\]"
-BLUE="\[\033[34m\]"
-MAGENTA="\[\033[35m\] "
-RESET="\[\033[0m\]"
-RED="\[\033[31m\]"
+function __ps1(){
+    GREEN="\[\033[32m\]"
+    BLUE="\[\033[34m\]"
+    MAGENTA="\[\033[35m\] "
+    RED="\[\033[31m\]"
+    YELLOW="\[\033[33m\]"
+    SILVER="\[\033[37m\]"
+    RESET="\[\033[0m\]"
 
+    if [[ -n "$CONDA_DEFAULT_ENV" ]]; then
+        conda_env="$YELLOW[$BLUE$CONDA_DEFAULT_ENV$YELLOW]"
+    else
+        conda_env=""
+    fi
 
-if [[ $(uname) == "Darwin" ]]; then
-    PS1=" "
-else
-    PS1=" "
-fi
-# PS1=" "
-PS1+="${GREEN}\u[\h]"
-PS1+="${BLUE}  \w"
-PS1+="${MAGENTA}\$(__git_ps1 '(%s )')\n"
-PS1+='$(__failed_cmd) '
-PS1+="${RESET}"
+    if [[ $(uname) == "Darwin" ]]; then
+        APS1="$SILVER"
+        APS1+=" "
+    else
+        APS1=" "
+    fi
+    
+    #
+    APS1+="${conda_env} ${GREEN}\u"
+    APS1+="${BLUE}  \W"
+    APS1+="${MAGENTA}\$(__git_ps1 '(%s )')"
+    APS1+='$(__failed_cmd) '
+    APS1+="${RESET}"
+
+    PS1="$APS1"
+}
+PROMPT_COMMAND="__ps1"
+    # eval $(/opt/homebrew/bin/brew shellenv)
