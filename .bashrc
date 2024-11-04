@@ -27,7 +27,7 @@ alias vf='nvim $(fzf)'
 alias ctop='TERM="${TERM/#tmux/screen}" ctop'
 alias git='/run/current-system/sw/bin/git'
 # alias nixu='nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/nix#kovaxs'
-alias nixu='darwin-rebuild switch --flake ~/nix#kovaxs'
+alias nixu='darwin-rebuild switch --flake ~/dotfiles/nix#kovaxs'
 alias genv='printenv | grep -i'
 
 

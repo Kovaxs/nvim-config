@@ -17,6 +17,7 @@
       # nixpkgs.config.allowUnsupportedSystem = true;
 
       environment.systemPackages = [
+        pkgs.nodejs_22
         # pkgs.sioyek
         pkgs.mkalias
         pkgs.cargo
@@ -114,6 +115,8 @@
 
                     };
                     onActivation.cleanup = "zap";
+                    onActivation.autoUpdate = true;
+                    onActivation.upgrade = true;
 
                 };
 
@@ -145,6 +148,9 @@
       done
           '';
 
+    system.defaults = {
+        dock.autohide = true;
+    };
     # Auto upgrade nix package and the daemon service.
     services.nix-daemon.enable = true;
     # nix.package = pkgs.nix;
