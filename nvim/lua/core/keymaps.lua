@@ -100,7 +100,7 @@ keymap.set("n", "<leader>qc", ":cclose<CR>", {desc = "close quickfix list"}) -- 
 -- Telescope
 keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, {desc = "Opens a Telescope prompt to search and navigate your Git repository files."}) -- Opens a Telescope prompt to search and navigate your Git repository files.
 keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, {desc = "Opens a Telescope prompt to search and access Neovim help tags."}) -- Opens a Telescope prompt to search and access Neovim help tags.
-keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, {desc = "Opens a Telescope prompt to search and open files on your system."}) -- Opens a Telescope prompt to search and open files on your system.
+keymap.set('n', '<leader>ff', function() require('telescope.builtin').find_files({ hidden = true }) end, {desc = "Opens a Telescope prompt to search and open files on your system."}) -- Opens a Telescope prompt to search and open files on your system.
 keymap.set('n', '<leader>fa', require('telescope.builtin').live_grep, {desc = "Opens a Telescope prompt to search real-time across your project files using a user-provided pattern."}) -- Opens a Telescope prompt to search real-time across your project files using a user-provided pattern.
 keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, {desc = "Opens a Telescope prompt to switch and manage open buffers in Neovim."}) -- Opens a Telescope prompt to switch and manage open buffers in Neovim.
 keymap.set('n', '<leader>fs', require('telescope.builtin').current_buffer_fuzzy_find, {desc = "Opens a Telescope prompt to search within the currently open buffer."}) -- Opens a Telescope prompt to search within the currently open buffer.
