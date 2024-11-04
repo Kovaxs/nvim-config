@@ -29,10 +29,10 @@ return {
       -- Install these LSPs automatically
       ensure_installed = {
         'lua_ls',
-        'jsonls',
+        -- 'jsonls',
         'lemminx',
         'marksman',
-        'yamlls',
+        -- 'yamlls',
         'pyright',
       }
     })
@@ -40,12 +40,13 @@ return {
     require('mason-tool-installer').setup({
       -- Install these linters, formatters, debuggers automatically
       ensure_installed = {
-        'black',
+        -- 'black',
         'debugpy',
         'flake8',
         'isort',
         'mypy',
         'pylint',
+        'nixpkgs-fmt',
       },
     })
 
@@ -85,6 +86,5 @@ return {
         },
       },
     }
-
   end
 }
