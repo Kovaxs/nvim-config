@@ -12,7 +12,6 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # Export PATHs
 export PATH=$PATH:~/bin
 if [[ $(uname) == "Darwin" ]]; then
-    export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET" 
     export PATH=/opt/homebrew/bin:$PATH
     export PATH=$PATH:$HOME/go/bin/
     # export PATH="/usr/local/bin:$PATH"
@@ -129,6 +128,11 @@ function __ps1(){
     else
         APS1=" "
     fi
+
+    if [[ -n "$IN_NIX_SHELL" ]]; then
+        APS1="$BLUE"
+        APS1+=" "
+    fi
     
     #
     APS1+="${conda_env} ${GREEN}\u"
@@ -139,5 +143,6 @@ function __ps1(){
 
     PS1="$APS1"
 }
+#
 PROMPT_COMMAND="__ps1"
     # eval $(/opt/homebrew/bin/brew shellenv)
