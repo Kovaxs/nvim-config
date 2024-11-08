@@ -17,6 +17,8 @@
       # nixpkgs.config.allowUnsupportedSystem = true;
 
       environment.systemPackages = [
+        # pkgs.lf
+        pkgs.lua
         pkgs.nodejs_22
         # pkgs.sioyek
         pkgs.mkalias
@@ -77,7 +79,7 @@
         pkgs.wireshark
         pkgs.vlc-bin
         pkgs.podman
-        pkgs.telegram-desktop
+        # pkgs.telegram-desktop
         pkgs.fzf
         # pkgs.kitty
         # pkgs.podman-desktop
@@ -112,6 +114,7 @@
                     masApps = {
                         # "Yoink" = 457622435;
                         "Surfingkeys" = 1609752330;  
+                        "Telegram" = 747648890;
 
                     };
                     onActivation.cleanup = "zap";
