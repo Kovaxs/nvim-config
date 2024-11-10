@@ -13,9 +13,9 @@ keymap.set("n", "<leader>cl",
 keymap.set("i", "kj", "<ESC>")
 
 -- Nvim-tree
-keymap.set("n", "<leader>re", ":NvimTreeToggle<CR>")   -- toggle file explorer
+-- keymap.set("n", "<leader>re", ":NvimTreeToggle<CR>")   -- toggle file explorer
 -- keymap.set("n", "<leader>er", ":NvimTreeFocus<CR>")    -- toggle focus to file explorer
-keymap.set("n", "<leader>rr", ":NvimTreeFindFile<CR>") -- find file in file explorer
+-- keymap.set("n", "<leader>rr", ":NvimTreeFindFile<CR>") -- find file in file explorer
 
 -- Moving lines around
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
