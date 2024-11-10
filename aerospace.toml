@@ -257,7 +257,7 @@ if.app-id = 'md.obsidian'
 run = ['move-node-to-workspace O']
 
 [[on-window-detected]]
-if.app-id = 'com.apple.Safari.WebApp.DE235F2A-69E5-4BBE-AE0B-66E7966BE70D'
+if.app-id = 'com.apple.Safari.WebApp.3409B404-0E73-4092-8847-3CC2A99929B7'
 # if.window-title-regex-substring = '.+(YT Music).+'
 run = ['move-node-to-workspace M']
 
