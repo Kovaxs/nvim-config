@@ -1,6 +1,6 @@
 -- LSP Support
 return {
-    -- LSP Configuration
+    -- LSP Configuratiou
     -- https://github.com/neovim/nvim-lspconfig
     'neovim/nvim-lspconfig',
     event = 'VeryLazy',
@@ -75,7 +75,19 @@ return {
                 })
             end
         })
+        -- Python pyright LSP settings
+        local util = require("lspconfig/util")
+        local path = util.path
 
+        lspconfig.pyright.setup {
+            -- on_attach = on_attach,
+            capabilities = lsp_capabilities,
+            before_init = function(_, config)
+                local default_venv_path = path.join(vim.env.HOME, "miniconda3", "miniconda3/envs/", "bin", "python")
+                config.settings.python.pythonPath = default_venv_path
+            end,
+
+        }
         -- Lua LSP settings
         lspconfig.lua_ls.setup {
             settings = {
@@ -87,6 +99,5 @@ return {
                 },
             },
         }
-
     end
 }
