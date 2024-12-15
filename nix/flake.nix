@@ -18,8 +18,9 @@
 
       environment.systemPackages = [
         # pkgs.lf
-        pkgs.lua
-        pkgs.nodejs_22
+        # pkgs.lua
+        pkgs.lua51Packages.lua
+        # pkgs.nodejs_22
         # pkgs.sioyek
         pkgs.mkalias
         pkgs.cargo
@@ -39,6 +40,8 @@
         pkgs.fzf
         pkgs.ghostscript
         pkgs.girara
+        # pkgs.gimp-with-plugins
+        pkgs.gimp
         pkgs.git
         pkgs.git-lfs
         pkgs.glow
@@ -56,7 +59,7 @@
         pkgs.librsvg
         pkgs.luarocks
         pkgs.ncdu
-        pkgs.neovim
+        # pkgs.neovim
         pkgs.nmap
         pkgs.pkg-config
         pkgs.poppler
@@ -79,6 +82,7 @@
         pkgs.wireshark
         pkgs.vlc-bin
         pkgs.podman
+        pkgs.ollama
         # pkgs.telegram-desktop
         pkgs.fzf
         # pkgs.kitty
@@ -110,6 +114,7 @@
                     brews = [
                         "bash"
                         "mas"
+                        "neovim"
                     ];
                     masApps = {
                         # "Yoink" = 457622435;
