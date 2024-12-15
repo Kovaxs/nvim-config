@@ -90,7 +90,7 @@ keymap.set("n", "<leader>tp", ":tabp<CR>") -- previous tab
 -- vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
 
 -- Vim fugitive
-keymap.set("n", "<leader>gG", vim.cmd.Git, { desc = "Vim fugitive" })
+-- keymap.set("n", "<leader>gG", vim.cmd.Git, { desc = "Vim fugitive" })
 
 -- Git-blame
 keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "toggle git blame" }) -- toggle git blame
