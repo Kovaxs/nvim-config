@@ -20,16 +20,20 @@ fi
 # Aliases
 alias l='ls -lhaFS'
 alias wl='watch -n 1 ls -lh'
+# alias v='nvim'
 alias v='nvim'
-alias vim='nvim'
 alias vf='nvim $(fzf)'
 alias ctop='TERM="${TERM/#tmux/screen}" ctop'
 alias git='/run/current-system/sw/bin/git'
 # alias nixu='nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/nix#kovaxs'
 alias nixu='darwin-rebuild switch --flake ~/dotfiles/nix#kovaxs'
 alias genv='printenv | grep -i'
+alias c='conda activate'
+alias countw='find . -type f | xargs wc -w | tail -1' # count the total number of words in all regular files located in the current directory
+alias sb='source $HOME/.bashrc'
 
-
+# TMP aliases
+alias ck='conda activate kotaemon'
 
 # fzf
 export FD_OPTIONS="--follow --exclude .git --exclude node_modules"
