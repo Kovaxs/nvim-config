@@ -1,3 +1,3 @@
 #!/bin/bash
-ln -s /Users/kovaxs/nvim-config ~/.config/nvim
+ln -s $HOME/nvim-config/nvim ~/.config/nvim
 echo "All dotfiles have been linked."
