@@ -1,103 +1,101 @@
--- LSP Support
 return {
-    -- LSP Configuratiou
-    -- https://github.com/neovim/nvim-lspconfig
-    'neovim/nvim-lspconfig',
-    event = 'VeryLazy',
-    dependencies = {
-        -- LSP Management
-        -- https://github.com/williamboman/mason.nvim
-        { 'williamboman/mason.nvim' },
-        -- https://github.com/williamboman/mason-lspconfig.nvim
-        { 'williamboman/mason-lspconfig.nvim' },
+	"neovim/nvim-lspconfig",
+	event = { "BufReadPre", "BufNewFile" },
+	dependencies = {
+		"hrsh7th/cmp-nvim-lsp",
+		{ "antosha417/nvim-lsp-file-operations", config = true },
+		{ "folke/neodev.nvim", opts = {} },
+	},
+	config = function()
+		local on_attach = function(client, bufnr)
+			if client.name == "ruff" then
+				-- Disable hover in favor of Pyright
+				client.server_capabilities.hoverProvider = false
+			end
+		end
+		-- import lspconfig plugin
+		local lspconfig = require("lspconfig")
 
-        -- Auto-Install LSPs, linters, formatters, debuggers
-        -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
-        { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
+		-- import mason_lspconfig plugin
+		local mason_lspconfig = require("mason-lspconfig")
 
-        -- Useful status updates for LSP
-        -- https://github.com/j-hui/fidget.nvim
-        { 'j-hui/fidget.nvim',                        opts = {} },
+		-- import cmp-nvim-lsp plugin
+		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-        -- Additional lua configuration, makes nvim stuff amazing!
-        -- https://github.com/folke/neodev.nvim
-        { 'folke/neodev.nvim' },
-    },
-    config = function()
-        require('mason').setup()
-        require('mason-lspconfig').setup({
-            -- Install these LSPs automatically
-            ensure_installed = {
-                'lua_ls',
-                -- 'jsonls',
-                'lemminx',
-                'marksman',
-                -- 'yamlls',
-                'pyright',
-            }
-        })
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+			callback = function(ev)
+				-- Buffer local mappings.
+				-- See `:help vim.lsp.*` for documentation on any of the below functions
+				local opts = { buffer = ev.buf, silent = true }
+			end,
+		})
 
-        require('mason-tool-installer').setup({
-            -- Install these linters, formatters, debuggers automatically
-            ensure_installed = {
-                -- 'black',
-                'debugpy',
-                'flake8',
-                'isort',
-                'mypy',
-                'pylint',
-                'nixpkgs-fmt',
-            },
-        })
+		-- used to enable autocompletion (assign to every lsp server config)
+		local capabilities = cmp_nvim_lsp.default_capabilities()
 
-        -- There is an issue with mason-tools-installer running with VeryLazy, since it triggers on VimEnter which has already occurred prior to this plugin loading so we need to call install explicitly
-        -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim/issues/39
-        vim.api.nvim_command('MasonToolsInstall')
+		-- Change the Diagnostic symbols in the sign column (gutter)
+		-- (not in youtube nvim video)
+		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+		for type, icon in pairs(signs) do
+			local hl = "DiagnosticSign" .. type
+			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+		end
 
-        local lspconfig = require('lspconfig')
-        local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-        local lsp_attach = function(client, bufnr)
-            -- Create your keybindings here...
-        end
-
-        -- Call setup on each LSP server
-        require('mason-lspconfig').setup_handlers({
-            function(server_name)
-                lspconfig[server_name].setup({
-                    on_attach = lsp_attach,
-                    capabilities = lsp_capabilities,
-                    handlers = {
-                        -- Add borders to LSP popups
-                        ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' }),
-                        ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help,
-                            { border = 'rounded' }),
-                    }
-                })
-            end
-        })
-        -- Python pyright LSP settings
-        local util = require("lspconfig/util")
-        local path = util.path
-
-        lspconfig.pyright.setup {
-            -- on_attach = on_attach,
-            capabilities = lsp_capabilities,
-            before_init = function(_, config)
-                local default_venv_path = path.join(vim.env.HOME, "miniconda3", "miniconda3/envs/", "bin", "python")
-                config.settings.python.pythonPath = default_venv_path
-            end,
-
-        }
-        -- Lua LSP settings
-        lspconfig.lua_ls.setup {
-            settings = {
-                Lua = {
-                    diagnostics = {
-                        -- Get the language server to recognize the `vim` global
-                        globals = { 'vim' },
-                    },
-                },
-            },
-        }
-    end
+		mason_lspconfig.setup_handlers({
+			-- default handler for installed servers
+			function(server_name)
+				lspconfig[server_name].setup({
+					capabilities = capabilities,
+				})
+			end,
+			-- Python
+			-- ["ruff"] = function()
+			--     lspconfig.ruff.setup({
+			--         on_attach = function(client, bufnr)
+			--             client.server_capabilities.hoverProvider = false
+			--             on_attach(client, bufnr)
+			--         end,
+			--     })
+			-- end,
+			-- ["basedpyright"] = function()
+			--     lspconfig.basedpyright.setup({
+			--         on_attach = on_attach,
+			--         capabilities = capabilities,
+			--         settings = {
+			--             basedpyright = {
+			--                 disableOrganizeImports = true,
+			--                 disableTaggedHints = false,
+			--                 analysis = {
+			--                     typeCheckingMode = "standard",
+			--                     useLibraryCodeForTypes = true, -- Analyze library code for type information
+			--                     autoImportCompletions = true,
+			--                     autoSearchPaths = true,
+			--                     diagnosticSeverityOverrides = {
+			--                         reportIgnoreCommentWithoutRule = true,
+			--                     },
+			--                 },
+			--             },
+			--         }
+			--     })
+			-- end,
+			["lua_ls"] = function()
+				-- configure lua server (with special settings)
+				lspconfig["lua_ls"].setup({
+					capabilities = capabilities,
+					settings = {
+						Lua = {
+							-- make the language server recognize "vim" global
+							diagnostics = {
+								globals = { "vim" },
+							},
+							completion = {
+								callSnippet = "Replace",
+							},
+						},
+					},
+				})
+			end,
+		})
+	end,
 }
