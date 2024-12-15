@@ -208,67 +208,59 @@ run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
 if.app-id = 'net.kovidgoyal.kitty'
-# if.window-title-regex-substring = '.+(twitch|youtube).+'
 run = ['move-node-to-workspace 2']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
-# if.window-title-regex-substring = '.+(twitch|youtube).+'
 run = ['move-node-to-workspace 3']
 
 [[on-window-detected]]
-if.app-id = 'com.microsoft.teams2'
-# if.window-title-regex-substring = '.+(twitch|youtube).+'
+if.app-id = 'com.apple.mail'
 run = ['move-node-to-workspace 4']
 
 [[on-window-detected]]
-if.app-id = 'com.microsoft.Outlook'
-# if.window-title-regex-substring = '.+(twitch|youtube).+'
+if.app-id = 'com.microsoft.teams2'
 run = ['move-node-to-workspace 5']
+
 
 [[on-window-detected]]
 if.app-id = 'ru.keepcoder.Telegram'
-# if.window-title-regex-substring = '.+(twitch|youtube).+'
-run = ['move-node-to-workspace 6']
+run = ['move-node-to-workspace 5']
 
 [[on-window-detected]]
 if.app-id = 'com.hnc.Discord'
-# if.window-title-regex-substring = '.+(twitch|youtube).+'
-run = ['move-node-to-workspace 7']
+run = ['move-node-to-workspace 0']
 
 [[on-window-detected]]
 if.app-id = 'org.zotero.zotero'
-# if.window-title-regex-substring = '.+(twitch|youtube).+'
+run = ['move-node-to-workspace 8']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.iCal'
 run = ['move-node-to-workspace 8']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari.WebApp.E7A9723D-5390-429B-B83D-66DC3CC1799D'
-# if.window-title-regex-substring = '.+(twitch|youtube).+'
 run = ['move-node-to-workspace 9']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari.WebApp.4345D9B1-EE28-4726-A344-5C8AE622D926'
-# if.window-title-regex-substring = '.+(twitch|youtube).+'
 run = ['move-node-to-workspace 9']
 
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
-# if.window-title-regex-substring = '.+(twitch|youtube).+'
 run = ['move-node-to-workspace O']
 
 [[on-window-detected]]
-if.app-id = 'com.apple.Safari.WebApp.3409B404-0E73-4092-8847-3CC2A99929B7'
-# if.window-title-regex-substring = '.+(YT Music).+'
+if.app-id = 'com.apple.Music'
 run = ['move-node-to-workspace M']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Notes'
-# if.window-title-regex-substring = '.+(twitch|youtube).+'
 run = ['move-node-to-workspace N']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.reminders'
-# if.window-title-regex-substring = '.+(twitch|youtube).+'
 run = ['move-node-to-workspace R']
 
 
