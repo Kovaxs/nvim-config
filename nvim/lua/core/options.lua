@@ -1,27 +1,27 @@
 local opt = vim.opt
 
 -- Session Management
-opt.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
-opt.cmdheight = 1  -- or any number you prefer
+opt.cmdheight = 1 -- or any number you prefer
 
 -- Spell check
-opt.spelllang = 'en_us'
+opt.spelllang = "en_us"
 opt.spell = true
 vim.g.spellfile_URL = "https://ftp.nluug.nl/vim/runtime/spell/"
 
 -- Identation
-vim.api.nvim_set_keymap('v', '<', '<gv', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('v', '>', '>gv', {noremap = true, silent = true})
+vim.api.nvim_set_keymap("v", "<", "<gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true, silent = true })
 
 -- Yanking highlight
 vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
-    group = "YankHighlight",
-    pattern = "*",
-    callback = function()
-        vim.highlight.on_yank({higroup="IncSearch", timeout=150})
-    end,
+	group = "YankHighlight",
+	pattern = "*",
+	callback = function()
+		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 150 })
+	end,
 })
 
 -- Line Number
@@ -53,9 +53,9 @@ opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 opt.termguicolors = true
 opt.background = "dark"
 opt.signcolumn = "yes"
-vim.diagnostic.config {
-  float = { border = "rounded" }, -- add border to diagnostic popups
-}
+vim.diagnostic.config({
+	float = { border = "rounded" }, -- add border to diagnostic popups
+})
 
 -- Performance
 opt.swapfile = false
@@ -94,4 +94,4 @@ opt.signcolumn = "yes"
 -- Misc
 opt.isfname:append("@-@")
 opt.updatetime = 50
-opt.colorcolumn = "80"
+opt.colorcolumn = "115"
