@@ -1,8 +1,11 @@
 local opt = vim.opt
 
+-- time managers
+opt.timeoutlen = 1000
+opt.ttimeoutlen = 0
+
 -- Session Management
 opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-
 opt.cmdheight = 1 -- or any number you prefer
 
 -- Spell check
