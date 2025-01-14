@@ -49,7 +49,7 @@ keymap.set("n", "<leader>bP", '"+P')
 -- end, { desc = "Trigger linting for current file" })
 
 -- Tmux new session
-keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ts<CR>")
 
 -- Advanced replace search
 keymap.set(
@@ -207,7 +207,7 @@ keymap.set("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>",
 --     function() require("conform").format({ lsp_fallback = true, async = false, timeout_ms = 1000, }) end,
 --     { desc = "Format file or range (in visual mode)" })
 keymap.set("v", "<leader>gf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", { desc = "LSP: Format Code" })
-keymap.set("n", "<leader>lh", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "LSP: Hover Documentation" })
+-- keymap.set("n", "<leader>lh", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "LSP: Hover Documentation" })
 keymap.set("n", "<leader>ln", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "LSP: Rename Symbol" })
 keymap.set("n", "<leader>lt", "<cmd>Telescope lsp_type_definitions<CR>", { desc = "LSP: Type Definition" }) -- Don't work in python
 keymap.set("n", "<leader>ls", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", { desc = "LSP: Document Symbols" })
