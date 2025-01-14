@@ -1,10 +1,21 @@
-return {
-    "askfiy/visual_studio_code",
-    priority = 100,
-    config = function()
-        vim.cmd([[colorscheme visual_studio_code]])
-    end,
+return
+{
+  "rockyzhang24/arctic.nvim",
+  dependencies = { "rktjmp/lush.nvim" },
+  name = "arctic",
+  branch = "main",
+  priority = 1000,
+  config = function()
+    vim.cmd("colorscheme arctic")
+  end
 }
+    -- {
+    -- "askfiy/visual_studio_code",
+    -- priority = 100,
+    -- config = function()
+    --     vim.cmd([[colorscheme visual_studio_code]])
+    -- end,
+-- }
 -- return {
 --   "folke/tokyonight.nvim",
 --   priority = 1000,
