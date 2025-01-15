@@ -12,6 +12,90 @@ local f = ls.function_node
 local d = ls.dynamic_node
 local sn = ls.snippet_node
 
+------------------------------------------------------------------------------------------------------------------
+-- Python snips
+------------------------------------------------------------------------------------------------------------------
+ls.add_snippets("python", {
+    s("rjson", {
+        -- t({ "import json", "", "" }),
+        t({ "with open(" }), i(1, "path/to/file.json"), t({ ", 'r', encoding='utf-8') as f:", "\t" }),
+        t({ "data = json.load(f)", "" }),
+        -- t({ "# Now you can use the 'data' dictionary", "" }),
+    }),
+})
+ls.add_snippets("python", {
+    s("wjson", {
+        -- t({ "import json", "", "" }),
+        t({ "with open(" }), i(1, "path/to/file.json"), t({ ", 'w', encoding='utf-8') as f:", "\t" }),
+        t({ "json.dump(" }), i(2, "data"), t({ ", f, indent=4)", "" }),
+        -- t({ "# The dictionary 'data' is now written to the file", "" }),
+    }),
+})
+
+ls.add_snippets("python", {
+    s("scan_dir", {
+        t({
+            -- "import os",
+            -- "",
+            "def scan_dir(path, pattern=None):",
+            "\t\"\"\"",
+            "\tScans the given directory and its subdirectories for files.",
+            "\tOptionally filters files by extension(s) provided in pattern.",
+            "\t",
+            "\tArgs:",
+            "\t\tpath (str): The directory path to scan.",
+            "\t\tpattern (str or list of str, optional): File extension(s) to filter by.",
+            "\t",
+            "\tReturns:",
+            "\t\tlist of str: Full paths of files in the directory and subdirectories.",
+            "\t\"\"\"",
+            "\tfile_paths = []",
+            "\tfor root, dirs, files in os.walk(path):",
+            "\t\tfor file in files:",
+            "\t\t\tif pattern is None or (",
+            "\t\t\t\tisinstance(pattern, str) and file.endswith(pattern)) or (",
+            "\t\t\t\tisinstance(pattern, list) and any(file.endswith(ext) for ext in pattern)):",
+            "\t\t\t\tfile_paths.append(os.path.join(root, file))",
+            "\treturn file_paths",
+            -- "",
+            -- "# Example usage:",
+            -- "# files = scan_dir('path/to/directory', pattern=['.py', '.txt'])",
+            -- "# print(files)",
+        }),
+    }),
+}
+)
+
+ls.add_snippets("python", {
+    s("addpath", {
+        t({
+            "import sys",
+            "",
+            "sys.path.append(" }), i(1, "path"), t({ ")"
+        }),
+    }),
+}
+)
+
+------------------------------------------------------------------------------------------------------------------
+-- Examples
+------------------------------------------------------------------------------------------------------------------
+ls.add_snippets("lua", {
+    s("hello", {
+        t('print("hello '),
+        i(1),
+        t(' world")')
+    }),
+
+    s("if", {
+        t('if '),
+        i(1, "true"),
+        t(' then '),
+        i(2),
+        t(' end')
+    })
+})
+
 vim.keymap.set({ "i", "s" }, "<A-n>", function()
     if ls.choice_active() then
         ls.change_choice(1)
@@ -30,21 +114,6 @@ vim.keymap.set({ "i", "s" }, "<A-j>", function()
     end
 end, { silent = true })
 
-ls.add_snippets("lua", {
-    s("hello", {
-        t('print("hello '),
-        i(1),
-        t(' world")')
-    }),
-
-    s("if", {
-        t('if '),
-        i(1, "true"),
-        t(' then '),
-        i(2),
-        t(' end')
-    })
-})
 
 ls.add_snippets("tex", {
     s("beg", {
