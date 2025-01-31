@@ -16,6 +16,34 @@ local sn = ls.snippet_node
 -- Python snips
 ------------------------------------------------------------------------------------------------------------------
 ls.add_snippets("python", {
+    s("mlflow_tempfile", {
+        t({
+            -- "import tempfile",
+            -- "import os",
+            -- "import mlflow",
+            -- "",
+            "# Create a temporary directory",
+            "with tempfile.TemporaryDirectory() as temp_dir:",
+            "    # Define the file path",
+            "    file_path = os.path.join(temp_dir, 'example.txt')",
+            "",
+            "    # Write to the file",
+            "    with open(file_path, 'w') as f:",
+            "        f.write('This is a test file.')",
+            "",
+            "    # Log the file to MLflow",
+            "    mlflow.log_artifact(file_path, artifact_path='",
+        }),
+        i(1, "your/mlflow/path"), -- Placeholder for the MLflow path
+        t({
+            "')",
+            -- "",
+            -- "# End of script",
+        }),
+    }),
+})
+
+ls.add_snippets("python", {
     s("rjson", {
         -- t({ "import json", "", "" }),
         t({ "with open(" }), i(1, "path/to/file.json"), t({ ", 'r', encoding='utf-8') as f:", "\t" }),
@@ -23,6 +51,7 @@ ls.add_snippets("python", {
         -- t({ "# Now you can use the 'data' dictionary", "" }),
     }),
 })
+
 ls.add_snippets("python", {
     s("wjson", {
         -- t({ "import json", "", "" }),
@@ -72,7 +101,7 @@ ls.add_snippets("python", {
             "import sys",
             "",
             "sys.path.append(" }), i(1, "path"), t({ ")"
-        }),
+    }),
     }),
 }
 )
