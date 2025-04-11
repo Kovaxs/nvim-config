@@ -1,21 +1,26 @@
 -- Set leader key to space
-vim.g.mapleader = " "
+-- vim.g.mapleader = " "
 
 local keymap = vim.keymap
 
+keymap.set("n", "<space><space>x", "<cmd>source %<CR>", {desc = "Source: source nvim"})
+keymap.set("n", "<space>x", ":.lua<CR>", {desc = "Lua: Run current line"})
+keymap.set("v", "<space>x", ":lua<CR>", {desc = "Lua: Run currently selected lines"})
+
+-- TODO: serach for better alternative to cnex and cprev
+-- keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
+-- keymap.set("n", "<M-k>", "<cmd>cprev<CR>")
+
 -- spell checker change language
--- keymap.set("n", "<leader>cl", ":setlocal spell spelllang=es_es<CR>", {desc = ""})
 keymap.set("n", "<leader>cl", function()
     vim.cmd("setlocal spelllang=" .. (vim.bo.spelllang == "es" and "en" or "es"))
 end, { desc = "Toggle spell check language between Spanish and English" })
 
 -- General keymaps
-keymap.set("i", "kj", "<ESC>")
+-- keymap.set("i", "kj", "<ESC>")
 
--- Nvim-tree
--- keymap.set("n", "<leader>re", ":NvimTreeToggle<CR>")   -- toggle file explorer
--- keymap.set("n", "<leader>er", ":NvimTreeFocus<CR>")    -- toggle focus to file explorer
--- keymap.set("n", "<leader>rr", ":NvimTreeFindFile<CR>") -- find file in file explorer
+-- Oil
+keymap.set("n", "-", "<cmd>Oil<CR>")
 
 -- Moving lines around
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -43,7 +48,6 @@ keymap.set("n", "<leader>bP", '"+P')
 -- keymap.set("v", "<leader>d", "\"_d")
 
 -- Linting
-
 -- keymap.set("n", "<leader>gl", function() -- Create a custom key mapping
 -- 	require("lint").try_lint() -- Trigger linting for the current file
 -- end, { desc = "Trigger linting for current file" })
@@ -59,41 +63,22 @@ keymap.set(
     { desc = "Advanced replace search" }
 )
 
--- Source file
-keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
-end, { desc = "Source file" })
 
--- Slit window management
-keymap.set("n", "<leader>sv", "<C-w>v", { desc = "split window vertically" })           -- split window vertically
-keymap.set("n", "<leader>ss", "<C-w>s", { desc = "split window horizontally" })         -- split window horizontally
-keymap.set("n", "<leader>se", "<C-w>=", { desc = "make split windows equal width" })    -- make split windows equal width
-keymap.set("n", "<leader>sx", ":close<CR>", { desc = "close split window" })            -- close split window
-keymap.set("n", "<leader>sj", "<C-w>-", { desc = "make split window height shorter" })  -- make split window height shorter
-keymap.set("n", "<leader>sk", "<C-w>+", { desc = "make split windows height taller" })  -- make split windows height taller
-keymap.set("n", "<leader>sl", "<C-w>5>", { desc = "make split windows width bigger" })  -- make split windows width bigger
-keymap.set("n", "<leader>sh", "<C-w>5<", { desc = "make split windows width smaller" }) -- make split windows width smaller
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", { desc = "toggle maximize tab" }) -- toggle maximize tab
 
--- Tab management
-keymap.set("n", "<leader>to", ":tabnew<CR>")   -- open a new tab
-keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close a tab
-keymap.set("n", "<leader>tn", ":tabn<CR>")     -- next tab
-keymap.set("n", "<leader>tp", ":tabp<CR>")     -- previous tab
 
--- Trouble
--- vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
--- vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
--- vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
--- vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
--- vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
--- vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
+-- Tab management
+-- keymap.set("n", "<leader>to", ":tabnew<CR>")   -- open a new tab
+-- keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close a tab
+-- keymap.set("n", "<leader>tn", ":tabn<CR>")     -- next tab
+-- keymap.set("n", "<leader>tp", ":tabp<CR>")     -- previous tab
 
 -- Vim fugitive
 -- keymap.set("n", "<leader>gG", vim.cmd.Git, { desc = "Vim fugitive" })
 
 -- Git-blame
-keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "toggle git blame" })                     -- toggle git blame
+keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "toggle git blame" }) -- toggle git blame
+
 -- Diff keymaps
 keymap.set("n", "<leader>cc", ":diffput<CR>", { desc = "put diff from current to other during diff" })  -- put diff from current to other during diff
 keymap.set("n", "<leader>cj", ":diffget 1<CR>", { desc = "get diff from left (local) during merge" })   -- get diff from left (local) during merge
@@ -101,59 +86,7 @@ keymap.set("n", "<leader>ck", ":diffget 3<CR>", { desc = "get diff from right (r
 keymap.set("n", "<leader>cn", "]c", { desc = "Next diff hunk" })                                        -- next diff hunk
 keymap.set("n", "<leader>cp", "[c", { desc = "Previous diff hunk" })                                    -- previous diff hunk
 
--- Quickfix keymaps
-keymap.set("n", "<leader>qo", ":copen<CR>", { desc = "open quickfix list" })                -- open quickfix list
-keymap.set("n", "<leader>qf", ":cfirst<CR>", { desc = "jump to first quickfix list item" }) -- jump to first quickfix list item
-keymap.set("n", "<leader>qn", ":cnext<CR>", { desc = "jump to next quickfix list item" })   -- jump to next quickfix list item
-keymap.set("n", "<leader>qp", ":cprev<CR>", { desc = "jump to prev quickfix list item" })   -- jump to prev quickfix list item
-keymap.set("n", "<leader>ql", ":clast<CR>", { desc = "jump to last quickfix list item" })   -- jump to last quickfix list item
-keymap.set("n", "<leader>qc", ":cclose<CR>", { desc = "close quickfix list" })              -- close quickfix list
-
--- Telescope
-keymap.set(
-    "n",
-    "<leader>fg",
-    require("telescope.builtin").git_files,
-    { desc = "Opens a Telescope prompt to search and navigate your Git repository files." }
-) -- Opens a Telescope prompt to search and navigate your Git repository files.
-keymap.set(
-    "n",
-    "<leader>fh",
-    require("telescope.builtin").help_tags,
-    { desc = "Opens a Telescope prompt to search and access Neovim help tags." }
-) -- Opens a Telescope prompt to search and access Neovim help tags.
-keymap.set("n", "<leader>ff", function()
-    require("telescope.builtin").find_files({ hidden = true }, { additional_args = { "-u" } })
-end, { desc = "Opens a Telescope prompt to search and open files on your system." }) -- Opens a Telescope prompt to search and open files on your system.
-keymap.set("n", "<leader>fa", function()
-    require("telescope.builtin").live_grep({ hidden = true }, { additional_args = { "-u" } })
-end, { desc = "Opens a Telescope prompt to search real-time across your project files using a user-provided pattern." }) -- Opens a Telescope prompt to search real-time across your project files using a user-provided pattern.
-keymap.set(
-    "n",
-    "<leader>fb",
-    require("telescope.builtin").buffers,
-    { desc = "Opens a Telescope prompt to switch and manage open buffers in Neovim." }
-) -- Opens a Telescope prompt to switch and manage open buffers in Neovim.
-keymap.set(
-    "n",
-    "<leader>fs",
-    require("telescope.builtin").current_buffer_fuzzy_find,
-    { desc = "Opens a Telescope prompt to search within the currently open buffer." }
-) -- Opens a Telescope prompt to search within the currently open buffer.
-keymap.set("n", "<leader>fo", require("telescope.builtin").lsp_document_symbols, {
-    desc =
-    "Opens a Telescope prompt to search and navigate symbols within the current document using Language Server Protocol (LSP) integration.",
-}) -- Opens a Telescope prompt to search and navigate symbols within the current document using Language Server Protocol (LSP) integration.
-keymap.set("n", "<leader>fi", require("telescope.builtin").lsp_incoming_calls, {
-    desc = "Opens a Telescope prompt to search for references to the currently selected symbol using LSP integration.",
-}) -- Opens a Telescope prompt to search for references to the currently selected symbol using LSP integration.
-keymap.set("n", "<leader>fm", function()
-    require("telescope.builtin").treesitter({ default_text = ":method:" })
-end, {
-    desc =
-    "This custom function utilizes Telescope's treesitter provider and sets the default text to 'method:', likely used for finding and selecting methods within your code.",
-}) -- This custom function utilizes Telescope's treesitter provider and sets the default text to ":method:", likely used for finding and selecting methods within your code.
-
+-- Git worktrees
 keymap.set("n", "<leader>gr", "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>",
     { silent = true, desc = "Show worktrees in Telescope" })
 keymap.set("n", "<leader>gR", "<cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>",
@@ -163,7 +96,7 @@ keymap.set("n", "<leader>gR", "<cmd>lua require('telescope').extensions.git_work
 keymap.set("n", "<leader>ha", require("harpoon.mark").add_file, { desc = "Add file to harpoon" })
 keymap.set("n", "<leader>hh", require("harpoon.ui").toggle_quick_menu, { desc = "Marks UI menu" })
 keymap.set("n", "<leader>ht", ":Telescope harpoon marks<CR>")
-keymap.set("n", "<leader>hc", require("harpoon.cmd-ui").toggle_quick_menu, { desc = "Commands UI menu" })
+-- keymap.set("n", "<leader>hc", require("harpoon.cmd-ui").toggle_quick_menu, { desc = "Commands UI menu" })
 keymap.set("n", "<leader>h1", function()
     require("harpoon.ui").nav_file(1)
 end, { desc = "Navigate to 1" })
@@ -176,51 +109,30 @@ end, { desc = "Navigate to 3" })
 keymap.set("n", "<leader>h4", function()
     require("harpoon.ui").nav_file(4)
 end, { desc = "Navigate to 4" })
-keymap.set("n", "<leader>h5", function()
-    require("harpoon.ui").nav_file(5)
-end, { desc = "Navigate to 5" })
-keymap.set("n", "<leader>h6", function()
-    require("harpoon.ui").nav_file(6)
-end, { desc = "Navigate to 6" })
-keymap.set("n", "<leader>h7", function()
-    require("harpoon.ui").nav_file(7)
-end, { desc = "Navigate to 7" })
-keymap.set("n", "<leader>h8", function()
-    require("harpoon.ui").nav_file(8)
-end, { desc = "Navigate to 8" })
-keymap.set("n", "<leader>h9", function()
-    require("harpoon.ui").nav_file(9)
-end, { desc = "Navigate to 9" })
-keymap.set("n", "<leader>hg1", function()
-    require("harpoon.tmux").sendCommand("2", 1)
-    require("harpoon.tmux").gotoTerminal("2")
-end, { desc = "Run the first command on Tmux pane 2" })
 
 -- Undo Tree
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle undo tree" })
+keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle undo tree" })
 
 -- Vim REST Console
-keymap.set("n", "<leader>xr", ":call VrcQuery()<CR>") -- Run REST query
+-- keymap.set("n", "<leader>xr", ":call VrcQuery()<CR>") -- Run REST query
 
 -- LSP
 -- Normal mode, starting with <leader>l
-keymap.set("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "LSP: Code Action" })
-keymap.set("n", "<leader>ld", "<cmd>Telescope lsp_definitions<CR>", { desc = "LSP: Go to Definition" })
-keymap.set("n", "<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { desc = "LSP: Go to Declaration" })    -- Don't work
-keymap.set("n", "<leader>li", "<cmd>Telescope lsp_implementations<CR>", { desc = "LSP: Go to Implementation" }) -- Don't work
-keymap.set("n", "<leader>lr", "<cmd>Telescope lsp_references<CR>", { desc = "LSP: Show References" })
+-- keymap.set("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "LSP: Code Action" })
+-- keymap.set("n", "<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { desc = "LSP: Go to Declaration" })    -- Don't work
+-- keymap.set("n", "<leader>li", "<cmd>Telescope lsp_implementations<CR>", { desc = "LSP: Go to Implementation" }) -- Don't work
 keymap.set("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", { desc = "LSP: Format Code" })
 -- keymap.set({ "n", "v" }, "<leader>lf",
 --     function() require("conform").format({ lsp_fallback = true, async = false, timeout_ms = 1000, }) end,
 --     { desc = "Format file or range (in visual mode)" })
-keymap.set("v", "<leader>gf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", { desc = "LSP: Format Code" })
+-- keymap.set("v", "<leader>gf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", { desc = "LSP: Format Code" })
 -- keymap.set("n", "<leader>lh", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "LSP: Hover Documentation" })
-keymap.set("n", "<leader>ln", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "LSP: Rename Symbol" })
-keymap.set("n", "<leader>lt", "<cmd>Telescope lsp_type_definitions<CR>", { desc = "LSP: Type Definition" }) -- Don't work in python
-keymap.set("n", "<leader>ls", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", { desc = "LSP: Document Symbols" })
-keymap.set("n", "<leader>lS", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", { desc = "LSP: Workspace Symbol" })
-keymap.set("n", "<leader>l?", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "LSP: Signature Help" }) -- Don't work
-keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)                                                       -- mapping to restart lsp if necessary
+-- keymap.set("n", "<leader>ln", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "LSP: Rename Symbol" })
+-- keymap.set("n", "<leader>lt", "<cmd>Telescope lsp_type_definitions<CR>", { desc = "LSP: Type Definition" }) -- Don't work in python
+-- keymap.set("n", "<leader>ls", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", { desc = "LSP: Document Symbols" })
+-- keymap.set("n", "<leader>lS", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", { desc = "LSP: Workspace Symbol" })
+-- keymap.set("n", "<leader>l?", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "LSP: Signature Help" }) -- Don't work
+-- keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)                                                       -- mapping to restart lsp if necessary
 
 -- Diagnostics
 keymap.set("n", "<leader>ee", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "LSP: Show Line Diagnostics" })
@@ -232,9 +144,9 @@ keymap.set("n", "<leader>es", "<cmd>lua vim.diagnostic.show()<CR>", { desc = "LS
 keymap.set("n", "<leader>el", function()
     require("lint").try_lint()
 end, { desc = "Trigger linting for current file" })
--- keymap.set('n', '<leader>el', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "LSP: Set local diagnostic list" })
--- keymap.set('n', '<leader>eq', '<cmd>lua vim.diagnostic.setqflist()<CR>',
--- { desc = "LSP: Local diagnostic list to quickfix list" })
+keymap.set('n', '<leader>el', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "LSP: Set local diagnostic list" })
+keymap.set('n', '<leader>eq', '<cmd>lua vim.diagnostic.setqflist()<CR>',
+{ desc = "LSP: Local diagnostic list to quickfix list" })
 
 -- Debugging
 keymap.set("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", { desc = "Set breakpoint" })
@@ -294,7 +206,6 @@ keymap.set("n", "<leader>d?", function()
 end, { desc = "Displays variable scopes in a centered floating window" })
 
 -- ChatGPT
--- keymap.set({"n", "v"}, "<leader>ac", "<cmd>ChatGPT<CR>", {desc = "ChatGPT"})
 
 keymap.set({ "n", "v" }, "<leader>ac", "<cmd>ChatGPT<CR>", { desc = "ChatGPT", noremap = true, silent = true })
 keymap.set(

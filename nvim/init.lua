@@ -1,39 +1,144 @@
--- minimal_init.lua
--- vim.cmd('set nocompatible')
--- vim.cmd('filetype plugin on')
--- vim.cmd('syntax on')
+print("advent of neovim")
 
--- Bootstrap lazy
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
+require("config.lazy")
 
--- This has to be set before initializing lazy
-vim.g.mapleader = " "
+-- time managers
+vim.opt.timeoutlen = 1000
+vim.opt.ttimeoutlen = 0
 
-vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75", })
-vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B", })
-vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF", })
-vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66", })
-vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379", })
-vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD", })
-vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2", })
--- Initialize lazy with dynamic loading of anything in the plugins directory
-require("lazy").setup("plugins", {
-  change_detection = {
-    enebled = true, -- automatically check for config file changes and reload the ui
-    notify = false, -- turn off notifications whenever plugging changes are made
-  },
+-- Session Management
+vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.opt.cmdheight = 1 -- or any number you prefer
+
+-- Spell check
+vim.opt.spelllang = "en_us"
+vim.opt.spell = true
+vim.g.spellfile_URL = "https://ftp.nluug.nl/vim/runtime/spell/"
+
+-- Identation
+vim.api.nvim_set_keymap("v", "<", "<gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true, silent = true })
+
+-- Line Number
+vim.opt.relativenumber = true
+vim.opt.number = true
+
+-- vim.opt.clipboard = "unnamedplus"
+vim.opt.number = true
+vim.opt.relativenumber = true
+-- Tabs & Identation
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.autoindent = true
+vim.opt.softtabstop = 4
+
+-- Line Wrapping
+vim.opt.wrap = false
+
+-- Search Settings
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+
+-- Cursor Line
+vim.opt.cursorline = true
+-- opt.guicursor = ""
+vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
+
+-- Appearance
+vim.opt.termguicolors = true
+vim.opt.background = "dark"
+vim.opt.signcolumn = "yes"
+vim.diagnostic.config({
+	float = { border = "rounded" }, -- add border to diagnostic popups
 })
--- These modules are not loaded by lazy
-require("core.options")
+
+-- Performance
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+
+-- Backspace
+vim.opt.backspace = "indent,eol,start"
+
+-- Clipboard
+-- opt.clipboard:append("unnamedplus")
+
+-- Split Windows
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+-- Consider - as part of keyword
+-- opt.iskeyword:append("-")
+-- opt.iskeyword:append("_")
+
+-- Remove underscore from `iskeyword` for all file types
+-- opt.iskeyword:remove("_")
+
+-- Disable the mouse while in nvim
+vim.opt.mouse = ""
+
+-- Folding
+vim.opt.foldlevel = 20
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- Utilize Treesitter folds
+
+-- Scrolling
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = "yes"
+
+-- Misc
+vim.opt.isfname:append("@-@")
+vim.opt.updatetime = 50
+vim.opt.colorcolumn = "89"
+
+
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.hl.on_yank()`
+vim.api.nvim_create_autocmd("TextYankPost", {
+  desc = "Highlight when yanking (copying) text",
+  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})
+
+vim.api.nvim_create_autocmd("TermOpen", {
+  group = vim.api.nvim_create_augroup("custom-term-open", { clear = true }),
+  callback = function()
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+  end,
+})
+
+local job_id = 0
+vim.keymap.set("n", "<space>to", function()
+  vim.cmd.vnew()
+  vim.cmd.term()
+  vim.cmd.wincmd("J")
+  vim.api.nvim_win_set_height(0, 5)
+
+  job_id = vim.bo.channel
+end, {desc = "Terminal: toggle terminal"})
+
+local current_command = ""
+vim.keymap.set("n", "<space>te", function()
+  current_command = vim.fn.input("Command: ")
+end, {desc = "Terminal: save command to run in terminal"})
+
+vim.keymap.set("n", "<space>tr", function()
+  if current_command == "" then
+    current_command = vim.fn.input("Command: ")
+  end
+
+  vim.fn.chansend(job_id, { current_command .. "\r\n" })
+end, {desc = "Terminal: run a save command or write command to run"})
+
 require("core.keymaps")
 
+-- MINI
+require("mini.surround").setup()
+require("mini.pairs").setup()
