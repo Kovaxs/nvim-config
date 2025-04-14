@@ -3,9 +3,9 @@
 
 local keymap = vim.keymap
 
-keymap.set("n", "<space><space>x", "<cmd>source %<CR>", {desc = "Source: source nvim"})
-keymap.set("n", "<space>x", ":.lua<CR>", {desc = "Lua: Run current line"})
-keymap.set("v", "<space>x", ":lua<CR>", {desc = "Lua: Run currently selected lines"})
+keymap.set("n", "<space><space>x", "<cmd>source %<CR>", { desc = "Source: source nvim" })
+keymap.set("n", "<space>x", ":.lua<CR>", { desc = "Lua: Run current line" })
+keymap.set("v", "<space>x", ":lua<CR>", { desc = "Lua: Run currently selected lines" })
 
 -- TODO: serach for better alternative to cnex and cprev
 -- keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
@@ -18,6 +18,58 @@ end, { desc = "Toggle spell check language between Spanish and English" })
 
 -- General keymaps
 -- keymap.set("i", "kj", "<ESC>")
+
+-- Telescope
+keymap.set("n", "<space>fh", require('telescope.builtin').help_tags,
+    { desc = "Telescope: search help_tags" })
+keymap.set("n", "<space>fd", require('telescope.builtin').find_files,
+    { desc = "Telescope: search files" })
+keymap.set("n", "<leader>fm", function() require("telescope.builtin").treesitter({ default_text = ":method:" }) end,
+    {
+        desc =
+        "This custom function utilizes Telescope's treesitter provider and sets the default text to 'method:', likely used for finding and selecting methods within your code.",
+    })
+keymap.set(
+    "n",
+    "<leader>fs",
+    require("telescope.builtin").current_buffer_fuzzy_find,
+    { desc = "Opens a Telescope prompt to search within the currently open buffer." }
+)
+keymap.set("n", "<leader>fa", function()
+    require("telescope.builtin").find_files({ hidden = true }, { additional_args = { "-u" } })
+end, { desc = "Opens a Telescope prompt to search and open files on your system." }) -- Opens a Telescope prompt to search and open files on your system.
+keymap.set("n", "<space>en", function()
+    require('telescope.builtin').find_files {
+        cwd = vim.fn.stdpath("config")
+    }
+end, { desc = "Telescope: search in nvim conf dir" })
+keymap.set("n", "<space>ep", function()
+    require('telescope.builtin').find_files {
+        cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
+    }
+end, { desc = "Telescope: search in installed packages files" })
+
+-- Refactor
+keymap.set(
+    { "n", "x" },
+    "<leader>rr",
+    function() require('telescope').extensions.refactoring.refactors() end, { desc = "Open refactoring menu" }
+)
+-- keymap.set({ "n", "x" }, "<leader>re", function() return require('refactoring').refactor('Extract Function') end,
+-- { expr = true })
+-- keymap.set({ "n", "x" }, "<leader>rf",
+-- function() return require('refactoring').refactor('Extract Function To File') end, { expr = true })
+-- keymap.set({ "n", "x" }, "<leader>rv", function() return require('refactoring').refactor('Extract Variable') end,
+-- { expr = true })
+-- keymap.set({ "n", "x" }, "<leader>rI", function() return require('refactoring').refactor('Inline Function') end,
+-- { expr = true })
+-- keymap.set({ "n", "x" }, "<leader>ri", function() return require('refactoring').refactor('Inline Variable') end,
+-- { expr = true })
+--
+-- keymap.set({ "n", "x" }, "<leader>rbb", function() return require('refactoring').refactor('Extract Block') end,
+-- { expr = true })
+-- keymap.set({ "n", "x" }, "<leader>rbf",
+--     function() return require('refactoring').refactor('Extract Block To File') end, { expr = true })
 
 -- Oil
 keymap.set("n", "-", "<cmd>Oil<CR>")
@@ -117,36 +169,34 @@ keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle undo tree"
 -- keymap.set("n", "<leader>xr", ":call VrcQuery()<CR>") -- Run REST query
 
 -- LSP
--- Normal mode, starting with <leader>l
--- keymap.set("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "LSP: Code Action" })
--- keymap.set("n", "<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { desc = "LSP: Go to Declaration" })    -- Don't work
--- keymap.set("n", "<leader>li", "<cmd>Telescope lsp_implementations<CR>", { desc = "LSP: Go to Implementation" }) -- Don't work
-keymap.set("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", { desc = "LSP: Format Code" })
--- keymap.set({ "n", "v" }, "<leader>lf",
---     function() require("conform").format({ lsp_fallback = true, async = false, timeout_ms = 1000, }) end,
---     { desc = "Format file or range (in visual mode)" })
--- keymap.set("v", "<leader>gf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", { desc = "LSP: Format Code" })
--- keymap.set("n", "<leader>lh", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "LSP: Hover Documentation" })
--- keymap.set("n", "<leader>ln", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "LSP: Rename Symbol" })
--- keymap.set("n", "<leader>lt", "<cmd>Telescope lsp_type_definitions<CR>", { desc = "LSP: Type Definition" }) -- Don't work in python
--- keymap.set("n", "<leader>ls", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", { desc = "LSP: Document Symbols" })
--- keymap.set("n", "<leader>lS", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", { desc = "LSP: Workspace Symbol" })
--- keymap.set("n", "<leader>l?", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "LSP: Signature Help" }) -- Don't work
--- keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)                                                       -- mapping to restart lsp if necessary
+keymap.set("n", "<leader>ld", "<cmd>Telescope lsp_definitions<CR>", { desc = "LSP: Go to Definition" })
+keymap.set("n", "<leader>lr", "<cmd>Telescope lsp_references<CR>", { desc = "LSP: Show References" })
 
 -- Diagnostics
 keymap.set("n", "<leader>ee", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "LSP: Show Line Diagnostics" })
-keymap.set("n", "<leader>en", "<cmd>lua vim.diagnostic.goto_next()<CR>", { desc = "LSP: Go to Next Diagnostic" })
-keymap.set("n", "<leader>ep", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { desc = "LSP: Go to Previous Diagnostic" })
 keymap.set("n", "<leader>ed", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "LSP: Tlescope diagnostic list" })
-keymap.set("n", "<leader>eh", "<cmd>lua vim.diagnostic.hide()<CR>", { desc = "LSP: Hide local diagnostic messages" })
-keymap.set("n", "<leader>es", "<cmd>lua vim.diagnostic.show()<CR>", { desc = "LSP: Show local diagnostic messages" })
-keymap.set("n", "<leader>el", function()
-    require("lint").try_lint()
-end, { desc = "Trigger linting for current file" })
-keymap.set('n', '<leader>el', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "LSP: Set local diagnostic list" })
-keymap.set('n', '<leader>eq', '<cmd>lua vim.diagnostic.setqflist()<CR>',
-{ desc = "LSP: Local diagnostic list to quickfix list" })
+keymap.set("n", "<leader>el", "<cmd>lua vim.diagnostic.setloclist()<CR>", { desc = "LSP: Set local diagnostic list" })
+keymap.set("n", "<leader>eq", "<cmd>lua vim.diagnostic.setqflist()<CR>",
+    { desc = "LSP: Local diagnostic list to quickfix list" })
+-- keymap.set("n", "<leader>eh", "<cmd>lua vim.diagnostic.hide()<CR>", { desc = "LSP: Hide local diagnostic messages" })
+-- keymap.set("n", "<leader>es", "<cmd>lua vim.diagnostic.show()<CR>", { desc = "LSP: Show local diagnostic messages" })
+-- keymap.set("n", "<leader>el", function()
+--     require("lint").try_lint()
+-- end, { desc = "Trigger linting for current file" })
+-- keymap.set("n", "<leader>en", "<cmd>lua vim.diagnostic.goto_next()<CR>", { desc = "LSP: Go to Next Diagnostic" })
+-- keymap.set("n", "<leader>ep", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { desc = "LSP: Go to Previous Diagnostic" })
+
+-- Formatting
+keymap.set({ "n", "v" }, "<leader>lf", function()
+    require("conform").format({
+        lsp_fallback = true,
+        async = true,
+        timeout_ms = 1000,
+    })
+end, { desc = "Format file or range (in visual mode)" })
+
+-- Trouble
+keymap.set("n", "<leader>ss", "<CMD>Trouble symbols toggle focus=true<CR>", { desc = "Symbols (Trouble)" })
 
 -- Debugging
 keymap.set("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", { desc = "Set breakpoint" })
