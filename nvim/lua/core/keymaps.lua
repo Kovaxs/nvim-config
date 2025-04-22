@@ -3,9 +3,9 @@
 
 local keymap = vim.keymap
 
-keymap.set("n", "<space><space>x", "<cmd>source %<CR>", { desc = "Source: source nvim" })
-keymap.set("n", "<space>x", ":.lua<CR>", { desc = "Lua: Run current line" })
-keymap.set("v", "<space>x", ":lua<CR>", { desc = "Lua: Run currently selected lines" })
+keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Source: source nvim" })
+keymap.set("n", "<leader>x", ":.lua<CR>", { desc = "Lua: Run current line" })
+keymap.set("v", "<leader>x", ":lua<CR>", { desc = "Lua: Run currently selected lines" })
 
 -- TODO: serach for better alternative to cnex and cprev
 -- keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
@@ -19,35 +19,111 @@ end, { desc = "Toggle spell check language between Spanish and English" })
 -- General keymaps
 -- keymap.set("i", "kj", "<ESC>")
 
--- Telescope
-keymap.set("n", "<space>fh", require('telescope.builtin').help_tags,
-    { desc = "Telescope: search help_tags" })
-keymap.set("n", "<space>fd", require('telescope.builtin').find_files,
-    { desc = "Telescope: search files" })
-keymap.set("n", "<leader>fm", function() require("telescope.builtin").treesitter({ default_text = ":method:" }) end,
-    {
-        desc =
-        "This custom function utilizes Telescope's treesitter provider and sets the default text to 'method:', likely used for finding and selecting methods within your code.",
-    })
+-- Lazygit
+keymap.set("n", "<leader>lg",
+    function()
+        Snacks.lazygit()
+    end,
+    { desc = "Git: Lazygit" })
+
+-- Picker
+
+keymap.set("n", "<leader>fT", function()
+    Snacks.picker.todo_comments({ keywords = { "TODO", "FIXME", "FIX" } })
+end, { desc = "Picker: Todo/Fix/Fixme" })
+keymap.set("n", "<leader>ft", function()
+    Snacks.picker.todo_comments()
+end, { desc = "Picker: Todo" })
+keymap.set("n", "<leader>sr", function()
+    Snacks.picker.registers()
+end, { desc = "Picker: registers" })
+keymap.set("n", "<leader>sh", function()
+    Snacks.picker.search_history()
+end, { desc = "Pickerw search history" })
+keymap.set("n", "<leader>fch", function()
+    Snacks.picker.command_history()
+end, { desc = "Picker: comand history" })
+keymap.set("n", "<leader>fcc", function()
+    Snacks.picker.commands()
+end, { desc = "Picker: comands" })
+keymap.set("n", "<leader>fS", function()
+    Snacks.picker.lsp_workspace_symbols()
+end, { desc = "Picker: lsp workspace symbols" })
+keymap.set("n", "<leader>fs", function()
+    Snacks.picker.lsp_symbols()
+end, { desc = "Picker: lsp symbols" })
+keymap.set("n", "<leader>fr", function()
+    Snacks.picker.resume()
+end, { desc = "Picker: resume" })
+keymap.set("n", "<leader>fq", function()
+    Snacks.picker.qflist()
+end, { desc = "Pikcer: quickfix list" })
+
+keymap.set("n", "<leader>fk", function()
+    Snacks.picker.keymaps()
+end, { desc = "Help: Kyemaps" })
+
+keymap.set("n", "<leader>ld", function()
+    Snacks.picker.lsp_definitions()
+end, { desc = "LSP: Go to Definition" })
+
+keymap.set("n", "<leader>lr", function()
+    Snacks.picker.lsp_references()
+end, { desc = "LSP: Show References" })
+
+keymap.set("n", "<leader>ed", function()
+    Snacks.picker.diagnostic_buffer()
+end, { desc = "LSP: Pikcer diagnostic list" })
+
+keymap.set("n", "<leader>oe",
+    function()
+        Snacks.picker.explorer()
+    end,
+    { desc = "Picker: Open File Explorer" })
+keymap.set("n", "<leader>ff",
+    -- require('telescope.builtin').find_files,
+    function()
+        Snacks.picker.grep()
+    end,
+    { desc = "Picker: live search" })
+keymap.set("n", "<leader>fg",
+    -- require('telescope.builtin').find_files,
+    function()
+        Snacks.picker.git_files()
+    end,
+    { desc = "Picker: git search" })
+keymap.set("n", "<leader>fd",
+    -- require('telescope.builtin').find_files,
+    function()
+        Snacks.picker.files()
+    end,
+    { desc = "Picker: search files" })
+keymap.set("n", "<leader>fh",
+    -- require('telescope.builtin').help_tags,
+    function()
+        Snacks.picker.help()
+    end,
+    { desc = "Picker: search help_tags" })
 keymap.set(
     "n",
-    "<leader>fs",
-    require("telescope.builtin").current_buffer_fuzzy_find,
-    { desc = "Opens a Telescope prompt to search within the currently open buffer." }
-)
-keymap.set("n", "<leader>fa", function()
-    require("telescope.builtin").find_files({ hidden = true }, { additional_args = { "-u" } })
-end, { desc = "Opens a Telescope prompt to search and open files on your system." }) -- Opens a Telescope prompt to search and open files on your system.
-keymap.set("n", "<space>en", function()
-    require('telescope.builtin').find_files {
-        cwd = vim.fn.stdpath("config")
-    }
-end, { desc = "Telescope: search in nvim conf dir" })
-keymap.set("n", "<space>ep", function()
-    require('telescope.builtin').find_files {
-        cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
-    }
-end, { desc = "Telescope: search in installed packages files" })
+    "<leader>*", function()
+        Snacks.picker.grep_word()
+    end,
+    -- require("telescope.builtin").current_buffer_fuzzy_find,
+    { desc = "Picker: search current word under the cursor" })
+keymap.set(
+    "n",
+    "<leader>/", function()
+        Snacks.picker.lines()
+    end,
+    -- require("telescope.builtin").current_buffer_fuzzy_find,
+    { desc = "Picker: search current in buffer lines" })
+keymap.set("n", "<leader>en", function()
+    Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+end, { desc = "Picker: search in nvim conf dir" })
+keymap.set("n", "<leader>ep", function()
+    Snacks.picker.files({ cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy") })
+end, { desc = "Picker: search in installed packages files" })
 
 -- Refactor
 keymap.set(
@@ -129,7 +205,11 @@ keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", { desc = "toggle maximize 
 -- keymap.set("n", "<leader>gG", vim.cmd.Git, { desc = "Vim fugitive" })
 
 -- Git-blame
-keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "toggle git blame" }) -- toggle git blame
+keymap.set("n", "<leader>gb",
+    function()
+        Snacks.git.blame_line()
+    end,
+    { desc = "Git: toggle blame" })
 
 -- Diff keymaps
 keymap.set("n", "<leader>cc", ":diffput<CR>", { desc = "put diff from current to other during diff" })  -- put diff from current to other during diff
@@ -148,7 +228,6 @@ keymap.set("n", "<leader>gR", "<cmd>lua require('telescope').extensions.git_work
 keymap.set("n", "<leader>ha", require("harpoon.mark").add_file, { desc = "Add file to harpoon" })
 keymap.set("n", "<leader>hh", require("harpoon.ui").toggle_quick_menu, { desc = "Marks UI menu" })
 keymap.set("n", "<leader>ht", ":Telescope harpoon marks<CR>")
--- keymap.set("n", "<leader>hc", require("harpoon.cmd-ui").toggle_quick_menu, { desc = "Commands UI menu" })
 keymap.set("n", "<leader>h1", function()
     require("harpoon.ui").nav_file(1)
 end, { desc = "Navigate to 1" })
@@ -163,18 +242,13 @@ keymap.set("n", "<leader>h4", function()
 end, { desc = "Navigate to 4" })
 
 -- Undo Tree
-keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle undo tree" })
+keymap.set("n", "<leader>u", function() Snacks.picker.undo() end, { desc = "Toggle undo tree" })
 
 -- Vim REST Console
 -- keymap.set("n", "<leader>xr", ":call VrcQuery()<CR>") -- Run REST query
 
--- LSP
-keymap.set("n", "<leader>ld", "<cmd>Telescope lsp_definitions<CR>", { desc = "LSP: Go to Definition" })
-keymap.set("n", "<leader>lr", "<cmd>Telescope lsp_references<CR>", { desc = "LSP: Show References" })
-
 -- Diagnostics
 keymap.set("n", "<leader>ee", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "LSP: Show Line Diagnostics" })
-keymap.set("n", "<leader>ed", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "LSP: Tlescope diagnostic list" })
 keymap.set("n", "<leader>el", "<cmd>lua vim.diagnostic.setloclist()<CR>", { desc = "LSP: Set local diagnostic list" })
 keymap.set("n", "<leader>eq", "<cmd>lua vim.diagnostic.setqflist()<CR>",
     { desc = "LSP: Local diagnostic list to quickfix list" })
@@ -317,12 +391,6 @@ keymap.set(
     "<leader>ax",
     "<cmd>ChatGPTRun explain_code<CR>",
     { desc = "Explain Code", noremap = true, silent = true }
-)
-keymap.set(
-    { "n", "v" },
-    "<leader>ar",
-    "<cmd>ChatGPTRun roxygen_edit<CR>",
-    { desc = "Roxygen Edit", noremap = true, silent = true }
 )
 keymap.set(
     { "n", "v" },
