@@ -78,7 +78,7 @@ vim.opt.splitbelow = true
 -- opt.iskeyword:remove("_")
 
 -- Disable the mouse while in nvim
-vim.opt.mouse = ""
+-- vim.opt.mouse = ""
 
 -- Folding
 vim.opt.foldlevel = 20
@@ -154,7 +154,7 @@ vim.keymap.set("n", "<space>tr", function()
 end, { desc = "Terminal: run a save command or write command to run" })
 
 require("core.keymaps")
-require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})
+require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/LuaSnip/" })
 
 -- MINI
 require("mini.surround").setup()
