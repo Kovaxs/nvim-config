@@ -7,7 +7,7 @@ return {
             configs.setup({
                 ensure_installed = { "query", "lua", "python", "latex", "markdown", "markdown_inline", "dockerfile",
                     "bibtex", "json", "yaml", "html", "css", "markdown", "markdown_inline", "bash", "lua", "vim",
-                    "dockerfile", "gitignore", "vimdoc", "c", "nix",
+                    "dockerfile", "gitignore", "vimdoc", "c", "nix", "regex"
                 },
                 auto_install = true,
                 ignore_install = {},
