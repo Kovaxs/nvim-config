@@ -28,41 +28,44 @@ keymap.set("n", "<leader>lg",
 
 -- Picker
 
-keymap.set("n", "<leader>fT", function()
-    Snacks.picker.todo_comments({ keywords = { "TODO", "FIXME", "FIX" } })
-end, { desc = "Picker: Todo/Fix/Fixme" })
-keymap.set("n", "<leader>ft", function()
-    Snacks.picker.todo_comments()
-end, { desc = "Picker: Todo" })
-keymap.set("n", "<leader>sr", function()
-    Snacks.picker.registers()
-end, { desc = "Picker: registers" })
+-- keymap.set("n", "<leader>fT", function()
+--     Snacks.picker.todo_comments({ keywords = { "TODO", "FIXME", "FIX" } })
+-- end, { desc = "Picker: Todo/Fix/Fixme" })
+-- keymap.set("n", "<leader>ft", function()
+--     Snacks.picker.todo_comments()
+-- end, { desc = "Picker: Todo" })
+--
+
+-- keymap.set("n", "<leader>sr", function()
+--     Snacks.picker.registers()
+-- end, { desc = "Picker: registers" })
+
+-- Special picker
+keymap.set("n", "<leader>sp", function()
+    Snacks.picker.spelling()
+end, { desc = "Picker: search history" })
 keymap.set("n", "<leader>sh", function()
     Snacks.picker.search_history()
-end, { desc = "Pickerw search history" })
-keymap.set("n", "<leader>fch", function()
-    Snacks.picker.command_history()
-end, { desc = "Picker: comand history" })
-keymap.set("n", "<leader>fcc", function()
-    Snacks.picker.commands()
-end, { desc = "Picker: comands" })
-keymap.set("n", "<leader>fS", function()
-    Snacks.picker.lsp_workspace_symbols()
-end, { desc = "Picker: lsp workspace symbols" })
-keymap.set("n", "<leader>fs", function()
-    Snacks.picker.lsp_symbols()
-end, { desc = "Picker: lsp symbols" })
+end, { desc = "Picker: search history" })
+
 keymap.set("n", "<leader>fr", function()
     Snacks.picker.resume()
 end, { desc = "Picker: resume" })
+
+keymap.set("n", "<leader>fch", function()
+    Snacks.picker.command_history()
+end, { desc = "Picker: comand history" })
+
+keymap.set("n", "<leader>fcc", function()
+    Snacks.picker.commands()
+end, { desc = "Picker: comands" })
+
 keymap.set("n", "<leader>fq", function()
     Snacks.picker.qflist()
 end, { desc = "Pikcer: quickfix list" })
 
-keymap.set("n", "<leader>fk", function()
-    Snacks.picker.keymaps()
-end, { desc = "Help: Kyemaps" })
 
+-- LSP, diagnostic & TS pickers
 keymap.set("n", "<leader>ld", function()
     Snacks.picker.lsp_definitions()
 end, { desc = "LSP: Go to Definition" })
@@ -71,56 +74,102 @@ keymap.set("n", "<leader>lr", function()
     Snacks.picker.lsp_references()
 end, { desc = "LSP: Show References" })
 
+keymap.set("n", "<leader>fS", function()
+    Snacks.picker.lsp_workspace_symbols()
+end, { desc = "Picker: lsp workspace symbols" })
+
+keymap.set("n", "<leader>fs", function()
+    Snacks.picker.lsp_symbols()
+end, { desc = "Picker: lsp symbols" })
+
+keymap.set("n", "<leader>ft", function()
+    Snacks.picker.treesitter()
+end, { desc = "TS: picker for current buffer" })
+
 keymap.set("n", "<leader>ed", function()
     Snacks.picker.diagnostic_buffer()
 end, { desc = "LSP: Pikcer diagnostic list" })
-
+-- File Explorer
 keymap.set("n", "<leader>oe",
     function()
         Snacks.picker.explorer()
     end,
     { desc = "Picker: Open File Explorer" })
+
+-- Git pikcer
+keymap.set("n", "<leader>glf",
+    function()
+        Snacks.picker.git_log_file()
+    end,
+    { desc = "Picker: git log line" })
+keymap.set("n", "<leader>gll",
+    function()
+        Snacks.picker.git_log_line()
+    end,
+    { desc = "Picker: git log line" })
+
+keymap.set("n", "<leader>gg",
+    function()
+        Snacks.picker.git_grep()
+    end,
+    { desc = "Picker: git files grep" })
+
+keymap.set("n", "<leader>gf",
+    function()
+        Snacks.picker.git_files()
+    end,
+    { desc = "Picker: git files search" })
+
+-- General pickers: smart, grep, files, help
 keymap.set("n", "<leader>ff",
-    -- require('telescope.builtin').find_files,
+    function()
+        Snacks.picker.smart()
+    end,
+    { desc = "Picker: smart search" })
+
+keymap.set("n", "<leader>fa",
     function()
         Snacks.picker.grep()
     end,
     { desc = "Picker: live search" })
-keymap.set("n", "<leader>fg",
-    -- require('telescope.builtin').find_files,
-    function()
-        Snacks.picker.git_files()
-    end,
-    { desc = "Picker: git search" })
+
 keymap.set("n", "<leader>fd",
-    -- require('telescope.builtin').find_files,
     function()
         Snacks.picker.files()
     end,
     { desc = "Picker: search files" })
+
+-- Help pikcer
+keymap.set("n", "<leader>fk", function()
+    Snacks.picker.keymaps()
+end, { desc = "Help: Kyemaps" })
+
 keymap.set("n", "<leader>fh",
-    -- require('telescope.builtin').help_tags,
     function()
         Snacks.picker.help()
     end,
     { desc = "Picker: search help_tags" })
+
+-- Current buffer greps
 keymap.set(
     "n",
     "<leader>*", function()
         Snacks.picker.grep_word()
     end,
-    -- require("telescope.builtin").current_buffer_fuzzy_find,
     { desc = "Picker: search current word under the cursor" })
+
 keymap.set(
     "n",
     "<leader>/", function()
         Snacks.picker.lines()
     end,
-    -- require("telescope.builtin").current_buffer_fuzzy_find,
     { desc = "Picker: search current in buffer lines" })
+
+-- Nvim config picker
 keymap.set("n", "<leader>en", function()
     Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "Picker: search in nvim conf dir" })
+
 keymap.set("n", "<leader>ep", function()
     Snacks.picker.files({ cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy") })
 end, { desc = "Picker: search in installed packages files" })
