@@ -17,7 +17,7 @@ return {
             layout = {
                 present = "ivy",
                 cycle = false,
-                layout = { position = "bottom" }
+                -- layout = { position = "bottom" }
             },
             matcher = {
                 frecency = true,
