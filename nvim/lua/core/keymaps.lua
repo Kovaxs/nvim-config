@@ -87,7 +87,7 @@ keymap.set("n", "<leader>ft", function()
 end, { desc = "TS: picker for current buffer" })
 
 keymap.set("n", "<leader>ed", function()
-    Snacks.picker.diagnostic_buffer()
+    Snacks.picker.diagnostics_buffer()
 end, { desc = "LSP: Pikcer diagnostic list" })
 -- File Explorer
 keymap.set("n", "<leader>oe",
