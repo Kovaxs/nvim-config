@@ -154,7 +154,7 @@ vim.keymap.set("n", "<space>tr", function()
 end, { desc = "Terminal: run a save command or write command to run" })
 
 require("core.keymaps")
-require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/LuaSnip/" })
+require("luasnip.loaders.from_lua").load({ paths = { "~/.config/nvim/LuaSnip/" } })
 
 -- MINI
 require("mini.surround").setup()
