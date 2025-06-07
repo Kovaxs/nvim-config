@@ -66,3 +66,4 @@ vim.diagnostic.config({ virtual_lines = { current_line = true } })
 
 vim.lsp.enable({ "pyright", "ruff" })
 vim.lsp.enable("lua_ls")
+vim.lsp.enable("rust_analyzer")

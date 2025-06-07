@@ -19,6 +19,7 @@ return {
                     -- liquid = { "prettier" },
                     lua = { "stylua" },
                     python = { "ruff_format" },
+                    rust = { "rustfmt", lsp_format = "fallback" },
                     ["*"] = { "codespell" },
                     ["_"] = { "trim_whitespace" },
                 },
