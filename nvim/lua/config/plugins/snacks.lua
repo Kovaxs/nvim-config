@@ -83,11 +83,11 @@ return {
                 -- -- The first option was to use the "dashboard" style, which uses a
                 -- -- 0 height and width, see the styles documentation
                 -- -- https://github.com/folke/snacks.nvim/blob/main/docs/styles.md
-                style = "dashboard",
+                style = "lazygit",
                 -- But I can also explicitly set them, which also works, what the best
                 -- way is? Who knows, but it works
-                width = 0,
-                height = 0,
+                -- width = 0,
+                -- height = 0,
             },
         },
         git = { enabled = true },
