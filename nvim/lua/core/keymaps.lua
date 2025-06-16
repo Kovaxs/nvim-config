@@ -11,6 +11,17 @@ keymap.set("v", "<leader>x", ":lua<CR>", { desc = "Lua: Run currently selected l
 -- keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
 -- keymap.set("n", "<M-k>", "<cmd>cprev<CR>")
 
+-- Toggle untoggle numbers
+
+-- Map <leader>n to toggle line numbers
+vim.keymap.set('n', '<leader>hn', function()
+    local number = vim.wo.number
+    local guide_lines = Snacks.indent.enabled
+    Snacks.indent.enabled = not guide_lines
+    vim.wo.number = not number
+    vim.wo.relativenumber = not number
+end, { desc = "Toggle line numbers" })
+
 -- spell checker change language
 keymap.set("n", "<leader>cl", function()
     vim.cmd("setlocal spelllang=" .. (vim.bo.spelllang == "es" and "en" or "es"))
