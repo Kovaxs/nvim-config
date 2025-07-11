@@ -17,10 +17,12 @@ return {
                     -- markdown = { "prettier" },
                     -- graphql = { "prettier" },
                     -- liquid = { "prettier" },
+                    sql = { "sql_formatter" },
+                    c = { "clang_format" },
                     lua = { "stylua" },
                     python = { "ruff_format" },
                     rust = { "rustfmt", lsp_format = "fallback" },
-                    ["*"] = { "codespell" },
+                    ["*"] = { "codespell", "injected" },
                     ["_"] = { "trim_whitespace" },
                 },
                 format_on_save = {
