@@ -30,7 +30,6 @@ return {
 				},
 			},
 			--
-			-- grep = {hidden = true},
 			layout = {
 				present = "ivy",
 				cycle = false,

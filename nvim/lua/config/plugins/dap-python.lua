@@ -8,6 +8,7 @@ return {
     },
     config = function()
         -- Update the path passed to setup to point to your system or virtual env python binary
-        require('dap-python').setup('uv')
+        -- require('dap-python').setup('uv')
+        require('dap-python').setup('/Users/kovaxs/miniconda3/bin/python')
     end
 }

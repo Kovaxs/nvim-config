@@ -6,6 +6,7 @@ local keymap = vim.keymap
 keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Source: source nvim" })
 keymap.set("n", "<leader>x", ":.lua<CR>", { desc = "Lua: Run current line" })
 keymap.set("v", "<leader>x", ":lua<CR>", { desc = "Lua: Run currently selected lines" })
+keymap.set("n", "<leader>yp", " :let @+ = expand('%:p')<CR>", { desc = "Yank current buffer path" })
 
 -- TODO: search for better alternative to cnex and cprev
 -- keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
@@ -129,7 +130,7 @@ keymap.set("n", "<leader>fB", function()
 end, { desc = "Picker: grep open buffers" })
 
 keymap.set("n", "<leader>fa", function()
-	Snacks.picker.grep({ hidden = true, ignored = true })
+	Snacks.picker.grep({ hidden = false, ignored = false })
 end, { desc = "Picker: live search all in current dir" })
 
 keymap.set("n", "<leader>fd", function()
