@@ -29,3 +29,25 @@ return {
 		end)
 	end,
 }
+-- return {
+-- 	"arminveres/md-pdf.nvim",
+-- 	config = function()
+-- 		require("md-pdf").setup({
+-- 			pdf_engine = "xelatex", -- recommended (fixes LaTeX warnings + supports Unicode better)
+--
+-- 			preview_cmd = function()
+-- 				return "sioyek"
+-- 			end,
+--
+-- 			-- ✔ Add correct Pandoc options here
+-- 			pandoc_user_args = {
+-- 				"--syntax-highlighting=tango", -- replaces deprecated --highlight-style
+-- 				"--standalone", -- optional, but good practice
+-- 			},
+-- 		})
+--
+-- 		vim.keymap.set("n", "<Space>,", function()
+-- 			require("md-pdf").convert_md_to_pdf()
+-- 		end)
+-- 	end,
+-- }
