@@ -21,7 +21,7 @@ echo "Detected Arch: $ARCH"
 if [ "$OS" = "Linux" ]; then
     # On Linux, the AppImage is the easiest single-file install
     # It contains all necessary libraries and runtime files inside it.
-    ASSET_NAME="nvim.appimage"
+    ASSET_NAME="nvim-linux-x86_64.appimage"
     # https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-linux-x86_64.tar.gz
     DOWNLOAD_URL="https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/${ASSET_NAME}"
     TARGET_FILE="$INSTALL_DIR/nvim"
