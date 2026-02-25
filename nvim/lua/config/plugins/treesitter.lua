@@ -17,6 +17,7 @@ return {
 				"html",
 				"css",
 				"markdown",
+				"astro",
 				"markdown_inline",
 				"bash",
 				"vim",
@@ -26,6 +27,7 @@ return {
 				"nix",
 				"regex",
 				"cpp",
+				"typescript",
 				"rust",
 			}
 

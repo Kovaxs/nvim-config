@@ -23,6 +23,7 @@ return {
         mason_lspconfig.setup({
             automatic_installation = true,
             ensure_installed = {
+                "astro",
                 "clangd",
                 "lua_ls",
                 "pyright",
