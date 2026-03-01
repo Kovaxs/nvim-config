@@ -378,3 +378,33 @@ keymap.set("n", "<leader>d?", function()
 	local widgets = require("dap.ui.widgets")
 	widgets.centered_float(widgets.scopes)
 end, { desc = "Displays variable scopes in a centered floating window" })
+
+-- Opencode
+-- Recommended/example keymaps
+keymap.set({ "n", "x" }, "<leader>aa", function()
+	require("opencode").ask("@this: ", { submit = true })
+end, { desc = "Ask opencode…" })
+keymap.set({ "n", "x" }, "<leader>ax", function()
+	require("opencode").select()
+end, { desc = "Execute opencode action…" })
+keymap.set({ "n", "t" }, "<leader>at", function()
+	require("opencode").toggle()
+end, { desc = "Toggle opencode" })
+
+-- keymap.set({ "n", "x" }, "go", function()
+-- 	return require("opencode").operator("@this ")
+-- end, { desc = "Add range to opencode", expr = true })
+-- keymap.set("n", "goo", function()
+-- 	return require("opencode").operator("@this ") .. "_"
+-- end, { desc = "Add line to opencode", expr = true })
+
+-- keymap.set("n", "<S-C-u>", function()
+-- 	require("opencode").command("session.half.page.up")
+-- end, { desc = "Scroll opencode up" })
+-- keymap.set("n", "<S-C-d>", function()
+-- 	require("opencode").command("session.half.page.down")
+-- end, { desc = "Scroll opencode down" })
+
+-- You may want these if you use the opinionated `<C-a>` and `<C-x>` keymaps above — otherwise consider `<leader>o…` (and remove terminal mode from the `toggle` keymap)
+-- keymap.set("n", "<C-a>", { desc = "Increment under cursor", noremap = true })
+-- keymap.set("n", "<C-x>", { desc = "Decrement under cursor", noremap = true })
