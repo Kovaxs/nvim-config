@@ -16,18 +16,23 @@
 -- }
 return {
 	"arminveres/md-pdf.nvim",
-	config = function()
-		require("md-pdf").setup({
-			pdf_engine = "pdflatex",
-			preview_cmd = function()
-				return "sioyek"
+	ft = { "markdown" },
+	cmd = { "MarkdownPdf" },
+	keys = {
+		{
+			"<Space>,",
+			function()
+				require("md-pdf").convert_md_to_pdf()
 			end,
-		})
-
-		vim.keymap.set("n", "<Space>,", function()
-			require("md-pdf").convert_md_to_pdf()
-		end)
-	end,
+			desc = "Markdown: convert to PDF",
+		},
+	},
+	opts = {
+		pdf_engine = "pdflatex",
+		preview_cmd = function()
+			return "sioyek"
+		end,
+	},
 }
 -- return {
 -- 	"arminveres/md-pdf.nvim",

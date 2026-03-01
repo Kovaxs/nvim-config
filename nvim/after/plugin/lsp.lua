@@ -59,17 +59,27 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-vim.lsp.config("*", {
-	capabilities = require("blink.cmp").get_lsp_capabilities(),
-	root_markers = { ".git" },
-})
+local function setup_lsp()
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
+	local ok, blink = pcall(require, "blink.cmp")
+	if ok then
+		capabilities = blink.get_lsp_capabilities(capabilities)
+	end
 
-vim.diagnostic.config({ virtual_lines = { current_line = true } })
+	vim.lsp.config("*", {
+		capabilities = capabilities,
+		root_markers = { ".git" },
+	})
 
-vim.lsp.enable({ "pyright", "ruff" })
-vim.lsp.enable("lua_ls")
-vim.lsp.enable("rust_analyzer")
-vim.lsp.enable("clangd")
--- vim.lsp.enable("postgres_lsp")
-vim.lsp.enable("ts_ls")
-vim.lsp.enable("astro")
+	vim.diagnostic.config({ virtual_lines = { current_line = true } })
+
+	vim.lsp.enable({ "pyright", "ruff" })
+	vim.lsp.enable("lua_ls")
+	vim.lsp.enable("rust_analyzer")
+	vim.lsp.enable("clangd")
+	-- vim.lsp.enable("postgres_lsp")
+	vim.lsp.enable("ts_ls")
+	vim.lsp.enable("astro")
+end
+
+setup_lsp()

@@ -1,5 +1,3 @@
-print("advent of neovim")
-
 -- 1. Load Plugin Manager First
 require("config.lazy")
 
@@ -8,8 +6,8 @@ require("config.lazy")
 -- ==========================================
 
 -- Time Managers
-vim.opt.timeoutlen = 1000
-vim.opt.ttimeoutlen = 0
+vim.opt.timeoutlen = 300
+vim.opt.ttimeoutlen = 10
 
 -- Session Management
 vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
@@ -147,8 +145,3 @@ vim.api.nvim_create_autocmd("FileType", {
 -- ==========================================
 -- 5. PLUGIN INITIALIZATION
 -- ==========================================
--- Tip: In the future, it is best practice to move these setups into
--- your `lazy.nvim` plugin files so Lazy can manage loading them!
-require("luasnip.loaders.from_lua").load({ paths = { "~/.config/nvim/LuaSnip/" } })
-require("mini.surround").setup()
-require("mini.pairs").setup()

@@ -2,9 +2,17 @@ return
 {
     {
         'saghen/blink.cmp',
+        event = { "InsertEnter", "CmdlineEnter" },
         -- optional: provides snippets for the snippet source
         dependencies = { 'rafamadriz/friendly-snippets',
-            { 'L3MON4D3/LuaSnip', version = 'v2.*', run = "make install_jsregexp" }
+            {
+                'L3MON4D3/LuaSnip',
+                version = 'v2.*',
+                build = "make install_jsregexp",
+                config = function()
+                    require("luasnip.loaders.from_lua").load({ paths = { vim.fn.stdpath("config") .. "/LuaSnip" } })
+                end,
+            }
         },
 
         -- use a release tag to download pre-built binaries

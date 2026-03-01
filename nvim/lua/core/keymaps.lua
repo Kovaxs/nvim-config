@@ -164,10 +164,6 @@ keymap.set("n", "<leader>ep", function()
 	Snacks.picker.files({ cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy") })
 end, { desc = "Picker: search in installed packages files" })
 
--- Refactor
-keymap.set({ "n", "x" }, "<leader>rr", function()
-	require("telescope").extensions.refactoring.refactors()
-end, { desc = "Open refactoring menu" })
 -- keymap.set({ "n", "x" }, "<leader>re", function() return require('refactoring').refactor('Extract Function') end,
 -- { expr = true })
 -- keymap.set({ "n", "x" }, "<leader>rf",
@@ -251,24 +247,14 @@ keymap.set("n", "<leader>ck", ":diffget 3<CR>", { desc = "get diff from right (r
 keymap.set("n", "<leader>cn", "]c", { desc = "Next diff hunk" }) -- next diff hunk
 keymap.set("n", "<leader>cp", "[c", { desc = "Previous diff hunk" }) -- previous diff hunk
 
--- Git worktrees
-keymap.set(
-	"n",
-	"<leader>gr",
-	"<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>",
-	{ silent = true, desc = "Show worktrees in Telescope" }
-)
-keymap.set(
-	"n",
-	"<leader>gR",
-	"<cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>",
-	{ silent = true, desc = "Create worktrees in Telescope" }
-)
-
 -- Harpoon
-keymap.set("n", "<leader>ha", require("harpoon.mark").add_file, { desc = "Add file to harpoon" })
-keymap.set("n", "<leader>hh", require("harpoon.ui").toggle_quick_menu, { desc = "Marks UI menu" })
-keymap.set("n", "<leader>ht", ":Telescope harpoon marks<CR>")
+keymap.set("n", "<leader>ha", function()
+	require("harpoon.mark").add_file()
+end, { desc = "Add file to harpoon" })
+keymap.set("n", "<leader>hh", function()
+	require("harpoon.ui").toggle_quick_menu()
+end, { desc = "Marks UI menu" })
+keymap.set("n", "<leader>ht", ":Telescope harpoon marks<CR>", { desc = "Telescope: harpoon marks" })
 keymap.set("n", "<leader>h1", function()
 	require("harpoon.ui").nav_file(1)
 end, { desc = "Navigate to 1" })
