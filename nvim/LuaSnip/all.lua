@@ -195,17 +195,16 @@ ls.add_snippets("typescriptreact", {
 	}),
 
 	s("co", {
-		d(function()
+		d(1, function()
 			local register_data = vim.fn.getreg() .. ""
 			if string.match(register_data, "[%d-]+,%s*[%d-]+") then
-				return M.sn(nil, {
-					M.t("position([" .. register_data .. "])"),
+				return sn(nil, {
+					t("position([" .. register_data .. "])"),
 				})
 			else
 				print("register does not contain the pattern")
-				return M.sn(nil, {})
+				return sn(nil, {})
 			end
-		end),
-		i(1),
+		end, {}),
 	}),
 })
