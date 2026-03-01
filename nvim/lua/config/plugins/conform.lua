@@ -2,8 +2,8 @@ return {
 	"stevearc/conform.nvim",
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
-		require("conform").setup({
-			formatters_by_ft = {
+			require("conform").setup({
+				formatters_by_ft = {
 				-- javascript = { "prettier" },
 				-- typescript = { "prettier" },
 				-- javascriptreact = { "prettier" },
@@ -23,11 +23,11 @@ return {
 				lua = { "stylua" },
 				python = { "ruff_format" },
 				rust = { "rustfmt", lsp_format = "fallback" },
-				["*"] = { "injected" },
+				markdown = { "injected" },
 				["_"] = { "trim_whitespace" },
 			},
 			format_on_save = {
-				lsp_fallback = true,
+				lsp_format = "fallback",
 				async = false,
 				timeout_ms = 1000,
 			},

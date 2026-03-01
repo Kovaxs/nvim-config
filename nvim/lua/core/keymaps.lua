@@ -310,7 +310,7 @@ keymap.set(
 -- Formatting
 keymap.set({ "n", "v" }, "<leader>lf", function()
 	require("conform").format({
-		lsp_fallback = true,
+		lsp_format = "fallback",
 		async = true,
 		timeout_ms = 1000,
 	})
