@@ -373,7 +373,7 @@ end, { desc = "Ask opencode…" })
 keymap.set({ "n", "x" }, "<leader>ax", function()
 	require("opencode").select()
 end, { desc = "Execute opencode action…" })
-keymap.set({ "n", "t" }, "<leader>at", function()
+keymap.set({ "n", "t" }, "<C-a>", function()
 	require("opencode").toggle()
 end, { desc = "Toggle opencode" })
 
