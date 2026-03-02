@@ -15,7 +15,7 @@ keymap.set("n", "<leader>yp", " :let @+ = expand('%:p')<CR>", { desc = "Yank cur
 -- Toggle untoggle numbers
 
 -- Map <leader>n to toggle line numbers
-vim.keymap.set("n", "<leader>hn", function()
+keymap.set("n", "<leader>hn", function()
 	local number = vim.wo.number
 	local guide_lines = Snacks.indent.enabled
 	Snacks.indent.enabled = not guide_lines
@@ -254,9 +254,9 @@ end, { desc = "Add file to harpoon" })
 keymap.set("n", "<leader>hh", function()
 	require("harpoon.ui").toggle_quick_menu()
 end, { desc = "Marks UI menu" })
-keymap.set("n", "<leader>ht", function()
-	Snacks.picker.marks()
-end, { desc = "Picker: marks" })
+-- keymap.set("n", "<leader>ht", function()
+-- 	Snacks.picker.marks()
+-- end, { desc = "Picker: marks" })
 keymap.set("n", "<leader>h1", function()
 	require("harpoon.ui").nav_file(1)
 end, { desc = "Navigate to 1" })
