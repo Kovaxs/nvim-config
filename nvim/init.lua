@@ -101,3 +101,7 @@ vim.g.mapleader = " " -- space for leader
 vim.g.maplocalleader = "," -- space for localleader
 require("core.keymaps")
 
+-- ============================================================================
+-- AUTOCMDS
+-- ============================================================================
+require("core.autocmds")
