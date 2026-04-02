@@ -42,10 +42,10 @@ vim.opt.fillchars = { eob = " " } -- hide "~" on empty lines
 -- Undo dir
 local undodir = vim.fn.expand("~/.vim/undodir")
 if
-	vim.fn.isdirectory(undodir) == 0 -- create undodir if nonexistent
-then
-	vim.fn.mkdir(undodir, "p")
-end
+  vim.fn.isdirectory(undodir) == 0 -- create undodir if nonexistent
+  then
+    vim.fn.mkdir(undodir, "p")
+  end
 
 vim.opt.backup = false -- do not create a backup file
 vim.opt.writebackup = false -- do not write to a backup file
@@ -93,4 +93,11 @@ vim.opt.maxmempattern = 20000 -- increase max memory
 -- ============================================================================
 
 require("ui.statusline").setup()
+
+-- =====================================================================================
+-- KAYMAPS
+-- =====================================================================================
+vim.g.mapleader = " " -- space for leader
+vim.g.maplocalleader = "," -- space for localleader
+require("core.keymaps")
 
