@@ -88,3 +88,9 @@ vim.opt.diffopt:append("linematch:60") -- improve diff display
 vim.opt.redrawtime = 10000 -- increase neovim redraw tolerance
 vim.opt.maxmempattern = 20000 -- increase max memory
 
+-- ============================================================================
+-- STATUSLINE
+-- ============================================================================
+
+require("ui.statusline").setup()
+
