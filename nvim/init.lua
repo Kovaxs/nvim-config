@@ -1,147 +1,90 @@
--- 1. Load Plugin Manager First
-require("config.lazy")
-
--- ==========================================
--- 2. GENERAL SETTINGS (vim.opt)
--- ==========================================
-
--- Time Managers
-vim.opt.timeoutlen = 300
-vim.opt.ttimeoutlen = 10
-
--- Session Management
-vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-vim.opt.cmdheight = 1
-
--- Spell check
-vim.opt.spelllang = "en_us"
-vim.opt.spell = true
--- vim.g.spellfile_URL is usually handled automatically by Neovim now
-
--- Line Numbers
-vim.opt.number = true
-vim.opt.relativenumber = true
-
--- Tabs & Indentation
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.autoindent = true
-vim.opt.softtabstop = 4
-
--- Line Wrapping
-vim.opt.wrap = false
-
--- Search Settings
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
-
--- Cursor Line & Appearance
-vim.opt.cursorline = true
-vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 vim.opt.termguicolors = true
-vim.opt.background = "dark"
-vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = "89"
+vim.cmd.colorscheme("unokai")
 
-vim.diagnostic.config({
-	float = { border = "rounded" },
-})
+-- ============================================================================
+-- OPTIONS
+-- ============================================================================
+vim.opt.number = true -- line number
+vim.opt.relativenumber = true -- relative line numbers
+vim.opt.cursorline = true -- highlight current line
+vim.opt.wrap = false -- do not wrap lines by default
+vim.opt.scrolloff = 10 -- keep 10 lines above/below cursor
+vim.opt.sidescrolloff = 10 -- keep 10 lines to left/right of cursor
 
--- Performance & Files
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
-vim.opt.updatetime = 50
+vim.opt.tabstop = 2 -- tabwidth
+vim.opt.shiftwidth = 2 -- indent width
+vim.opt.softtabstop = 2 -- soft tab stop not tabs on tab/backspace
+vim.opt.expandtab = true -- use spaces instead of tabs
+vim.opt.smartindent = true -- smart auto-indent
+vim.opt.autoindent = true -- copy indent from current line
 
--- Misc behavior
-vim.opt.backspace = "indent,eol,start"
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-vim.opt.isfname:append("@-@")
-vim.opt.scrolloff = 8
+vim.opt.ignorecase = true -- case insensitive search
+vim.opt.smartcase = true -- case sensitive if uppercase in string
+vim.opt.hlsearch = true -- highlight search matches
+vim.opt.incsearch = true -- show matches as you type
 
--- Folding (Native Neovim 0.10+ Treesitter folding)
-vim.opt.foldlevel = 20
-vim.opt.foldenable = false
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.signcolumn = "yes" -- always show a sign column
+vim.opt.colorcolumn = "89" -- show a column at 100 position chars
+vim.opt.showmatch = true -- highlights matching brackets
+vim.opt.cmdheight = 1 -- single line command line
+vim.opt.completeopt = "menuone,noinsert,noselect" -- completion options
+-- vim.opt.autocomplete = true
+vim.opt.showmode = false -- do not show the mode, instead have it in statusline
+vim.opt.pumheight = 10 -- popup menu height
+vim.opt.pumblend = 10 -- popup menu transparency
+vim.opt.winblend = 0 -- floating window transparency
+vim.opt.conceallevel = 0 -- do not hide markup
+vim.opt.concealcursor = "" -- do not hide cursorline in markup
+vim.opt.lazyredraw = true -- do not redraw during macros
+vim.opt.synmaxcol = 300 -- syntax highlighting limit
+vim.opt.fillchars = { eob = " " } -- hide "~" on empty lines
 
--- ==========================================
--- 3. KEYMAPS
--- ==========================================
+-- Undo dir
+local undodir = vim.fn.expand("~/.vim/undodir")
+if
+	vim.fn.isdirectory(undodir) == 0 -- create undodir if nonexistent
+then
+	vim.fn.mkdir(undodir, "p")
+end
 
-require("core.keymaps") -- Load your external keymaps
+vim.opt.backup = false -- do not create a backup file
+vim.opt.writebackup = false -- do not write to a backup file
+vim.opt.swapfile = false -- do not create a swapfile
+vim.opt.undofile = true -- do create an undo file
+vim.opt.undodir = undodir -- set the undo directory
+vim.opt.updatetime = 300 -- faster completion
+vim.opt.timeoutlen = 500 -- timeout duration
+vim.opt.ttimeoutlen = 0 -- key code timeout
+vim.opt.autoread = true -- auto-reload changes if outside of neovim
+vim.opt.autowrite = false -- do not auto-save
 
--- Continuous visual mode indentation (Modern API)
-vim.keymap.set("v", "<", "<gv", { noremap = true, silent = true, desc = "Indent left" })
-vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true, desc = "Indent right" })
+-- vim.opt.hidden = true -- allow hidden buffers
+vim.opt.errorbells = false -- no error sounds
+-- vim.opt.backspace = "indent,eol,start" -- better backspace behaviour
+vim.opt.autochdir = false -- do not autochange directories
+vim.opt.iskeyword:append("-") -- include - in words
+vim.opt.path:append("**") -- include subdirs in search
+-- vim.opt.selection = "inclusive" -- include last char in selection
+vim.opt.mouse = "a" -- enable mouse support
+-- vim.opt.clipboard:append("unnamedplus") -- use system clipboard
+-- vim.opt.modifiable = true -- allow buffer modifications
+-- vim.opt.encoding = "utf-8" -- set encoding
 
--- Custom Terminal Keymaps
-local job_id = 0
-vim.keymap.set("n", "<space>ot", function()
-	vim.cmd.vnew()
-	vim.cmd.term()
-	vim.cmd.wincmd("J")
-	vim.api.nvim_win_set_height(0, 5)
-	job_id = vim.bo.channel
-end, { desc = "Terminal: toggle terminal" })
+-- I dont't like the blink
+vim.opt.guicursor =
+	"n-v-c:block,i-ci-ve:block,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175" -- cursor blinking and settings
 
-local current_command = ""
-vim.keymap.set("n", "<space>te", function()
-	current_command = vim.fn.input("Command: ")
-end, { desc = "Terminal: save command to run in terminal" })
+-- Folding: requires treesitter available at runtime; safe fallback if not
+vim.opt.foldmethod = "expr" -- use expression for folding
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- use treesitter for folding
+vim.opt.foldlevel = 99 -- start with all folds open
 
-vim.keymap.set("n", "<space>tr", function()
-	if current_command == "" then
-		current_command = vim.fn.input("Command: ")
-	end
+vim.opt.splitbelow = true -- horizontal splits go below
+vim.opt.splitright = true -- vertical splits go right
 
-	if job_id ~= 0 then
-		vim.fn.chansend(job_id, { current_command .. "\r\n" })
-	else
-		print("No terminal open! Press <space>ot first.")
-	end
-end, { desc = "Terminal: run a saved command" })
+vim.opt.wildmenu = true -- tab completion
+vim.opt.wildmode = "longest:full,full" -- complete longest common match, full completion list, cycle through with Tab
+vim.opt.diffopt:append("linematch:60") -- improve diff display
+vim.opt.redrawtime = 10000 -- increase neovim redraw tolerance
+vim.opt.maxmempattern = 20000 -- increase max memory
 
--- ==========================================
--- 4. AUTOCOMMANDS
--- ==========================================
-
--- Highlight when yanking
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-	callback = function()
-		vim.hl.on_yank()
-	end,
-})
-
--- Terminal styling (use opt_local so it doesn't break normal buffers)
-vim.api.nvim_create_autocmd("TermOpen", {
-	group = vim.api.nvim_create_augroup("custom-term-open", { clear = true }),
-	callback = function()
-		vim.opt_local.number = false
-		vim.opt_local.relativenumber = false
-	end,
-})
-
--- Merged Treesitter Setup (Highlighting and Indentation)
-vim.api.nvim_create_autocmd("FileType", {
-	group = vim.api.nvim_create_augroup("TreesitterSetup", { clear = true }),
-	callback = function(args)
-		-- 1. Enable syntax highlighting safely
-		pcall(vim.treesitter.start, args.buf)
-
-		-- 2. Enable treesitter-based indentation safely
-		pcall(function()
-			vim.bo[args.buf].indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
-		end)
-	end,
-})
-
--- ==========================================
--- 5. PLUGIN INITIALIZATION
--- ==========================================
