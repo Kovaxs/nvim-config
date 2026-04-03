@@ -1,7 +1,7 @@
 local M = {}
 
 local plugins = {
-	-- require("config.plugins.gitsigns"),
+	require("config.plugins.gitsigns"),
 	require("config.plugins.mini"),
 	require("config.plugins.fzf_lua"),
 	require("config.plugins.nvim_undotree"),
