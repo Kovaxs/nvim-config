@@ -3,6 +3,7 @@ local augroup = vim.api.nvim_create_augroup("UserConfig", { clear = true })
 -- Format on save (ONLY real file buffers, ONLY when efm is attached)
 vim.api.nvim_create_autocmd("BufWritePre", {
 	group = augroup,
+	desc = "Format on save with efm",
 	pattern = {
 		"*.lua",
 		"*.py",
@@ -59,6 +60,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- highlight yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = augroup,
+	desc = "Highlight yanked text",
 	callback = function()
 		vim.hl.on_yank()
 	end,
@@ -68,13 +70,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_create_autocmd("BufReadPost", {
 	group = augroup,
 	desc = "Restore last cursor position",
-	callback = function()
+	callback = function(args)
 		if vim.o.diff then -- except in diff mode
 			return
 		end
 
-		local last_pos = vim.api.nvim_buf_get_mark(0, '"') -- {line, col}
-		local last_line = vim.api.nvim_buf_line_count(0)
+		local last_pos = vim.api.nvim_buf_get_mark(args.buf, '"') -- {line, col}
+		local last_line = vim.api.nvim_buf_line_count(args.buf)
 
 		local row = last_pos[1]
 		if row < 1 or row > last_line then
@@ -88,6 +90,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- wrap, linebreak and spellcheck on markdown and text files
 vim.api.nvim_create_autocmd("FileType", {
 	group = augroup,
+	desc = "Enable wrap and spell for writing",
 	pattern = { "markdown", "text", "gitcommit" },
 	callback = function()
 		vim.opt_local.wrap = true
