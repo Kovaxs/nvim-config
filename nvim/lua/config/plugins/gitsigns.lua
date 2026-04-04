@@ -43,27 +43,15 @@ function M.setup()
 		return "<Ignore>"
 	end, { expr = true, desc = "Previous git hunk" })
 
-	-- vim.keymap.set("n", "<leader>hs", function()
-	-- 	gitsigns.stage_hunk()
-	-- end, { desc = "Stage hunk" })
-	--
-	-- vim.keymap.set("n", "<leader>hr", function()
-	-- 	gitsigns.reset_hunk()
-	-- end, { desc = "Reset hunk" })
-
-	-- vim.keymap.set("n", "<leader>hp", function()
-	-- 	gitsigns.preview_hunk()
-	-- end, { desc = "Preview hunk" })
-
-	vim.keymap.set("n", "<leader>hb", function()
+	vim.keymap.set("n", "<leader>gb", function()
 		gitsigns.blame_line({ full = true })
 	end, { desc = "Blame line" })
 
-	vim.keymap.set("n", "<leader>hB", function()
+	vim.keymap.set("n", "<leader>gB", function()
 		gitsigns.toggle_current_line_blame()
 	end, { desc = "Toggle inline blame" })
 
-	vim.keymap.set("n", "<leader>hd", function()
+	vim.keymap.set("n", "<leader>gd", function()
 		gitsigns.diffthis()
 	end, { desc = "Diff this" })
 end
