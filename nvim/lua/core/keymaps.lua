@@ -68,6 +68,84 @@ vim.keymap.set("n", "<leader>ee", function()
 	fzf.files({ cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "site", "pack", "core", "opt") })
 end, { desc = "Picker: installed package files" })
 
+local terminal = {
+	buf = nil,
+	win = nil,
+	job = nil,
+	command = "",
+}
+
+local function valid_buf(buf)
+	return buf and vim.api.nvim_buf_is_valid(buf)
+end
+
+local function valid_win(win)
+	return win and vim.api.nvim_win_is_valid(win)
+end
+
+local function open_terminal()
+	if valid_win(terminal.win) and vim.api.nvim_win_get_buf(terminal.win) == terminal.buf then
+		vim.api.nvim_set_current_win(terminal.win)
+		vim.cmd("startinsert")
+		return
+	end
+
+	vim.cmd("botright split")
+	vim.api.nvim_win_set_height(0, 7)
+
+	if valid_buf(terminal.buf) then
+		vim.api.nvim_win_set_buf(0, terminal.buf)
+	else
+		vim.cmd("terminal")
+		terminal.buf = vim.api.nvim_get_current_buf()
+	end
+
+	terminal.win = vim.api.nvim_get_current_win()
+	if valid_buf(terminal.buf) then
+		terminal.job = vim.bo[terminal.buf].channel
+	end
+
+	vim.cmd("startinsert")
+end
+
+vim.keymap.set("n", "<leader>ot", function()
+	if valid_win(terminal.win) and vim.api.nvim_win_get_buf(terminal.win) == terminal.buf then
+		vim.api.nvim_win_close(terminal.win, true)
+		terminal.win = nil
+		return
+	end
+
+	open_terminal()
+end, { desc = "Terminal: Toggle" })
+
+vim.keymap.set("n", "<leader>oe", function()
+	terminal.command = vim.fn.input("Command: ")
+end, { desc = "Terminal: Save command" })
+
+vim.keymap.set("n", "<leader>or", function()
+	if terminal.command == "" then
+		terminal.command = vim.fn.input("Command: ")
+	end
+
+	if terminal.command == "" then
+		return
+	end
+
+	open_terminal()
+
+	local job = terminal.job
+	if valid_buf(terminal.buf) then
+		job = vim.bo[terminal.buf].channel
+		terminal.job = job
+	end
+
+	if job and job > 0 then
+		vim.fn.chansend(job, { terminal.command, "\r\n" })
+	else
+		vim.notify("No terminal open. Use <leader>ot first.", vim.log.levels.WARN)
+	end
+end, { desc = "Terminal: Run command" })
+
 -- Diagnostic
 vim.keymap.set("n", "<leader>td", function()
 	vim.diagnostic.enable(not vim.diagnostic.is_enabled())

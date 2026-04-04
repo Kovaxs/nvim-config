@@ -42,3 +42,13 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.spelllang = { "en_us" }
 	end,
 })
+
+vim.api.nvim_create_autocmd("TermOpen", {
+	group = augroup,
+	desc = "Terminal window defaults",
+	callback = function(args)
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
+		vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { buffer = args.buf, desc = "Terminal: Normal mode" })
+	end,
+})
