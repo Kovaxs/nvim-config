@@ -10,25 +10,31 @@ function M.setup()
 		return
 	end
 
+	local codespell = lint.linters.codespell
+	if codespell then
+		codespell.args = { "--stdin-single-line", "-", "--quiet-level=2" }
+	end
+
 	lint.linters_by_ft = {
-		c = { "cpplint", "typos" },
-		cpp = { "cpplint", "typos" },
+		bash = { "shellcheck", "codespell" },
+		c = { "cpplint", "codespell" },
+		cpp = { "cpplint", "codespell" },
 		css = { "stylelint" },
-		gitcommit = { "typos" },
-		go = { "golangcilint", "typos" },
+		gitcommit = { "codespell" },
+		go = { "golangcilint", "codespell" },
 		html = { "htmlhint" },
-		javascript = { "eslint_d", "typos" },
-		javascriptreact = { "eslint_d", "typos" },
+		javascript = { "eslint_d", "codespell" },
+		javascriptreact = { "eslint_d", "codespell" },
 		json = { "jsonlint" },
 		jsonc = { "jsonlint" },
-		lua = { "luacheck", "typos" },
-		markdown = { "markdownlint-cli2", "typos" },
-		python = { "ruff", "typos" },
-		rust = { "typos" },
-		sh = { "shellcheck", "typos" },
-		text = { "typos" },
-		typescript = { "eslint_d", "typos" },
-		typescriptreact = { "eslint_d", "typos" },
+		lua = { "luacheck", "codespell" },
+		markdown = { "markdownlint-cli2", "codespell" },
+		python = { "ruff", "codespell" },
+		rust = { "codespell" },
+		sh = { "shellcheck", "codespell" },
+		text = { "codespell" },
+		typescript = { "eslint_d", "codespell" },
+		typescriptreact = { "eslint_d", "codespell" },
 	}
 
 	local group = vim.api.nvim_create_augroup("NvimLint", { clear = true })

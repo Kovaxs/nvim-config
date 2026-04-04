@@ -13,6 +13,7 @@ function M.setup()
 	mason_tool_installer.setup({
 		ensure_installed = {
 			"clang-format",
+			"codespell",
 			"cpplint",
 			"eslint_d",
 			"gofumpt",
@@ -28,7 +29,6 @@ function M.setup()
 			"shfmt",
 			"stylelint",
 			"stylua",
-			"typos",
 		},
 		auto_update = false,
 		run_on_start = true,

@@ -52,3 +52,10 @@ end, { desc = "Copy full file path" })
 vim.keymap.set("n", "<leader>td", function()
 	vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { desc = "Toggle diagnostics" })
+
+-- Change language
+vim.keymap.set("n", "<leader>cl", function()
+	local current = vim.bo.spelllang
+	local next_lang = current:match("^es") and "en" or "es"
+	vim.cmd("setlocal spelllang=" .. next_lang)
+end, { desc = "Toggle spell language en/es" })
