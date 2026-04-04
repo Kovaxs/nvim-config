@@ -11,8 +11,9 @@ local plugins = {
 	require("config.plugins.mason_lspconfig"),
 	require("config.plugins.lspconfig"),
 	-- require("config.plugins.efmls"),
-	-- require("config.plugins.blink"),
-	-- require("config.plugins.luasnip"),
+	require("config.plugins.friendly_snippets"),
+	require("config.plugins.blink_cmp"),
+	require("config.plugins.luasnip_plugin"),
 }
 
 local function collect_specs()

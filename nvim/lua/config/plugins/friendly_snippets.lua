@@ -1,7 +1,7 @@
 local M = {}
 
 M.spec = {
-	src = "https://github.com/L3MON4D3/LuaSnip",
+	src = "https://github.com/rafamadriz/friendly-snippets",
 }
 
 function M.setup() end
