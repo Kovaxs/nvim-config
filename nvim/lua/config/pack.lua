@@ -1,6 +1,7 @@
 local M = {}
 
 local plugins = {
+	require("config.plugins.gruvbox"),
 	require("config.plugins.gitsigns"),
 	require("config.plugins.mini"),
 	require("config.plugins.fzf_lua"),

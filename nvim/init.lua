@@ -1,5 +1,4 @@
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("unokai")
 
 -- ============================================================================
 -- OPTIONS
@@ -42,10 +41,10 @@ vim.opt.fillchars = { eob = " " } -- hide "~" on empty lines
 -- Undo dir
 local undodir = vim.fn.expand("~/.vim/undodir")
 if
-  vim.fn.isdirectory(undodir) == 0 -- create undodir if nonexistent
-  then
-    vim.fn.mkdir(undodir, "p")
-  end
+	vim.fn.isdirectory(undodir) == 0 -- create undodir if nonexistent
+then
+	vim.fn.mkdir(undodir, "p")
+end
 
 vim.opt.backup = false -- do not create a backup file
 vim.opt.writebackup = false -- do not write to a backup file
@@ -109,4 +108,3 @@ require("core.autocmds")
 -- PLUGINS
 -- ============================================================================
 require("config.pack").setup()
-
