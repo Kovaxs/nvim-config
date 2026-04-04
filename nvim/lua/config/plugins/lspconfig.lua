@@ -153,6 +153,13 @@ local function setup_servers()
 	})
 
 	vim.lsp.config("ty", {})
+	vim.lsp.config("ruff", {
+		init_options = {
+			settings = {
+				hover = false,
+			},
+		},
+	})
 	vim.lsp.config("bashls", {})
 	vim.lsp.config("ts_ls", {})
 	vim.lsp.config("gopls", {})
@@ -163,6 +170,7 @@ local function setup_servers()
 	local to_enable = {
 		"lua_ls", -- Lua
 		"ty", -- Python
+		"ruff", -- Python (code actions / lint)
 		"bashls", -- Bash / shell
 		"ts_ls", -- TypeScript / JavaScript
 		"gopls", -- Go

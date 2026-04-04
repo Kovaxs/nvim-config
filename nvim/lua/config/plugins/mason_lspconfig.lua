@@ -13,6 +13,7 @@ function M.setup()
 	local ensure_installed = {
 		"lua_ls", -- Lua
 		"ty", -- Python
+		"ruff", -- Python (code actions / lint)
 		"bashls", -- Bash / shell
 		"ts_ls", -- TypeScript / JavaScript
 		"gopls", -- Go
