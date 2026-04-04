@@ -6,7 +6,7 @@ local plugins = {
 	require("config.plugins.fzf_lua"),
 	require("config.plugins.nvim_undotree"),
 	require("config.plugins.nvim_difftool"),
-	-- require("config.plugins.treesitter"),
+	require("config.plugins.treesitter"),
 	-- require("config.plugins.lspconfig"),
 	-- require("config.plugins.mason"),
 	-- require("config.plugins.efmls"),
