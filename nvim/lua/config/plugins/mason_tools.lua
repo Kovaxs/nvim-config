@@ -28,6 +28,7 @@ function M.setup()
 			"shfmt",
 			"stylelint",
 			"stylua",
+			"typos",
 		},
 		auto_update = false,
 		run_on_start = true,

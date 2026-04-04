@@ -11,21 +11,24 @@ function M.setup()
 	end
 
 	lint.linters_by_ft = {
-		c = { "cpplint" },
-		cpp = { "cpplint" },
+		c = { "cpplint", "typos" },
+		cpp = { "cpplint", "typos" },
 		css = { "stylelint" },
-		go = { "golangcilint" },
+		gitcommit = { "typos" },
+		go = { "golangcilint", "typos" },
 		html = { "htmlhint" },
-		javascript = { "eslint_d" },
-		javascriptreact = { "eslint_d" },
+		javascript = { "eslint_d", "typos" },
+		javascriptreact = { "eslint_d", "typos" },
 		json = { "jsonlint" },
 		jsonc = { "jsonlint" },
-		lua = { "luacheck" },
-		markdown = { "markdownlint-cli2" },
-		python = { "ruff" },
-		sh = { "shellcheck" },
-		typescript = { "eslint_d" },
-		typescriptreact = { "eslint_d" },
+		lua = { "luacheck", "typos" },
+		markdown = { "markdownlint-cli2", "typos" },
+		python = { "ruff", "typos" },
+		rust = { "typos" },
+		sh = { "shellcheck", "typos" },
+		text = { "typos" },
+		typescript = { "eslint_d", "typos" },
+		typescriptreact = { "eslint_d", "typos" },
 	}
 
 	local group = vim.api.nvim_create_augroup("NvimLint", { clear = true })
