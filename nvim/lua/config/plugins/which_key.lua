@@ -11,6 +11,19 @@ function M.setup()
 	end
 
 	which_key.setup()
+	which_key.add({
+		{ "<leader>d", group = "Debug" },
+		{ "<leader>h", group = "Harpoon" },
+		{ "<leader>g", group = "Git" },
+		{ "<leader>b", group = "Buffer" },
+		{ "<leader>c", group = "Lang" },
+		{ "<leader>e", group = "Nvim config pickers" },
+		{ "<leader>f", group = "fzf pickers" },
+		{ "<leader>o", group = "Terminal" },
+		{ "<leader>t", group = "Diagnostic" },
+		{ "<leader><leader>", group = "Lua source" },
+		{ "<leader>y", group = "Yank path" },
+	})
 end
 
 return M
