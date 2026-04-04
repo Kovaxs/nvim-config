@@ -7,8 +7,9 @@ local plugins = {
 	require("config.plugins.nvim_undotree"),
 	require("config.plugins.nvim_difftool"),
 	require("config.plugins.treesitter"),
-	-- require("config.plugins.lspconfig"),
-	-- require("config.plugins.mason"),
+	require("config.plugins.mason"),
+	require("config.plugins.mason_lspconfig"),
+	require("config.plugins.lspconfig"),
 	-- require("config.plugins.efmls"),
 	-- require("config.plugins.blink"),
 	-- require("config.plugins.luasnip"),
@@ -24,6 +25,14 @@ local function collect_specs()
 	return specs
 end
 
+local function pre_setup_plugins()
+	for _, plugin in ipairs(plugins) do
+		if type(plugin.pre_setup) == "function" then
+			plugin.pre_setup()
+		end
+	end
+end
+
 local function setup_plugins()
 	for _, plugin in ipairs(plugins) do
 		if type(plugin.setup) == "function" then
@@ -33,6 +42,8 @@ local function setup_plugins()
 end
 
 function M.setup()
+	pre_setup_plugins()
+
 	vim.pack.add(collect_specs(), {
 		load = true,
 		confirm = false,
