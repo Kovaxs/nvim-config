@@ -1,3 +1,5 @@
+-- Tmux new session
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ts<CR>")
 -- better movement in wrapped text
 vim.keymap.set("n", "j", function()
 	return vim.v.count == 0 and "gj" or "j"
