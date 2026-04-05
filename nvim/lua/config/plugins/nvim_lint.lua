@@ -30,7 +30,7 @@ function M.setup()
 		lua = { "luacheck", "codespell" },
 		markdown = { "markdownlint-cli2", "codespell" },
 		nix = { "nix", "codespell" },
-		python = { "ruff", "codespell" },
+		python = { "codespell" },
 		rust = { "codespell" },
 		sh = { "shellcheck", "codespell" },
 		text = { "codespell" },
