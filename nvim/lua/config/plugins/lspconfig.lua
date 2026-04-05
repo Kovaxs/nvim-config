@@ -39,7 +39,7 @@ local function setup_diagnostics()
 			source = "always",
 			header = "",
 			prefix = "",
-			focusable = false,
+			focusable = true,
 			style = "minimal",
 		},
 	})
@@ -155,6 +155,7 @@ local function setup_servers()
 	vim.lsp.config("gopls", {})
 	vim.lsp.config("clangd", {})
 	vim.lsp.config("rust_analyzer", {})
+	vim.lsp.config("nil_ls", {})
 	vim.lsp.config("zls", {})
 
 	local to_enable = {
@@ -166,6 +167,7 @@ local function setup_servers()
 		"gopls", -- Go
 		"clangd", -- C / C++
 		"rust_analyzer", -- Rust
+		"nil_ls", -- Nix
 		"zls", -- Zig
 	}
 

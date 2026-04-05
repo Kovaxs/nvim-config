@@ -19,6 +19,7 @@ function M.setup()
 		"gopls", -- Go
 		"clangd", -- C / C++
 		"rust_analyzer", -- Rust
+		"nil_ls", -- Nix
 		"zls", -- Zig
 	}
 

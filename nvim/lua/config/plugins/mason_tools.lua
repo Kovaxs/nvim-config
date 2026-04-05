@@ -12,6 +12,7 @@ function M.setup()
 
 	mason_tool_installer.setup({
 		ensure_installed = {
+			"alejandra",
 			"clang-format",
 			"codespell",
 			"cpplint",

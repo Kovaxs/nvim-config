@@ -23,6 +23,7 @@ function M.setup()
 			jsonc = { "prettierd" },
 			lua = { "stylua" },
 			markdown = { "prettierd" },
+			nix = { "alejandra", "nixfmt" },
 			python = { "ruff_format" },
 			sh = { "shfmt" },
 			typescript = { "prettierd" },

@@ -29,6 +29,7 @@ function M.setup()
 		jsonc = { "jsonlint" },
 		lua = { "luacheck", "codespell" },
 		markdown = { "markdownlint-cli2", "codespell" },
+		nix = { "nix", "codespell" },
 		python = { "ruff", "codespell" },
 		rust = { "codespell" },
 		sh = { "shellcheck", "codespell" },
