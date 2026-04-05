@@ -68,7 +68,6 @@ vim.keymap.set("n", "<leader>ee", function()
 	fzf.files({ cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "site", "pack", "core", "opt") })
 end, { desc = "Picker: installed package files" })
 
-
 local terminal = {
 	buf = nil,
 	win = nil,
@@ -152,7 +151,7 @@ vim.keymap.set("n", "<leader>td", function()
 	vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { desc = "Toggle diagnostics" })
 vim.keymap.set("n", "<leader>te", function()
-	vim.diagnostic.open_float({ border = "rounded" })
+	vim.diagnostic.open_float({ border = "rounded", focus = true })
 end, { desc = "Show diagnostic in floating window" })
 vim.keymap.set("n", "<leader>tl", function()
 	vim.diagnostic.setloclist()

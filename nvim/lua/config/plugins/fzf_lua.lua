@@ -15,7 +15,7 @@ function M.setup()
 
 	-- Base preset + local overrides for UI and picker behavior
 	fzf.setup({
-		"telescope",
+		"fzf-native",
 		-- Floating window layout
 		winopts = {
 			height = 0.85,
