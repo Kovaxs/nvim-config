@@ -43,6 +43,7 @@ function M.setup()
 	vim.keymap.set("n", "<leader>fh", "<cmd>FzfLua helptags<CR>", { desc = "Help tags" })
 	vim.keymap.set("n", "<leader>fk", "<cmd>FzfLua keymaps<CR>", { desc = "Help keymaps" })
 	vim.keymap.set("n", "<leader>fr", "<cmd>FzfLua oldfiles<CR>", { desc = "Recent files" })
+	vim.keymap.set("n", "<leader>ft", "<cmd>FzfLua command_history<CR>", { desc = "Command history" })
 end
 
 return M

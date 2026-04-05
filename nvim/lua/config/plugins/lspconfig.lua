@@ -52,91 +52,81 @@ local function setup_diagnostics()
 	end
 end
 
--- keymaps
--- local function setup_keymaps()
--- 	local augroup = vim.api.nvim_create_augroup("UserLspConfig", { clear = true })
---
--- 	vim.api.nvim_create_autocmd("LspAttach", {
--- 		group = augroup,
--- 		callback = function(ev)
--- 			local client = vim.lsp.get_client_by_id(ev.data.client_id)
--- 			if not client then
--- 				return
--- 			end
+local function setup_keymaps()
+	local augroup = vim.api.nvim_create_augroup("UserLspConfig", { clear = true })
 
-			-- local bufnr = ev.buf
-			-- local opts = { noremap = true, silent = true, buffer = bufnr }
+	vim.api.nvim_create_autocmd("LspAttach", {
+		group = augroup,
+		callback = function(ev)
+			local client = vim.lsp.get_client_by_id(ev.data.client_id)
+			if not client then
+				return
+			end
 
-	-- 		vim.keymap.det("n", "<leader>gd", function()
-	-- 			require("fzf-lua").lsp_definitions({ jump_to_single_result = true })
-	-- 		end, vim.tbl_extend("force", opts, { desc = "LSP definitions" }))
-	--
-	-- 		vim.keymap.set("n", "<leader>gD", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "LSP definition" }))
-	--
-	-- 		vim.keymap.set("n", "<leader>gS", function()
-	-- 			vim.cmd("vsplit")
-	-- 			vim.lsp.buf.definition()
-	-- 		end, vim.tbl_extend("force", opts, { desc = "Definition in split" }))
-	--
-	-- 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Code actions" }))
-	-- 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename symbol" }))
-	--
-	-- 		vim.keymap.set("n", "<leader>D", function()
-	-- 			vim.diagnostic.open_float({ scope = "line" })
-	-- 		end, vim.tbl_extend("force", opts, { desc = "Line diagnostics" }))
-	--
-	-- 		vim.keymap.set("n", "<leader>d", function()
-	-- 			vim.diagnostic.open_float({ scope = "cursor" })
-	-- 		end, vim.tbl_extend("force", opts, { desc = "Cursor diagnostics" }))
-	--
-	-- 		vim.keymap.set("n", "<leader>nd", function()
-	-- 			vim.diagnostic.jump({ count = 1 })
-	-- 		end, vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
-	--
-	-- 		vim.keymap.set("n", "<leader>pd", function()
-	-- 			vim.diagnostic.jump({ count = -1 })
-	-- 		end, vim.tbl_extend("force", opts, { desc = "Previous diagnostic" }))
-	--
-	-- 		vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover docs" }))
-	--
-	-- 		vim.keymap.set("n", "<leader>fr", function()
-	-- 			require("fzf-lua").lsp_references()
-	-- 		end, vim.tbl_extend("force", opts, { desc = "LSP references" }))
-	--
-	-- 		vim.keymap.set("n", "<leader>ft", function()
-	-- 			require("fzf-lua").lsp_typedefs()
-	-- 		end, vim.tbl_extend("force", opts, { desc = "LSP type defs" }))
-	--
-	-- 		vim.keymap.set("n", "<leader>fs", function()
-	-- 			require("fzf-lua").lsp_document_symbols()
-	-- 		end, vim.tbl_extend("force", opts, { desc = "LSP document symbols" }))
-	--
-	-- 		vim.keymap.set("n", "<leader>fw", function()
-	-- 			require("fzf-lua").lsp_workspace_symbols()
-	-- 		end, vim.tbl_extend("force", opts, { desc = "LSP workspace symbols" }))
-	--
-	-- 		vim.keymap.set("n", "<leader>fi", function()
-	-- 			require("fzf-lua").lsp_implementations()
-	-- 		end, vim.tbl_extend("force", opts, { desc = "LSP implementations" }))
-	--
-	-- 		if client:supports_method("textDocument/codeAction", bufnr) then
-	-- 			vim.keymap.set("n", "<leader>oi", function()
-	-- 				vim.lsp.buf.code_action({
-	-- 					context = { only = { "source.organizeImports" }, diagnostics = {} },
-	-- 					apply = true,
-	-- 					bufnr = bufnr,
-	-- 				})
-	-- 			end, vim.tbl_extend("force", opts, { desc = "Organize imports" }))
-	-- 		end
-	-- 	end,
-	-- })
-	--
-	-- vim.keymap.set("n", "<leader>q", function()
-	-- 	vim.diagnostic.setloclist({ open = true })
-	-- end, { desc = "Open diagnostic list" })
-	--
-	-- vim.keymap.set("n", "<leader>dl", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
--- end
+			local bufnr = ev.buf
+			local opts = { noremap = true, silent = true, buffer = bufnr }
+
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover docs" }))
+
+			vim.keymap.set("n", "<leader>lf", function()
+				require("fzf-lua").lsp_finder()
+			end, vim.tbl_extend("force", opts, { desc = "LSP Finder" }))
+
+			vim.keymap.set("n", "<leader>lD", function()
+				vim.cmd("vsplit")
+				vim.lsp.buf.definition()
+			end, vim.tbl_extend("force", opts, { desc = "Definitions (vsplit)" }))
+
+			vim.keymap.set("n", "<leader>ld", function()
+				require("fzf-lua").lsp_definitions({ jump_to_single_result = true })
+			end, vim.tbl_extend("force", opts, { desc = "Definitions" }))
+
+			vim.keymap.set("n", "<leader>lT", function()
+				require("fzf-lua").lsp_declarations()
+			end, vim.tbl_extend("force", opts, { desc = "Declarations" }))
+
+			vim.keymap.set("n", "<leader>lr", function()
+				require("fzf-lua").lsp_references()
+			end, vim.tbl_extend("force", opts, { desc = "References" }))
+
+			vim.keymap.set("n", "<leader>li", function()
+				require("fzf-lua").lsp_implementations()
+			end, vim.tbl_extend("force", opts, { desc = "Implementations" }))
+
+			vim.keymap.set("n", "<leader>lt", function()
+				require("fzf-lua").lsp_typedefs()
+			end, vim.tbl_extend("force", opts, { desc = "Type Definitions" }))
+
+			vim.keymap.set("n", "<leader>lb", function()
+				require("fzf-lua").lsp_type_sub()
+			end, vim.tbl_extend("force", opts, { desc = "Sub Types" }))
+
+			vim.keymap.set("n", "<leader>lu", function()
+				require("fzf-lua").lsp_type_super()
+			end, vim.tbl_extend("force", opts, { desc = "Super Types" }))
+
+			vim.keymap.set("n", "<leader>ls", function()
+				require("fzf-lua").lsp_document_symbols()
+			end, vim.tbl_extend("force", opts, { desc = "Document Symbols" }))
+
+			vim.keymap.set("n", "<leader>lS", function()
+				require("fzf-lua").lsp_workspace_symbols()
+			end, vim.tbl_extend("force", opts, { desc = "Workspace Symbols" }))
+
+			vim.keymap.set("n", "<leader>lw", function()
+				require("fzf-lua").lsp_live_workspace_symbols()
+			end, vim.tbl_extend("force", opts, { desc = "Live Workspace Symbols" }))
+
+			vim.keymap.set("n", "<leader>lc", function()
+				require("fzf-lua").lsp_incoming_calls()
+			end, vim.tbl_extend("force", opts, { desc = "Incoming Calls" }))
+
+			vim.keymap.set("n", "<leader>lC", function()
+				require("fzf-lua").lsp_outgoing_calls()
+			end, vim.tbl_extend("force", opts, { desc = "Outgoing Calls" }))
+		end,
+	})
+end
 
 local function setup_servers()
 	vim.lsp.config("*", {
@@ -184,7 +174,7 @@ end
 
 function M.setup()
 	setup_diagnostics()
-	-- setup_keymaps()
+	setup_keymaps()
 	setup_servers()
 end
 

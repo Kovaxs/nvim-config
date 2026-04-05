@@ -15,6 +15,7 @@ function M.setup()
 		{ "<leader>d", group = "Debug" },
 		{ "<leader>h", group = "Harpoon" },
 		{ "<leader>g", group = "Git" },
+		{ "<leader>l", group = "LSP" },
 		{ "<leader>b", group = "Buffer" },
 		{ "<leader>c", group = "Lang" },
 		{ "<leader>e", group = "Nvim config pickers" },
