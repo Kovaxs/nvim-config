@@ -2,7 +2,7 @@ local M = {}
 
 M.spec = {
 	src = "https://github.com/L3MON4D3/LuaSnip",
-	version = "v2.*",
+	version = "v2.4.1",
 }
 
 function M.pre_setup()
