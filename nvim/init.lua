@@ -83,8 +83,9 @@ vim.opt.redrawtime = 10000 -- increase neovim redraw tolerance
 vim.opt.maxmempattern = 20000 -- increase max memory
 
 -- ============================================================================
--- STATUSLINE
+-- UI
 -- ============================================================================
+require("config.ui2").setup()
 require("ui.statusline").setup()
 
 -- =====================================================================================

@@ -68,6 +68,7 @@ vim.keymap.set("n", "<leader>ee", function()
 	fzf.files({ cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "site", "pack", "core", "opt") })
 end, { desc = "Picker: installed package files" })
 
+
 local terminal = {
 	buf = nil,
 	win = nil,

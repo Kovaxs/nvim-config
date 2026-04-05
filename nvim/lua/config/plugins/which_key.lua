@@ -13,6 +13,7 @@ function M.setup()
 	which_key.setup()
 	which_key.add({
 		{ "<leader>d", group = "Debug" },
+		{ "<leader>n", group = "Notify" },
 		{ "<leader>h", group = "Harpoon" },
 		{ "<leader>g", group = "Git" },
 		{ "<leader>l", group = "LSP" },
