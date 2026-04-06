@@ -51,9 +51,9 @@ function M.setup()
 		gitsigns.toggle_current_line_blame()
 	end, { desc = "Toggle inline blame" })
 
-	vim.keymap.set("n", "<leader>gd", function()
-		gitsigns.diffthis()
-	end, { desc = "Diff this" })
+	-- vim.keymap.set("n", "<leader>gd", function()
+	-- 	gitsigns.diffthis()
+	-- end, { desc = "Diff this" })
 end
 
 return M
