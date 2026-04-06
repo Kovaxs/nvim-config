@@ -6,6 +6,7 @@ vim.opt.termguicolors = true
 vim.opt.number = true -- line number
 vim.opt.relativenumber = true -- relative line numbers
 vim.opt.cursorline = true -- highlight current line
+vim.opt.cursorcolumn = true -- highlight cursor column
 vim.opt.wrap = false -- do not wrap lines by default
 vim.opt.scrolloff = 10 -- keep 10 lines above/below cursor
 vim.opt.sidescrolloff = 10 -- keep 10 lines to left/right of cursor
@@ -21,6 +22,7 @@ vim.opt.ignorecase = true -- case insensitive search
 vim.opt.smartcase = true -- case sensitive if uppercase in string
 vim.opt.hlsearch = true -- highlight search matches
 vim.opt.incsearch = true -- show matches as you type
+vim.opt.inccommand = "split" -- show span change
 vim.opt.spelllang = "en_us" -- default spellcheck language
 vim.opt.spell = true -- enable spellcheck globally
 
@@ -89,11 +91,12 @@ require("config.ui2").setup()
 require("ui.statusline").setup()
 
 -- =====================================================================================
--- KAYMAPS
+-- KAYMAPS, COMMANDS
 -- =====================================================================================
 vim.g.mapleader = " " -- space for leader
 vim.g.maplocalleader = "," -- space for localleader
 require("core.keymaps")
+require("core.commands")
 
 -- ============================================================================
 -- AUTOCMDS
