@@ -25,6 +25,7 @@ function M.setup()
 		{ "<leader>t", group = "Diagnostic" },
 		{ "<leader><leader>", group = "Lua source" },
 		{ "<leader>y", group = "Yank path" },
+		{ "<leader>q", group = "Add line to (quick/local)-fix list" },
 	})
 end
 

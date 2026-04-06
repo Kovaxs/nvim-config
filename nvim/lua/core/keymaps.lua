@@ -36,7 +36,7 @@ vim.keymap.set({ "n", "v" }, "<leader>x", '"_d', { desc = "Delete without yankin
 -- Better clipboard interaction
 vim.keymap.set("n", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>y", '"+y')
-vim.keymap.set("n", "<leader>Y", '"+Y')
+vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "Yank line to clipboard registry" })
 vim.keymap.set("n", "<leader>bp", '"+p')
 vim.keymap.set("v", "<leader>bp", '"+p')
 vim.keymap.set("n", "<leader>bP", '"+P')
@@ -159,6 +159,22 @@ end, { desc = "LSP: Set local diagnostic list" })
 vim.keymap.set("n", "<leader>tq", function()
 	vim.diagnostic.setqflist()
 end, { desc = "LSP: Local diagnostic list to quickfix list" })
+
+-- Add current line to the Quickfix List
+vim.keymap.set(
+	"n",
+	"<leader>qq",
+	':caddexpr expand("%") . ":" . line(".") . ":" . getline(".")<CR>',
+	{ desc = "Add line to Quickfix" }
+)
+
+-- Add current line to the Location List
+vim.keymap.set(
+	"n",
+	"<leader>ql",
+	':laddexpr expand("%") . ":" . line(".") . ":" . getline(".")<CR>',
+	{ desc = "Add line to Location List" }
+)
 
 -- Toggle numbers
 vim.keymap.set("n", "<leader>hn", function()
