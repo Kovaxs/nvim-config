@@ -11,7 +11,10 @@ function M.setup()
 	end
 
 	vim.fn.sign_define("DapBreakpoint", { text = "●", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
-	vim.fn.sign_define("DapBreakpointCondition", { text = "◆", texthl = "DiagnosticSignWarn", linehl = "", numhl = "" })
+	vim.fn.sign_define(
+		"DapBreakpointCondition",
+		{ text = "◆", texthl = "DiagnosticSignWarn", linehl = "", numhl = "" }
+	)
 	vim.fn.sign_define("DapStopped", { text = "▶", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" })
 
 	vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Debug: Continue" })
@@ -31,6 +34,8 @@ function M.setup()
 		dap.repl.open()
 		dap.repl.execute(".help")
 	end, { desc = "Debug: REPL help" })
+
+	vim.keymap.set("n", "<leader>dF", "<cmd>FzfLua dap_breakpoints<CR>", { desc = "Dabug: fzf breakpoints" })
 
 	vim.keymap.set("n", "<leader>df", function()
 		local widgets = require("dap.ui.widgets")
