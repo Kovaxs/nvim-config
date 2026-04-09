@@ -17,6 +17,14 @@ vim.opt.softtabstop = 4 -- soft tab stop not tabs on tab/backspace
 vim.opt.expandtab = true -- use spaces instead of tabs
 vim.opt.smartindent = true -- smart auto-indent
 vim.opt.autoindent = true -- copy indent from current line
+vim.opt.list = true
+vim.opt.listchars = {
+	tab = "··", -- Leading dot for tabs
+	space = "·", -- Dot for every space
+	multispace = "···", -- Dot for multiple spaces
+	lead = "·", -- Dot for leading spaces
+	trail = "·", -- Dot for trailing spaces
+}
 
 vim.opt.ignorecase = true -- case insensitive search
 vim.opt.smartcase = true -- case sensitive if uppercase in string
