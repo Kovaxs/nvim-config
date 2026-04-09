@@ -189,3 +189,6 @@ vim.keymap.set("n", "<leader>cl", function()
 	local next_lang = current:match("^es") and "en" or "es"
 	vim.cmd("setlocal spelllang=" .. next_lang)
 end, { desc = "Toggle spell language en/es" })
+
+-- lazygit
+vim.keymap.set("n", "<leader>gl", ":edit term://lazygit<CR>i", { noremap = true, silent = true })
