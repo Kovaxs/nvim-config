@@ -63,6 +63,25 @@ local mode_icons = {
 	t = " \u{f120} TERMINAL ",
 }
 
+local function lsp_server()
+	-- vim.lsp.get_clients is the modern API for Neovim 0.10+
+	-- We add a fallback to get_active_clients for older versions just in case
+	local get_clients = vim.lsp.get_clients or vim.lsp.get_active_clients
+	local clients = get_clients({ bufnr = 0 })
+
+	if next(clients) == nil then
+		return "" -- Return nothing if no LSP is attached
+	end
+
+	local client_names = {}
+	for _, client in ipairs(clients) do
+		table.insert(client_names, client.name)
+	end
+
+	-- \u{f085} is the cog/gear icon (nf-fa-cogs)
+	return " \u{f085} " .. table.concat(client_names, ", ") .. " "
+end
+
 local function diagnostics()
 	local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
 	local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
@@ -195,15 +214,17 @@ function M.render_active()
 		" %f %h%m%r ",
 		"%#SlSepFileBase#\u{e0b0}",
 
-		-- MIDDLE EXPANSION
+		-- CENTERED LSP SERVER
 		"%#SlBase#",
-		"%=",
+		"%=", -- Push from the left
+		lsp_server(), -- Centered text
+		"%=", -- Push from the right
 
 		-- FILE SIZE & FILETYPE
 		"%#SlSepBaseFile#\u{e0b2}",
 		"%#SlFile#",
 		file_size(),
-		"|", -- A small separator between size and type
+		"|",
 		file_type(),
 
 		-- POSITION (Top/Bot)
