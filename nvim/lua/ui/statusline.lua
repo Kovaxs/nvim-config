@@ -47,21 +47,20 @@ local filetype_icons = {
 	astro = "\u{e628} ",
 }
 
--- I updated these to be lowercase to match your screenshot
 local mode_icons = {
-	n = " normal ",
-	i = " insert ",
-	v = " visual ",
-	V = " v-line ",
-	["\22"] = " v-block ",
-	c = " command ",
-	s = " select ",
-	S = " s-line ",
-	["\19"] = " s-block ",
-	R = " replace ",
-	r = " replace ",
-	["!"] = " shell ",
-	t = " terminal ",
+	n = " \u{f121} NORMAL ",
+	i = " \u{f11c} INSERT ",
+	v = " \u{f0168} VISUAL ",
+	V = " \u{f0168} V-LINE ",
+	["\22"] = " \u{f0168} V-BLOCK ",
+	c = " \u{f120} COMMAND ",
+	s = " \u{f0c5} SELECT ",
+	S = " \u{f0c5} S-LINE ",
+	["\19"] = " \u{f0c5} S-BLOCK ",
+	R = " \u{f044} REPLACE ",
+	r = " \u{f044} REPLACE ",
+	["!"] = " \u{f489} SHELL ",
+	t = " \u{f120} TERMINAL ",
 }
 
 local function diagnostics()
