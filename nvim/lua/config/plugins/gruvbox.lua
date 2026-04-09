@@ -12,7 +12,14 @@ function M.setup()
 
 	gruvbox.setup({
 		contrast = "",
-		transparent_mode = false,
+		transparent_mode = true,
+		italic = {
+			strings = true,
+			emphasis = true,
+			comments = true,
+			operators = false,
+			folds = true,
+		},
 	})
 
 	vim.opt.background = "dark"
