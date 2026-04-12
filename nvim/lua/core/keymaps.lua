@@ -48,7 +48,7 @@ vim.keymap.set("n", "<leader>yp", function() -- show file path
 	print("file:", path)
 end, { desc = "Copy full file path" })
 
-vim.keymap.set("n", "<leader>en", function()
+vim.keymap.set("n", "<leader>fp", function()
 	local ok, fzf = pcall(require, "fzf-lua")
 	if not ok then
 		vim.notify("fzf-lua is not available", vim.log.levels.WARN)
@@ -58,7 +58,7 @@ vim.keymap.set("n", "<leader>en", function()
 	fzf.files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "Picker: nvim config files" })
 
-vim.keymap.set("n", "<leader>ee", function()
+vim.keymap.set("n", "<leader>fn", function()
 	local ok, fzf = pcall(require, "fzf-lua")
 	if not ok then
 		vim.notify("fzf-lua is not available", vim.log.levels.WARN)
@@ -147,16 +147,16 @@ vim.keymap.set("n", "<leader>or", function()
 end, { desc = "Terminal: Run command" })
 
 -- Diagnostic
-vim.keymap.set("n", "<leader>td", function()
+vim.keymap.set("n", "<leader>ed", function()
 	vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { desc = "Toggle diagnostics" })
-vim.keymap.set("n", "<leader>te", function()
+vim.keymap.set("n", "<leader>ee", function()
 	vim.diagnostic.open_float({ border = "rounded", focus = true })
 end, { desc = "Show diagnostic in floating window" })
-vim.keymap.set("n", "<leader>tl", function()
+vim.keymap.set("n", "<leader>el", function()
 	vim.diagnostic.setloclist()
 end, { desc = "LSP: Set local diagnostic list" })
-vim.keymap.set("n", "<leader>tq", function()
+vim.keymap.set("n", "<leader>eq", function()
 	vim.diagnostic.setqflist()
 end, { desc = "LSP: Local diagnostic list to quickfix list" })
 
