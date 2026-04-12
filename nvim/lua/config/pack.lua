@@ -12,7 +12,7 @@ local plugins = {
 	require("config.plugins.which_key"),
 	require("config.plugins.nvim_nio"),
 	require("config.plugins.dap"),
-	require("config.plugins.dap_ui"),
+	require("config.plugins.dap_view"),
 	require("config.plugins.dap_python"),
 	require("config.plugins.nvim_undotree"),
 	require("config.plugins.nvim_difftool"),

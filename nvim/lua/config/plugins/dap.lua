@@ -52,21 +52,21 @@ function M.setup()
 	end, { desc = "Debug: Hover value" })
 
 	vim.keymap.set("n", "<leader>du", function()
-		require("dapui").toggle()
+		vim.cmd("DapViewToggle!")
 	end, { desc = "Debug: Toggle UI" })
 
 	vim.keymap.set("n", "<leader>dU", function()
-		require("dapui").open({ reset = true })
-	end, { desc = "Debug: Reset UI" })
+		vim.cmd("DapViewOpen")
+	end, { desc = "Debug: Open UI" })
 
 	vim.keymap.set("n", "<leader>dq", function()
 		dap.disconnect()
-		require("dapui").close()
+		vim.cmd("DapViewClose!")
 	end, { desc = "Debug: Disconnect" })
 
 	vim.keymap.set("n", "<leader>dx", function()
 		dap.terminate()
-		require("dapui").close()
+		vim.cmd("DapViewClose!")
 	end, { desc = "Debug: Terminate" })
 end
 
