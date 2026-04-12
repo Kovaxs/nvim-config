@@ -68,7 +68,7 @@ function M.setup()
 		vim.cmd("DapViewClose!")
 	end, { desc = "Debug: Disconnect" })
 
-	vim.keymap.set("n", "<leader>dx", function()
+	vim.keymap.set("n", "<leader>dt", function()
 		dap.terminate()
 		vim.cmd("DapViewClose!")
 	end, { desc = "Debug: Terminate" })
