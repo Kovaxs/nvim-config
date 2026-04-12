@@ -51,6 +51,10 @@ function M.setup()
 		require("dap.ui.widgets").hover()
 	end, { desc = "Debug: Hover value" })
 
+	vim.keymap.set("n", "<leader>dw", function()
+		vim.cmd("DapViewWatch")
+	end, { desc = "Debug: Watch variable under the cursor" })
+
 	vim.keymap.set("n", "<leader>du", function()
 		vim.cmd("DapViewToggle!")
 	end, { desc = "Debug: Toggle UI" })
