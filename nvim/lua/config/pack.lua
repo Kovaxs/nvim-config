@@ -17,6 +17,7 @@ local plugins = {
 	require("config.plugins.nvim_undotree"),
 	require("config.plugins.nvim_difftool"),
 	require("config.plugins.treesitter"),
+	require("config.plugins.treesitter_context"),
 	require("config.plugins.mason"),
 	require("config.plugins.mason_lspconfig"),
 	require("config.plugins.mason_tools"),
