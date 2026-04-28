@@ -21,7 +21,7 @@ function M.setup()
 		{ "<leader>c", group = "Lang" },
 		{ "<leader>f", group = "Fzf pickers" },
 		{ "<leader>t", group = "Terminal" },
-		{ "<leader>t", group = "Opencode" },
+		{ "<leader>o", group = "Opencode" },
 		{ "<leader>e", group = "Diagnostic" },
 		{ "<leader><leader>", group = "Lua source" },
 		{ "<leader>y", group = "Yank path" },
