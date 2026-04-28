@@ -122,7 +122,7 @@ vim.keymap.set("n", "<leader>te", function()
 	terminal.command = vim.fn.input("Command: ")
 end, { desc = "Terminal: Save command" })
 
-vim.keymap.set("n", "<leader>or", function()
+vim.keymap.set("n", "<leader>tr", function()
 	if terminal.command == "" then
 		terminal.command = vim.fn.input("Command: ")
 	end
