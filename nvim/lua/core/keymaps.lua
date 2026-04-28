@@ -108,7 +108,7 @@ local function open_terminal()
 	vim.cmd("startinsert")
 end
 
-vim.keymap.set("n", "<leader>ot", function()
+vim.keymap.set("n", "<leader>to", function()
 	if valid_win(terminal.win) and vim.api.nvim_win_get_buf(terminal.win) == terminal.buf then
 		vim.api.nvim_win_close(terminal.win, true)
 		terminal.win = nil
@@ -118,7 +118,7 @@ vim.keymap.set("n", "<leader>ot", function()
 	open_terminal()
 end, { desc = "Terminal: Toggle" })
 
-vim.keymap.set("n", "<leader>oe", function()
+vim.keymap.set("n", "<leader>te", function()
 	terminal.command = vim.fn.input("Command: ")
 end, { desc = "Terminal: Save command" })
 
@@ -142,7 +142,7 @@ vim.keymap.set("n", "<leader>or", function()
 	if job and job > 0 then
 		vim.fn.chansend(job, { terminal.command, "\r\n" })
 	else
-		vim.notify("No terminal open. Use <leader>ot first.", vim.log.levels.WARN)
+		vim.notify("No terminal open. Use <leader>tt first.", vim.log.levels.WARN)
 	end
 end, { desc = "Terminal: Run command" })
 
