@@ -23,6 +23,17 @@ function M.setup()
 			row = 0.35,
 			col = 0.50,
 			border = "rounded",
+			preview = {
+				default = "builtin",
+			},
+		},
+		previewers = {
+			builtin = {
+				syntax = true,
+				treesitter = {
+					enabled = true,
+				},
+			},
 		},
 		-- File picker defaults
 		files = {
