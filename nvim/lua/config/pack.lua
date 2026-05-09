@@ -27,7 +27,6 @@ local plugins = {
 	require("config.plugins.friendly_snippets"),
 	require("config.plugins.blink_cmp"),
 	require("config.plugins.luasnip_plugin"),
-	require("config.plugins.opencode"),
 	require("config.plugins.custom.lazygit"),
 }
 
