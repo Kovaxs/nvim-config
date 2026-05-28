@@ -19,6 +19,7 @@ local ensure_installed = {
 	"vue",
 	"svelte",
 	"bash",
+	"terraform",
 }
 
 M.spec = {

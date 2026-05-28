@@ -28,6 +28,8 @@ function M.setup()
 			sh = { "shfmt" },
 			typescript = { "prettierd" },
 			typescriptreact = { "prettierd" },
+			terraform = { "terraform_fmt" },
+			tf = { "terraform_fmt" },
 		},
 		format_on_save = {
 			timeout_ms = 2000,

@@ -30,6 +30,7 @@ function M.setup()
 			"shfmt",
 			"stylelint",
 			"stylua",
+			"terraform-ls",
 		},
 		auto_update = false,
 		run_on_start = true,
