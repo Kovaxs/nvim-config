@@ -22,6 +22,7 @@ function M.setup()
 			"golangci-lint",
 			"htmlhint",
 			"jsonlint",
+			"js-debug-adapter",
 			"luacheck",
 			"markdownlint-cli2",
 			"prettierd",

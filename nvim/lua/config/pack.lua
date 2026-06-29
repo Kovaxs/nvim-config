@@ -14,6 +14,7 @@ local plugins = {
 	require("config.plugins.dap"),
 	require("config.plugins.dap_view"),
 	require("config.plugins.dap_python"),
+	require("config.plugins.dap_js"),
 	require("config.plugins.nvim_undotree"),
 	require("config.plugins.nvim_difftool"),
 	require("config.plugins.treesitter"),
