@@ -28,6 +28,7 @@ local plugins = {
 	require("config.plugins.blink_cmp"),
 	require("config.plugins.luasnip_plugin"),
 	require("config.plugins.custom.lazygit"),
+	require("config.plugins.custom.jjui"),
 
 }
 
