@@ -35,6 +35,10 @@
       "src": "https://github.com/ThePrimeagen/harpoon",
       "version": "'harpoon2'"
     },
+    "lean.nvim": {
+      "rev": "c15b1cea82ccb6c0bc1ee16ec12632fc04219087",
+      "src": "https://github.com/Julian/lean.nvim"
+    },
     "mason-lspconfig.nvim": {
       "rev": "77e06f7d2fc127e6ef0a720b59acbc50757cff19",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
