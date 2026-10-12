@@ -128,6 +128,35 @@ local function setup_keymaps()
 	})
 end
 
+---Resolve a Python tool from the project's uv venv (`.venv/bin`), falling back to PATH (Mason).
+---@param exe string
+---@param root string?
+---@return string
+local function venv_exe(exe, root)
+	local start = root or vim.fn.getcwd()
+	local venv = vim.fs.find(".venv", { path = start, upward = true, type = "directory" })[1]
+	if venv and vim.fn.executable(venv .. "/bin/" .. exe) == 1 then
+		return venv .. "/bin/" .. exe
+	end
+	if vim.env.VIRTUAL_ENV and vim.fn.executable(vim.env.VIRTUAL_ENV .. "/bin/" .. exe) == 1 then
+		return vim.env.VIRTUAL_ENV .. "/bin/" .. exe
+	end
+	return exe
+end
+
+---@param exe string
+---@param args string[]
+local function venv_cmd(exe, args)
+	return function(dispatchers, config)
+		local cmd = vim.list_extend({ venv_exe(exe, config.root_dir) }, args)
+		return vim.lsp.rpc.start(cmd, dispatchers, {
+			cwd = config.cmd_cwd or config.root_dir,
+			env = config.cmd_env,
+			detached = config.detached,
+		})
+	end
+end
+
 local function setup_servers()
 	vim.lsp.config("*", {
 		capabilities = lsp_capabilities(),
@@ -142,8 +171,9 @@ local function setup_servers()
 		},
 	})
 
-	vim.lsp.config("ty", {})
+	vim.lsp.config("ty", { cmd = venv_cmd("ty", { "server" }) })
 	vim.lsp.config("ruff", {
+		cmd = venv_cmd("ruff", { "server" }),
 		init_options = {
 			settings = {
 				hover = false,
