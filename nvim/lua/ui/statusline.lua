@@ -7,6 +7,11 @@ local M = {}
 local branch_cache = {}
 local branch_cache_ttl = 5000
 
+local ok_tokens, tokens = pcall(require, "ui.tokens")
+if not ok_tokens then
+	tokens = nil
+end
+
 local filetype_icons = {
 	lua = "\u{e620} ",
 	python = "\u{e73c} ",
@@ -191,6 +196,13 @@ local function file_size()
 	return " \u{f016} " .. size_str .. " "
 end
 
+local function file_tokens()
+	if not tokens then
+		return ""
+	end
+	return tokens.statusline()
+end
+
 local function mode_icon()
 	local mode = vim.fn.mode()
 	return mode_icons[mode] or (" " .. mode .. " ")
@@ -224,6 +236,7 @@ function M.render_active()
 		"%#SlSepBaseFile#\u{e0b2}",
 		"%#SlFile#",
 		file_size(),
+		file_tokens(),
 		"|",
 		file_type(),
 

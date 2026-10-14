@@ -20,6 +20,7 @@ local ensure_installed = {
 	"svelte",
 	"bash",
 	"terraform",
+	"just",
 }
 
 M.spec = {

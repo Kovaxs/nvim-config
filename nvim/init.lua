@@ -96,6 +96,7 @@ vim.opt.maxmempattern = 20000 -- increase max memory
 -- UI
 -- ============================================================================
 require("config.ui2").setup()
+require("ui.tokens").setup()
 require("ui.statusline").setup()
 
 -- =====================================================================================

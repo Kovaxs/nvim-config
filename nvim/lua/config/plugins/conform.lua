@@ -31,6 +31,12 @@ function M.setup()
 			terraform = { "terraform_fmt" },
 			tf = { "terraform_fmt" },
 		},
+		formatters = {
+			-- Prefer the project's uv venv ruff, fall back to Mason/PATH.
+			ruff_format = {
+				command = require("conform.util").find_executable({ ".venv/bin/ruff" }, "ruff"),
+			},
+		},
 		format_on_save = {
 			timeout_ms = 2000,
 			lsp_format = "fallback",
