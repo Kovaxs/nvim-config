@@ -54,20 +54,6 @@ This file tracks practical next tasks for the current `vim.pack`-based setup.
 - [ ] Add an exact `tiktoken` backend (`uv run --with tiktoken`, stdin) behind the same contract.
 - [ ] Add an Anthropic `count_tokens` backend and a `:TokensBackend <name>` switcher.
 
-## Font
-
-`init.lua` sets `guifont` to `PlemolJP Console NF:h12` for GUI clients such as Neovide. Terminal Neovim uses the font of the terminal emulator, so set that to `PlemolJP Console NF` too.
-
-Linux install (per user, no root):
-
-```sh
-curl -fLo /tmp/PlemolJP_NF.zip https://github.com/yuru7/PlemolJP/releases/download/v3.1.0/PlemolJP_NF_v3.1.0.zip
-unzip -q /tmp/PlemolJP_NF.zip -d /tmp/PlemolJP_NF
-mkdir -p ~/.local/share/fonts/PlemolJP
-cp /tmp/PlemolJP_NF/PlemolJP_NF_v3.1.0/PlemolJPConsole_NF/*.ttf ~/.local/share/fonts/PlemolJP/
-fc-cache -f
-```
-
 ## Guides
 
 ### Statusline Token Counter (Markdown)
