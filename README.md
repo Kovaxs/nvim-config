@@ -32,8 +32,8 @@ This file tracks practical next tasks for the current `vim.pack`-based setup.
 
 ### Quality Checks / Tooling
 
-- [ ] Add one local "pre-flight" command/script to run smoke + format + lint checks.
-- [ ] Add a minimal check script for headless startup and LSP health.
+- [x] Add one local "pre-flight" command/script to run smoke + format + lint checks. (`just check`)
+- [x] Add a minimal check script for headless startup and LSP health. (`just smoke`, `just lsp-health`)
 - [ ] Keep formatter/linter tool lists aligned with `mason-tool-installer`.
 
 ### Testing Foundation
@@ -48,7 +48,62 @@ This file tracks practical next tasks for the current `vim.pack`-based setup.
 - [ ] Add a short keymap reference section in README for new terminal/debug/harpoon mappings.
 - [ ] Document plugin management conventions used by `nvim/lua/config/pack.lua`.
 
+### Statusline Token Counter
+
+- [x] Show an async token count in the statusline for Markdown buffers (`ui.tokens`, estimate backend).
+- [ ] Add an exact `tiktoken` backend (`uv run --with tiktoken`, stdin) behind the same contract.
+- [ ] Add an Anthropic `count_tokens` backend and a `:TokensBackend <name>` switcher.
+
 ## Guides
+
+### Statusline Token Counter (Markdown)
+
+`nvim/lua/ui/tokens/` counts tokens in the background and caches the result in
+`vim.b[buf].token_count`; the statusline render only reads that cache, so redraws stay fast.
+
+- Active backend: `estimate` (~4 chars per token, shown with a `~` prefix).
+- Tracked buffers: `markdown` only by default. Others render nothing.
+- Triggers: `BufEnter`, `BufWritePost`, `FileType` immediately; `TextChanged`, `TextChangedI`,
+  `InsertLeave` debounced (500ms). Buffers over 1MB are skipped.
+- Manual recount: `:TokensRefresh`.
+
+**Choosing which files are counted.** One filter, `tracked_buf()` in `ui/tokens/init.lua`:
+
+```lua
+-- default: markdown only
+require("ui.tokens").setup()
+
+-- several filetypes (list or map form; keys merge with the defaults)
+require("ui.tokens").setup({ filetypes = { "markdown", "org", "text" } })
+require("ui.tokens").setup({ filetypes = { org = true, markdown = false } })
+
+-- every normal buffer
+require("ui.tokens").setup({ all = true })
+
+-- every normal buffer except these filetypes
+require("ui.tokens").setup({ all = true, exclude = { "help", "qf", "oil", "gitcommit" } })
+```
+
+Rules:
+
+- `all = true` overrides `filetypes`; `exclude` still wins over both.
+- Buffers with a non-empty `buftype` (terminal, prompt, nofile, quickfix) are always skipped.
+- `filetypes` merges with the defaults, so dropping one needs an explicit `false`
+  (for example `markdown = false`).
+- Default `exclude`: `help`, `qf`, `loclist`, `prompt`, `nofile`, `oil`, `terminal`,
+  `TelescopePrompt`, `NvimTree`.
+- With `all = true` and an external tokenizer, raise `debounce_ms` (~1000) and lower
+  `max_bytes` (~256KB), or keep `backend = "estimate"`.
+
+**Adding a tokenizer backend.** Drop `nvim/lua/ui/tokens/backends/<name>.lua` returning a table with:
+
+- `name` (string), `exact` (boolean, false for estimates),
+- `available()` returning boolean,
+- `count(text, cb)` that MUST call `cb(count, err)` asynchronously, never inline.
+
+Then `require("ui.tokens").setup({ backend = "<name>" })`. If the backend is unavailable or errors,
+the configured `fallback` backend (default `estimate`) is used instead. Out-of-order results are
+dropped by a per-buffer request id.
 
 ### How to Add a New Language (Example: C++)
 

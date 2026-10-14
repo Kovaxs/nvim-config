@@ -2,7 +2,7 @@
 Operational guide for coding agents working in this repository.
 
 ## Repository Scope
-- Root repo contains helper scripts (`install.sh`, `setup.sh`) and Neovim config in `nvim/`.
+- Root repo contains a `justfile` wrapping all common ops, and Neovim config in `nvim/`.
 - Main code is Lua-based Neovim configuration.
 - Plugin management uses Neovim 0.12 built-in `vim.pack`.
 - There is no formal CI pipeline or committed test suite.
@@ -27,21 +27,24 @@ Operational guide for coding agents working in this repository.
 - `nvim/lua/core/keymaps.lua`: global keymaps and terminal helpers.
 - `nvim/lua/core/autocmds.lua`: shared autocmds.
 - `nvim/lua/ui/statusline.lua`: statusline setup.
+- `nvim/lua/ui/tokens/`: async per-buffer token counter (`init.lua` + pluggable `backends/*.lua`).
 - `nvim/LuaSnip/all.lua`: snippet definitions.
 
 ## Setup Commands
-- Link config into default Neovim location: `./setup.sh`
-- Install pinned Neovim helper version: `./install.sh`
+A `justfile` at the repo root wraps all common ops; run `just` to list recipes. The commands below map to `just setup`, `just install-nvim`, and `just version`.
+- Link config into default Neovim location: `just setup`
+- Install pinned Neovim helper version: `just install-nvim`
 - Verify Neovim is installed: `nvim --version`
 
 ## Build / Smoke Commands
-No compile/build artifact step exists. Use smoke checks:
+No compile/build artifact step exists. Use smoke checks (`just smoke`, `just health`, `just lsp-health`, `just update-plugins`):
 - Startup smoke test: `nvim --headless "+qa"`
 - Full health check: `nvim --headless "+checkhealth" "+qa"`
 - LSP health check: `nvim --headless "+checkhealth vim.lsp" "+qa"`
 - Plugin updates (networked): `nvim --headless "+PackUpdate" "+qa"`
 
 ## Lint / Format Commands
+Available as `just fmt`, `just fmt-check`, `just lint`, `just lint-file <file>`, `just fmt-file <file>`. Equivalent direct commands:
 - Format all Lua: `stylua nvim/**/*.lua`
 - Check Lua formatting: `stylua --check nvim/**/*.lua`
 - Lint all Lua: `luacheck nvim`
@@ -53,6 +56,8 @@ Relevant config files:
 - `nvim/lua/config/plugins/nvim_lint.lua`
 - `.luacheckrc`
 - `.luarc.json`
+
+Note: `stylua` and `luacheck` come from Mason and may not be on `PATH` in a plain shell. Prepend `~/.local/share/nvim/mason/bin` when the commands are not found.
 
 ## Test Commands (Including Single-Test Guidance)
 Current state:
@@ -136,6 +141,7 @@ Follow local style in touched files and keep edits minimal.
 - Update `AGENTS.md` when build/lint/test workflow changes.
 
 ## Quick Pre-PR Checklist
+- Run `just check` (smoke test + formatting check + lint).
 - Lint/format checks run for touched files.
 - `nvim --headless "+qa"` succeeds.
 - `nvim --headless "+checkhealth vim.lsp" "+qa"` reviewed when LSP changed.
