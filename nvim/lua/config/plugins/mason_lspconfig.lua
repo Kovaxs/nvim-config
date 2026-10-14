@@ -21,6 +21,7 @@ function M.setup()
 		"rust_analyzer", -- Rust
 		"nil_ls", -- Nix
 		"zls", -- Zig
+		"just", -- Justfile
 	}
 
 	mason_lspconfig.setup({

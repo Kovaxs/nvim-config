@@ -187,6 +187,7 @@ local function setup_servers()
 	vim.lsp.config("rust_analyzer", {})
 	vim.lsp.config("nil_ls", {})
 	vim.lsp.config("zls", {})
+	vim.lsp.config("just", {})
 
 	local to_enable = {
 		"lua_ls", -- Lua
@@ -199,6 +200,7 @@ local function setup_servers()
 		"rust_analyzer", -- Rust
 		"nil_ls", -- Nix
 		"zls", -- Zig
+		"just", -- Justfile
 	}
 
 	vim.lsp.enable(to_enable)
