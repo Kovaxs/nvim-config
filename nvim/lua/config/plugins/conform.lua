@@ -23,6 +23,7 @@ function M.setup()
 			jsonc = { "prettierd" },
 			lua = { "stylua" },
 			markdown = { "prettierd" },
+			mojo = { "mojo_format" },
 			nix = { "alejandra", "nixfmt" },
 			python = { "ruff_format" },
 			sh = { "shfmt" },
@@ -32,6 +33,12 @@ function M.setup()
 			tf = { "terraform_fmt" },
 		},
 		formatters = {
+			-- `mojo format` only works on files, so conform writes the buffer to a temp file first.
+			mojo_format = {
+				command = "mojo",
+				args = { "format", "$FILENAME" },
+				stdin = false,
+			},
 			-- Prefer the project's uv venv ruff, fall back to Mason/PATH.
 			ruff_format = {
 				command = require("conform.util").find_executable({ ".venv/bin/ruff" }, "ruff"),

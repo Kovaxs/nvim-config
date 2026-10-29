@@ -201,6 +201,7 @@ local function setup_servers()
 		"nil_ls", -- Nix
 		"zls", -- Zig
 		"just", -- Justfile
+		"mojo", -- Mojo (needs mojo-lsp-server on PATH)
 	}
 
 	vim.lsp.enable(to_enable)
