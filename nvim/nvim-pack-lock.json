@@ -100,6 +100,11 @@
       "rev": "cc1adb7e7e9f4827cd655f6b1c05fadedaa87f45",
       "src": "https://github.com/TamaMcGlinn/quickfixdd"
     },
+    "render-markdown.nvim": {
+      "rev": "640a3ec6d538bad17c328be373c7cad0293d9589",
+      "src": "https://github.com/meanderingprogrammer/render-markdown.nvim",
+      "version": ">=0.0.0"
+    },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
       "src": "https://github.com/folke/which-key.nvim"
