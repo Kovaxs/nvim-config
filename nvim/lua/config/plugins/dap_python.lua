@@ -12,12 +12,13 @@ function M.setup()
 	end
 
 	-- Keep dap-python helpers (test_method/test_class), but run adapter through uv.
-	dap_python.setup("python3")
-	dap.adapters.python = {
-		type = "executable",
-		command = "uv",
-		args = { "run", "--with", "debugpy", "python", "-m", "debugpy.adapter" },
-	}
+	-- dap_python.setup("python3")
+	-- dap.adapters.python = {
+	-- 	type = "executable",
+	-- 	command = "uv",
+	-- 	args = { "run", "--with", "debugpy", "python", "-m", "debugpy.adapter" },
+	-- }
+	dap_python.setup("uv")
 
 	vim.keymap.set("n", "<leader>dn", dap_python.test_method, { desc = "Debug: Nearest test" })
 	vim.keymap.set("n", "<leader>dN", dap_python.test_class, { desc = "Debug: Test class" })
