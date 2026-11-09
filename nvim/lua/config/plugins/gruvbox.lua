@@ -1,11 +1,17 @@
 local M = {}
 
--- Italicize keyword groups (treesitter @keyword.* links to these). Set to false to keep them upright.
+-- Italicize keyword groups, including every treesitter @keyword* group. Set to false to keep them upright.
 local KEYWORD_ITALIC = true
 local keyword_groups = { "Keyword", "Statement", "Conditional", "Repeat", "Include", "Exception" }
 
 local function italicize_keywords()
-	for _, name in ipairs(keyword_groups) do
+	local names = vim.deepcopy(keyword_groups)
+	for name in pairs(vim.api.nvim_get_hl(0, {})) do
+		if name:find("^@keyword") then
+			table.insert(names, name)
+		end
+	end
+	for _, name in ipairs(names) do
 		local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
 		hl.italic = true
 		vim.api.nvim_set_hl(0, name, hl)
