@@ -37,9 +37,9 @@ function M.setup()
 		},
 		-- File picker defaults
 		files = {
-			hidden = true,
-			no_ignore = false,
-			git_icons = true,
+			hidden = false,
+			no_ignore = true,
+			git_icons = false,
 		},
 		-- ripgrep options used by live_grep and grep-like pickers
 		grep = {
