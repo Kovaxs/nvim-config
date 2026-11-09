@@ -1,4 +1,5 @@
 vim.opt.termguicolors = true
+vim.opt.guifont = "PlemolJP Console NF:h12" -- GUI clients only (e.g. Neovide); terminals use their own font
 
 -- ============================================================================
 -- OPTIONS
