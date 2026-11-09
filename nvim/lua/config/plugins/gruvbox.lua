@@ -1,5 +1,17 @@
 local M = {}
 
+-- Italicize keyword groups (treesitter @keyword.* links to these). Set to false to keep them upright.
+local KEYWORD_ITALIC = true
+local keyword_groups = { "Keyword", "Statement", "Conditional", "Repeat", "Include", "Exception" }
+
+local function italicize_keywords()
+	for _, name in ipairs(keyword_groups) do
+		local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
+		hl.italic = true
+		vim.api.nvim_set_hl(0, name, hl)
+	end
+end
+
 M.spec = {
 	src = "https://github.com/ellisonleao/gruvbox.nvim",
 }
@@ -21,6 +33,14 @@ function M.setup()
 			folds = true,
 		},
 	})
+
+	if KEYWORD_ITALIC then
+		-- registered before colorscheme so it re-applies on every theme load
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			group = vim.api.nvim_create_augroup("GruvboxKeywordItalic", { clear = true }),
+			callback = italicize_keywords,
+		})
+	end
 
 	vim.opt.background = "dark"
 	vim.cmd.colorscheme("gruvbox")
