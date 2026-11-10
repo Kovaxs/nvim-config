@@ -31,6 +31,7 @@ local plugins = {
 	require("config.plugins.custom.lazygit"),
 	require("config.plugins.custom.jjui"),
 	require("config.plugins.nvim_lean"),
+	require("config.plugins.zen_mode"),
 }
 
 local function collect_specs()
