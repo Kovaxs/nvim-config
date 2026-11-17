@@ -35,7 +35,7 @@ vim.opt.inccommand = "split" -- show span change
 vim.opt.spelllang = "en_us" -- default spellcheck language
 vim.opt.spell = true -- enable spellcheck globally
 
-vim.opt.signcolumn = "yes" -- always show a sign column
+vim.opt.signcolumn = "yes:2" -- always show a sign column, two slots (gitsigns + marks)
 vim.opt.colorcolumn = "89" -- show a column at 100 position chars
 vim.opt.showmatch = true -- highlights matching brackets
 vim.opt.cmdheight = 1 -- single line command line

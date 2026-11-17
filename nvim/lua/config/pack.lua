@@ -4,6 +4,7 @@ local plugins = {
 	require("config.plugins.gruvbox"),
 	require("config.plugins.oil"),
 	require("config.plugins.gitsigns"),
+	require("config.plugins.marks_signs"),
 	require("config.plugins.mini"),
 	require("config.plugins.fzf_lua"),
 	require("config.plugins.plenary"),
