@@ -22,6 +22,14 @@ function M.setup()
 		signcolumn = true,
 		current_line_blame = false,
 	})
+	-- Re-apply on colorscheme change, since :colorscheme clears custom highlights
+	vim.api.nvim_create_autocmd("ColorScheme", {
+		group = vim.api.nvim_create_augroup("GitsignsBlameHl", { clear = true }),
+		callback = function()
+			vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#7aa2f7", italic = true })
+		end,
+	})
+	vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#7aa2f7", italic = true })
 
 	vim.keymap.set("n", "]h", function()
 		if vim.wo.diff then
